@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envío</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Formulario de Envío</h1>
+        <form id="envio-form" action="mailto:jgonzalezvieco@gmail.com" method="post" enctype="text/plain">
+            <label for="nombre-contacto">Nombre de Contacto:</label>
+            <input type="text" id="nombre-contacto" name="nombre-contacto" required>
+            
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" name="direccion" required>
+            
+            <label for="ciudad">Ciudad:</label>
+            <input type="text" id="ciudad" name="ciudad" required>
+            
+            <label for="provincia">Provincia:</label>
+            <input type="text" id="provincia" name="provincia" required>
+            
+            <label for="codigo-postal">Código Postal:</label>
+            <input type="text" id="codigo-postal" name="codigo-postal" required>
+            
+            <label for="nacion">Nación:</label>
+            <input type="text" id="nacion" name="nacion" required>
+            
+            <label for="telefono">Número de Teléfono:</label>
+            <input type="tel" id="telefono" name="telefono" required>
+            
+            <label for="correo-electronico">Correo Electrónico:</label>
+            <input type="email" id="correo-electronico" name="correo-electronico" required>
+            
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+</body>
+</html>
