@@ -4,14 +4,25 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    position: relative; /* Para permitir el posicionamiento absoluto de otros elementos */
+}
+
+.image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-image: url('IMG_2800.jpg');
     background-size: contain; /* Ajusta el tamaño de la imagen sin distorsionarla */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
     background-position: center; /* Centra la imagen */
+    z-index: -1; /* Coloca la imagen detrás de otros elementos */
 }
 
 .container {
     text-align: center;
+    z-index: 1; /* Coloca el contenedor de los botones encima de la imagen */
 }
 
 button {
@@ -33,40 +44,3 @@ button:hover {
     background-color: #45a049;
 }
 
-#map {
-    width: 100%;
-    height: 400px;
-    background-color: grey; /* Esto es un marcador de posición; puede ser reemplazado por el mapa real */
-    margin-bottom: 20px;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 300px;
-    margin: 0 auto;
-}
-
-label, input {
-    margin: 5px 0;
-}
-
-input, button {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-button:hover {
-    background-color: #45a049;
-}
