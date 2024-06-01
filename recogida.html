@@ -22,7 +22,7 @@
     <div class="container">
         <h1>Puntos de Recogida en Petrer 03610</h1>
         <div id="map"></div>
-        <form id="recogidaForm" action="https://formsubmit.co/vapeemporium8@gmail.com" method="POST">
+        <form id="recogidaForm" name="recogidaForm" action="https://formsubmit.co/vapeemporium8@gmail.com" method="POST">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required>
             
@@ -57,7 +57,7 @@
             <!-- Mejoramos el aspecto del precio total -->
             <div style="margin-top: 10px;">
                 <label for="precioTotal">Precio Total:</label>
-                <span id="precioTotal">13</span> €
+                <span id="precioTotal" name="precioTotal">13</span> €
             </div>
             
             <button type="submit">Enviar</button>
@@ -81,4 +81,5 @@
     </script>
 </body>
 </html>
+
 
