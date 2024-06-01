@@ -4,7 +4,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-image: url('IMG_2800.jpg');
+    background-image: url('');
     background-size: contain; /* Ajusta el tamaño de la imagen sin distorsionarla */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
     background-position: center; /* Centra la imagen */
