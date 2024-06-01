@@ -1,13 +1,62 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Principal</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        .container img {
+            width: 250px; /* Ajusta el tamaño de la imagen según lo necesites */
+            height: auto; /* para mantener la proporción */
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .container h1 {
+            margin-top: 300px; /* ajusta el margen superior para hacer espacio para la imagen */
+        }
+
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 30px; /* ajusta el tamaño del botón según lo necesites */
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
+        <img src="IMG_2800.jpg" alt="Imagen pequeña">
         <h1></h1>
         <button onclick="location.href='catalogo.html'">Ver Catálogo</button>
         <button onclick="location.href='recogida.html'">Recogida</button>
@@ -15,6 +64,10 @@
     </div>
 </body>
 </html>
+
+
+
+
 
 
 
