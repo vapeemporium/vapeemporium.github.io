@@ -4,7 +4,10 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    background-image: url('IMG_2800.jpg');
+    background-size: contain; /* Ajusta el tamaño de la imagen sin distorsionarla */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-position: center; /* Centra la imagen */
 }
 
 .container {
@@ -33,7 +36,7 @@ button:hover {
 #map {
     width: 100%;
     height: 400px;
-    background-color: grey; /* Esto es un placeholder; se puede reemplazar con el mapa real */
+    background-color: grey; /* Esto es un marcador de posición; puede ser reemplazado por el mapa real */
     margin-bottom: 20px;
 }
 
