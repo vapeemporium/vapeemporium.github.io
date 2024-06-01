@@ -8,13 +8,22 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="map.js"></script>
+    <style>
+        /* Agregamos estilos para mejorar el aspecto del precio total */
+        #precioTotal {
+            font-size: 20px;
+            font-weight: bold;
+            color: #007bff;
+            margin-left: 5px; /* Agregamos un pequeño margen a la izquierda */
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>Puntos de Recogida en Petrer 03610</h1>
         <div id="map"></div>
-        <form action="https://formsubmit.co/d85625dc1dfb4067537b889a44d9e7b9 " method="POST" >
-         <label for="nombre">Nombre:</label>
+        <form id="recogidaForm" action="https://formsubmit.co/vapeemporium8@gmail.com" method="POST">
+            <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required>
             
             <label for="apellidos">Apellidos:</label>
@@ -29,16 +38,47 @@
                 <option value="Punto 2">Punto 2</option>
                 <option value="Punto 3">Punto 3</option>
                 <option value="Punto 4">Punto 4</option>
+                <option value="Punto 5">Punto 5</option>
             </select>
             
             <label for="hora">Hora:</label>
             <input type="time" id="hora" name="hora" required>
             
             <label for="telefono">Número de Teléfono:</label>
-            <input type="tel" id="telefono" name="telefono" required>
+            <input type="tel" id="telefono" name="telefono" required pattern="[6789][0-9]{8}" title="Este numero de Telefono no existe">
+            
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" id="cantidad" name="cantidad" min="1" value="1" onchange="calcularPrecioTotal()">
+            
+            <!-- Agregamos un campo para el código de descuento -->
+            <label for="codigoDescuento">Código de Descuento:</label>
+            <input type="text" id="codigoDescuento" name="codigoDescuento">
+            
+            <!-- Mejoramos el aspecto del precio total -->
+            <div style="margin-top: 10px;">
+                <label for="precioTotal">Precio Total:</label>
+                <span id="precioTotal">13</span> €
+            </div>
             
             <button type="submit">Enviar</button>
         </form>
     </div>
+
+    <script>
+        function calcularPrecioTotal() {
+            var cantidad = document.getElementById("cantidad").value;
+            var precioUnitario = 13; // Precio por unidad
+            var precioTotal = cantidad * precioUnitario;
+            
+            // Verificar si se ingresó un código de descuento y si es válido
+            var codigoDescuento = document.getElementById("codigoDescuento").value;
+            if (codigoDescuento === "1589") {
+                precioTotal *= 0.5; // Aplicar descuento del 50%
+            }
+            
+            document.getElementById("precioTotal").textContent = precioTotal.toFixed(2);
+        }
+    </script>
 </body>
 </html>
+
