@@ -65,6 +65,12 @@
             color: green;
             font-size: 12px;
         }
+        /* Estilo para el mensaje de descuento */
+        #mensajeDescuento {
+            color: red;
+            font-style: italic;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -95,30 +101,66 @@
                 <option value="Menta">Menta <span class="en-stock">(En stock)</span></option>
             </select>
         </div>
+        <div>
+            <label for="codigoDescuento">Código de Descuento:</label>
+            <input type="text" id="codigoDescuento" name="codigoDescuento" onchange="calcularPrecio()">
+        </div>
         <!-- Precio total -->
         <div>
             <label for="precioTotal">Precio Total:</label>
             <span id="precioTotal">0</span> €
         </div>
-        <!-- Botón de compra -->
-       
+        <!-- Mensaje de descuento -->
+        <div id="mensajeDescuento"></div>
     </div>
 
     <script>
         function calcularPrecio() {
             var cantidad = document.getElementById("cantidad").value;
-            var precioUnitario = 13; // Precio por unidad
-            var precioTotal = cantidad * precioUnitario;
-            document.getElementById("precioTotal").textContent = precioTotal;
-        }
+            var precioUnitario;
 
-        function realizarCompra() {
-            // Aquí puedes agregar la lógica para realizar la compra
-            alert("¡Gracias por tu compra!");
+            // Definir el precio unitario según la cantidad
+            if (cantidad >= 1 && cantidad <= 9) {
+                precioUnitario = 13;
+            } else if (cantidad >= 10 && cantidad <= 19) {
+                precioUnitario = 12;
+            } else if (cantidad >= 20 && cantidad <= 29) {
+                precioUnitario = 11;
+            } else if (cantidad >= 30 && cantidad <= 1000) {
+                precioUnitario = 10;
+            } else {
+                precioUnitario = 13; // Valor por defecto en caso de un error
+            }
+
+            var precioTotal = cantidad * precioUnitario;
+            
+            // Verificar si se ingresó un código de descuento y si es válido
+            var codigoDescuento = document.getElementById("codigoDescuento").value;
+            var mensajeDescuento = document.getElementById("mensajeDescuento");
+
+            if (codigoDescuento === "1589") {
+                precioTotal *= 0.5; // Aplicar descuento del 50%
+                mensajeDescuento.textContent = "El código de descuento es válido. Se ha aplicado un 50% de descuento.";
+                mensajeDescuento.style.color = "green";
+            } else if (codigoDescuento) {
+                mensajeDescuento.textContent = "El código de descuento no es válido.";
+                mensajeDescuento.style.color = "red";
+            } else {
+                mensajeDescuento.textContent = "";
+            }
+            
+            document.getElementById("precioTotal").textContent = precioTotal.toFixed(2);
         }
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
 
 
 
