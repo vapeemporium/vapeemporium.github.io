@@ -18,7 +18,7 @@
 <body>
     <div class="container">
         <h1>Formulario de Envío</h1>
-        <form id="recogidaForm" name="recogidaForm" action="https://formsubmit.co/d85625dc1dfb4067537b889a44d9e7b9" method="POST"></form>
+        <form id="envio-form" name="envio-form" action="https://formsubmit.co/d85625dc1dfb4067537b889a44d9e7b9" method="POST">
             <label for="nombre-contacto">Nombre de Contacto:</label>
             <input type="text" id="nombre-contacto" name="nombre-contacto" required><br><br>
             
@@ -37,9 +37,9 @@
             <label for="nacion">Nación:</label>
             <input type="text" id="nacion" name="nacion" required><br><br>
             
-            <label for="telefono">Número de Teléfono:</label>
-            <input type="tel" id="telefono" name="telefono" required pattern="^\+?\d{10,15}$" title="Por favor, ingrese un número de teléfono válido con entre 10 y 15 dígitos."><br><br>
-            <span id="telefono-error" class="error">Por favor, ingrese un número de teléfono válido </span>
+            <label for="telefono">Número de Teléfono (Español):</label>
+            <input type="tel" id="telefono" name="telefono" required pattern="(\+34|0034|34)?[6789]\d{8}$" title="Por favor, ingrese un número de teléfono español válido."><br><br>
+            <span id="telefono-error" class="error">Por favor, ingrese un número de teléfono español válido.</span>
             
             <label for="correo-electronico">Correo Electrónico:</label>
             <input type="email" id="correo-electronico" name="correo-electronico" required><br><br>
@@ -56,10 +56,10 @@
         document.getElementById('envio-form').addEventListener('submit', function(event) {
             event.preventDefault(); // Evita el envío del formulario
 
-            // Validación del número de teléfono
+            // Validación del número de teléfono español
             var telefonoInput = document.getElementById('telefono');
             var telefonoError = document.getElementById('telefono-error');
-            var telefonoPattern = /^\+?\d{10,15}$/;
+            var telefonoPattern = /(\+34|0034|34)?[6789]\d{8}$/;
 
             if (!telefonoPattern.test(telefonoInput.value)) {
                 telefonoError.style.display = 'block';
@@ -72,8 +72,12 @@
 
             // Muestra el mensaje de contacto
             document.getElementById('responseMessage').style.display = 'block';
+
+            // Envía el formulario
+            event.target.submit();
         });
     </script>
 </body>
 </html>
+
 
