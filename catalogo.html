@@ -60,6 +60,11 @@
             font-weight: bold;
             color: #007bff;
         }
+        /* Estilo para la palabra "En stock" */
+        .en-stock {
+            color: green;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
@@ -77,17 +82,17 @@
         <div>
             <label for="sabor">Sabor:</label>
             <select id="sabor" name="sabor">
-                <option value="Red bull">Red bull</option>
-                <option value="Fresa sandía">Fresa sandía</option>
-                <option value="Arándanos sandía">Arándanos sandía</option>
-                <option value="Fresa mango">Fresa mango</option>
-                <option value="Bluberry raspberry">Bluberry raspberry</option>
-                <option value="Melocotón helado">Melocotón helado</option>
-                <option value="Sandía helada">Sandía helada</option>
-                <option value="Bluberry ice">Bluberry ice</option>
-                <option value="Grape ice">Grape ice</option>
-                <option value="Mixted fruies">Mixted fruies</option>
-                <option value="Menta">Menta</option>
+                <option value="Red bull">Red bull <span class="en-stock">(En stock)</span></option>
+                <option value="Fresa sandía">Fresa sandía <span class="en-stock">(En stock)</span></option>
+                <option value="Arándanos sandía">Arándanos sandía <span class="en-stock">(En stock)</span></option>
+                <option value="Fresa mango">Fresa mango <span class="en-stock">(En stock)</span></option>
+                <option value="Bluberry raspberry">Bluberry raspberry <span class="en-stock">(En stock)</span></option>
+                <option value="Melocotón helado">Melocotón helado <span class="en-stock">(En stock)</span></option>
+                <option value="Sandía helada">Sandía helada <span class="en-stock">(En stock)</span></option>
+                <option value="Bluberry ice">Bluberry ice <span class="en-stock">(En stock)</span></option>
+                <option value="Grape ice">Grape ice <span class="en-stock">(En stock)</span></option>
+                <option value="Mixted fruies">Mixted fruies <span class="en-stock">(En stock)</span></option>
+                <option value="Menta">Menta <span class="en-stock">(En stock)</span></option>
             </select>
         </div>
         <!-- Precio total -->
@@ -114,6 +119,7 @@
     </script>
 </body>
 </html>
+
 
 
 
