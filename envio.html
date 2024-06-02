@@ -5,37 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Envío</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .container {
+            margin-top: 50px; /* Ajusta este valor según tus necesidades */
+        }
+        .error {
+            color: red;
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>Formulario de Envío</h1>
-        <form id="envio-form" action="mailto:jgonzalezvieco@gmail.com" method="post" enctype="text/plain">
+        <form id="recogidaForm" name="recogidaForm" action="https://formsubmit.co/d85625dc1dfb4067537b889a44d9e7b9" method="POST"></form>
             <label for="nombre-contacto">Nombre de Contacto:</label>
-            <input type="text" id="nombre-contacto" name="nombre-contacto" required>
+            <input type="text" id="nombre-contacto" name="nombre-contacto" required><br><br>
             
             <label for="direccion">Dirección:</label>
-            <input type="text" id="direccion" name="direccion" required>
+            <input type="text" id="direccion" name="direccion" required><br><br>
             
             <label for="ciudad">Ciudad:</label>
-            <input type="text" id="ciudad" name="ciudad" required>
+            <input type="text" id="ciudad" name="ciudad" required><br><br>
             
             <label for="provincia">Provincia:</label>
-            <input type="text" id="provincia" name="provincia" required>
+            <input type="text" id="provincia" name="provincia" required><br><br>
             
             <label for="codigo-postal">Código Postal:</label>
-            <input type="text" id="codigo-postal" name="codigo-postal" required>
+            <input type="text" id="codigo-postal" name="codigo-postal" required><br><br>
             
             <label for="nacion">Nación:</label>
-            <input type="text" id="nacion" name="nacion" required>
+            <input type="text" id="nacion" name="nacion" required><br><br>
             
             <label for="telefono">Número de Teléfono:</label>
-            <input type="tel" id="telefono" name="telefono" required>
+            <input type="tel" id="telefono" name="telefono" required pattern="^\+?\d{10,15}$" title="Por favor, ingrese un número de teléfono válido con entre 10 y 15 dígitos."><br><br>
+            <span id="telefono-error" class="error">Por favor, ingrese un número de teléfono válido </span>
             
             <label for="correo-electronico">Correo Electrónico:</label>
-            <input type="email" id="correo-electronico" name="correo-electronico" required>
+            <input type="email" id="correo-electronico" name="correo-electronico" required><br><br>
             
+            <label for="instagram">Instagram (opcional):</label>
+            <input type="text" id="instagram" name="instagram"><br><br>
+
             <button type="submit">Enviar</button>
         </form>
+        <p id="responseMessage" style="display:none;">Nos pondremos en contacto en 24h</p>
     </div>
+
+    <script>
+        document.getElementById('envio-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita el envío del formulario
+
+            // Validación del número de teléfono
+            var telefonoInput = document.getElementById('telefono');
+            var telefonoError = document.getElementById('telefono-error');
+            var telefonoPattern = /^\+?\d{10,15}$/;
+
+            if (!telefonoPattern.test(telefonoInput.value)) {
+                telefonoError.style.display = 'block';
+                return; // Detiene el envío del formulario
+            } else {
+                telefonoError.style.display = 'none';
+            }
+
+            // Aquí podrías agregar la lógica para enviar el formulario, por ejemplo, usando fetch()
+
+            // Muestra el mensaje de contacto
+            document.getElementById('responseMessage').style.display = 'block';
+        });
+    </script>
 </body>
 </html>
+
