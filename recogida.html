@@ -10,13 +10,6 @@
     <script src="map.js"></script>
    
     <style>
-        /* Agregamos estilos para mejorar el aspecto del precio total */
-        #precioTotal {
-            font-size: 20px;
-            font-weight: bold;
-            color: #007bff;
-            margin-left: 5px; /* Agregamos un pequeño margen a la izquierda */
-        }
         /* Estilo para el mensaje de descuento */
         #mensajeDescuento {
             color: red;
@@ -35,11 +28,8 @@
         <h1>Puntos de Recogida en Petrer 03610</h1>
         <div id="map" style="height: 400px;"></div>
         <form id="recogidaForm" name="recogidaForm" action="https://formsubmit.co/d85625dc1dfb4067537b889a44d9e7b9" method="POST">
-            <label for="nombre">Nombre:</label>
+            <label for="nombre">Nombre y Apellidos:</label>
             <input type="text" id="nombre" name="nombre" required>
-            
-            <label for="apellidos">Apellidos:</label>
-            <input type="text" id="apellidos" name="apellidos" required>
             
             <label for="sabor">Sabor y cantidad (se pueden poner varios) :</label>
             <input type="text" id="sabor" name="sabor" required>
@@ -64,66 +54,10 @@
             <label for="telefono">Número de Teléfono:</label>
             <input type="tel" id="telefono" name="telefono" required pattern="[6789][0-9]{8}" title="Este numero de Telefono no existe">
             
-            <label for="cantidad">Cantidad Total:</label>
-            <input type="number" id="cantidad" name="cantidad" min="1" value="1" onchange="calcularPrecioTotal()">
-            
-            <!-- Agregamos un campo para el código de descuento -->
-            <label for="codigoDescuento">Código de Descuento:</label>
-            <input type="text" id="codigoDescuento" name="codigoDescuento" onchange="calcularPrecioTotal()">
-            
-            <!-- Mejoramos el aspecto del precio total -->
-            <div style="margin-top: 10px;">
-                <label for="precioTotal">Precio Total:</label>
-                <span id="precioTotal" name="precioTotal">13</span> €
-            </div>
-
-            <!-- Agregamos el mensaje de descuento -->
-            <div id="mensajeDescuento"></div>
-            
             <button type="submit">Enviar</button>
         </form>
     </div>
-
-    <script>
-        function calcularPrecioTotal() {
-            var cantidad = document.getElementById("cantidad").value;
-            var precioUnitario;
-
-            // Definir el precio unitario según la cantidad
-            if (cantidad >= 1 && cantidad <= 9) {
-                precioUnitario = 13;
-            } else if (cantidad >= 10 && cantidad <= 19) {
-                precioUnitario = 12;
-            } else if (cantidad >= 20 && cantidad <= 29) {
-                precioUnitario = 11;
-            } else if (cantidad >= 30 && cantidad <= 1000) {
-                precioUnitario = 10;
-            } else {
-                precioUnitario = 13; // Valor por defecto en caso de un error
-            }
-
-            var precioTotal = cantidad * precioUnitario;
-            
-            // Verificar si se ingresó un código de descuento y si es válido
-            var codigoDescuento = document.getElementById("codigoDescuento").value;
-            var mensajeDescuento = document.getElementById("mensajeDescuento");
-
-            if (codigoDescuento === "1589") {
-                precioTotal *= 0.5; // Aplicar descuento del 50%
-                mensajeDescuento.textContent = "El código de descuento es válido. Se ha aplicado un 50% de descuento.";
-                mensajeDescuento.style.color = "green";
-            } else if (codigoDescuento) {
-                mensajeDescuento.textContent = "No es válido el código de descuento.";
-                mensajeDescuento.style.color = "red";
-            } else {
-                mensajeDescuento.textContent = "";
-            }
-            
-            document.getElementById("precioTotal").textContent = precioTotal.toFixed(2);
-        }
-    </script>
 </body>
 </html>
-
 
 
