@@ -23,12 +23,17 @@
             font-style: italic;
             margin-top: 10px;
         }
+
+        /* Margen superior para el mapa */
+        #map {
+            margin-top: 600px; /* Ajusta el margen superior según sea necesario */
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Puntos de Recogida en Petrer 03610</h1>
-        <div id="map"></div>
+        <div id="map" style="height: 400px;"></div>
         <form id="recogidaForm" name="recogidaForm" action="https://formsubmit.co/d85625dc1dfb4067537b889a44d9e7b9" method="POST">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required>
