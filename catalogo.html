@@ -72,14 +72,21 @@
             font-style: italic;
             margin-top: 10px;
         }
+        /* Estilo para la flecha */
+        .arrow {
+            cursor: pointer;
+            font-size: 24px;
+            color: #007bff;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Catálogo de Productos</h1>
-        <!-- Imagen centrada -->
+        <!-- Imagen centrada con flecha -->
         <div style="text-align: center;">
-            <img class="imagen-producto" src="vape.jpg" alt="Imagen de producto">
+            <img class="imagen-producto" id="imagenProducto" src="vape1.jpg" alt="Imagen de producto">
+            <div class="arrow" onclick="cambiarImagen()">➡️</div>
         </div>
         <!-- Opciones de selección -->
         <div>
@@ -116,6 +123,14 @@
     </div>
 
     <script>
+        let imagenes = ['vape1.jpg', 'vape2.jpg', 'vape3.jpg'];
+        let indiceImagen = 0;
+
+        function cambiarImagen() {
+            indiceImagen = (indiceImagen + 1) % imagenes.length;
+            document.getElementById("imagenProducto").src = imagenes[indiceImagen];
+        }
+
         function calcularPrecio() {
             var cantidad = document.getElementById("cantidad").value;
             var precioUnitario;
