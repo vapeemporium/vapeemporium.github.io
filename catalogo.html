@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -8,17 +9,17 @@
     <style>
         /* Estilo para ajustar el tamaño de la imagen */
         .imagen-producto {
-            max-width: 50%; /* Cambia este valor según sea necesario */
+            max-width: 50%;
             height: auto;
         }
         /* Estilo para ajustar el tamaño de la barra de cantidad */
-        #cantidad {
-            width: 50px; /* Cambia este valor según sea necesario */
+        input[type="number"] {
+            width: 50px;
         }
         /* Estilo para el contenedor del catálogo */
         .container {
             max-width: 600px;
-            margin: 0 auto;
+            margin: 20px auto;
             padding: 20px;
             background-color: #f9f9f9;
             border-radius: 10px;
@@ -55,7 +56,7 @@
             border: 1px solid #ccc;
         }
         /* Estilo para el precio total */
-        #precioTotal {
+        .precioTotal {
             font-size: 18px;
             font-weight: bold;
             color: #007bff;
@@ -66,77 +67,182 @@
             font-size: 12px;
         }
         /* Estilo para el mensaje de descuento */
-        #mensajeDescuento {
+        .mensajeDescuento {
             color: red;
             font-style: italic;
             margin-top: 10px;
+        }
+        /* Margen entre productos */
+        .producto {
+            margin: 50px 0;
+        }
+        /* Margen adicional para el primer producto */
+        .producto:first-of-type {
+            margin-top: 450px;
+        }
+        /* Estilo para las flechas de navegación */
+        .flechas {
+            position: relative;
+            text-align: center;
+        }
+        .flechas img {
+            display: inline;
+        }
+        .flechas .flecha {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 24px;
+            color: #333;
+        }
+        .flechas .flecha.izquierda {
+            left: 0;
+        }
+        .flechas .flecha.derecha {
+            right: 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Catálogo de Productos</h1>
-        <!-- Imagen centrada -->
-        <div style="text-align: center;">
-            <img class="imagen-producto" src="vape.jpg" alt="Imagen de producto">
+        <!-- Primer Producto -->
+        <div class="producto">
+            <h2>Producto 1</h2>
+            <!-- Imagen centrada con flechas -->
+            <div class="flechas">
+                <span class="flecha izquierda" onclick="cambiarImagen('producto1', -1)">&#9664;</span>
+                <img class="imagen-producto" id="producto1" src="vape.jpg" alt="Imagen de producto 1">
+                <span class="flecha derecha" onclick="cambiarImagen('producto1', 1)">&#9654;</span>
+            </div>
+            <!-- Opciones de selección -->
+            <div>
+                <label for="cantidad1">Cantidad:</label>
+                <input type="number" id="cantidad1" name="cantidad1" min="1" max="100" onchange="calcularPrecio('1')">
+            </div>
+            <div>
+                <label for="sabor1">Sabor:</label>
+                <select id="sabor1" name="sabor1">
+                    <option value="Red bull">Red bull <span class="en-stock">(En stock)</span></option>
+                    <option value="Fresa sandía">Fresa sandía <span class="en-stock">(En stock)</span></option>
+                    <option value="Arándanos sandía">Arándanos sandía <span class="en-stock">(En stock)</span></option>
+                    <option value="Fresa mango">Fresa mango <span class="en-stock">(En stock)</span></option>
+                    <option value="Bluberry raspberry">Bluberry raspberry <span class="en-stock">(En stock)</span></option>
+                    <option value="Melocotón helado">Melocotón helado <span class="en-stock">(En stock)</span></option>
+                    <option value="Sandía helada">Sandía helada <span class="en-stock">(En stock)</span></option>
+                    <option value="Bluberry ice">Bluberry ice <span class="en-stock">(En stock)</span></option>
+                    <option value="Grape ice">Grape ice <span class="en-stock">(En stock)</span></option>
+                    <option value="Mixted fruits">Mixted fruits <span class="en-stock">(En stock)</span></option>
+                    <option value="Menta">Menta <span class="en-stock">(En stock)</span></option>
+                </select>
+            </div>
+            <div>
+                <label for="codigoDescuento1">Código de Descuento:</label>
+                <input type="text" id="codigoDescuento1" name="codigoDescuento1" onchange="calcularPrecio('1')">
+            </div>
+            <!-- Precio total -->
+            <div>
+                <label for="precioTotal1">Precio Total:</label>
+                <span id="precioTotal1" class="precioTotal">0</span> €
+            </div>
+            <!-- Mensaje de descuento -->
+            <div id="mensajeDescuento1" class="mensajeDescuento"></div>
         </div>
-        <!-- Opciones de selección -->
-        <div>
-            <label for="cantidad">Cantidad:</label>
-            <input type="number" id="cantidad" name="cantidad" min="1" max="100" onchange="calcularPrecio()">
+        <!-- Segundo Producto -->
+        <div class="producto">
+            <h2>Producto 2</h2>
+            <!-- Imagen centrada con flechas -->
+            <div class="flechas">
+                <span class="flecha izquierda" onclick="cambiarImagen('producto2', -1)">&#9664;</span>
+                <img class="imagen-producto" id="producto2" src="negro.jpg" alt="Imagen de producto 2">
+                <span class="flecha derecha" onclick="cambiarImagen('producto2', 1)">&#9654;</span>
+            </div>
+            <!-- Opciones de selección -->
+            <div>
+                <label for="cantidad2">Cantidad:</label>
+                <input type="number" id="cantidad2" name="cantidad2" min="1" max="100" onchange="calcularPrecio('2')">
+            </div>
+            <div>
+                <label for="sabor2">Sabor:</label>
+                <select id="sabor2" name="sabor2">
+                    <option value="Red bull">Dark Knight <span class="en-stock">(En stock)</span></option>
+                    <option value="Fresa sandía">Neon Street <span class="en-stock">(En stock)</span></option>
+                    <option value="Arándanos sandía">Saiyan Trunk <span class="en-stock">(En stock)</span></option>
+                    <option value="Fresa mango">Ice Blade <span class="en-stock">(En stock)</span></option>
+                    <option value="Bluberry raspberry">Hellsing Grey <span class="en-stock">(En stock)</span></option>
+                    
+                </select>
+            </div>
+            <div>
+                <label for="codigoDescuento2">Código de Descuento:</label>
+                <input type="text" id="codigoDescuento2" name="codigoDescuento2" onchange="calcularPrecio('2')">
+            </div>
+            <!-- Precio total -->
+            <div>
+                <label for="precioTotal2">Precio Total:</label>
+                <span id="precioTotal2" class="precioTotal">0</span> €
+            </div>
+            <!-- Mensaje de descuento -->
+            <div id="mensajeDescuento2" class="mensajeDescuento"></div>
         </div>
-        <div>
-            <label for="sabor">Sabor:</label>
-            <select id="sabor" name="sabor">
-                <option value="Red bull">Red bull <span class="en-stock">(En stock)</span></option>
-                <option value="Fresa sandía">Fresa sandía <span class="en-stock">(En stock)</span></option>
-                <option value="Arándanos sandía">Arándanos sandía <span class="en-stock">(En stock)</span></option>
-                <option value="Fresa mango">Fresa mango <span class="en-stock">(En stock)</span></option>
-                <option value="Bluberry raspberry">Bluberry raspberry <span class="en-stock">(En stock)</span></option>
-                <option value="Melocotón helado">Melocotón helado <span class="en-stock">(En stock)</span></option>
-                <option value="Sandía helada">Sandía helada <span class="en-stock">(En stock)</span></option>
-                <option value="Bluberry ice">Bluberry ice <span class="en-stock">(En stock)</span></option>
-                <option value="Grape ice">Grape ice <span class="en-stock">(En stock)</span></option>
-                <option value="Mixted fruies">Mixted fruies <span class="en-stock">(En stock)</span></option>
-                <option value="Menta">Menta <span class="en-stock">(En stock)</span></option>
-            </select>
-        </div>
-        <div>
-            <label for="codigoDescuento">Código de Descuento:</label>
-            <input type="text" id="codigoDescuento" name="codigoDescuento" onchange="calcularPrecio()">
-        </div>
-        <!-- Precio total -->
-        <div>
-            <label for="precioTotal">Precio Total:</label>
-            <span id="precioTotal">0</span> €
-        </div>
-        <!-- Mensaje de descuento -->
-        <div id="mensajeDescuento"></div>
     </div>
 
     <script>
-        function calcularPrecio() {
-            var cantidad = document.getElementById("cantidad").value;
+        const imagenesProducto1 = ["vape.jpg"];
+        const imagenesProducto2 = ["negro.jpg", "neon.jpg", "azul.jpg","amarillo morado.jpg", "gris.jpg"];
+        let indiceProducto1 = 0;
+        let indiceProducto2 = 0;
+
+        function cambiarImagen(productId, direccion) {
+            let imagenes, indice;
+
+            if (productId === 'producto1') {
+                imagenes = imagenesProducto1;
+                indice = indiceProducto1;
+            } else {
+                imagenes = imagenesProducto2;
+                indice = indiceProducto2;
+            }
+
+            indice = (indice + direccion + imagenes.length) % imagenes.length;
+
+            document.getElementById(productId).src = imagenes[indice];
+
+            if (productId === 'producto1') {
+                indiceProducto1 = indice;
+            } else {
+                indiceProducto2 = indice;
+            }
+        }
+
+        function calcularPrecio(productId) {
+            var cantidad = document.getElementById("cantidad" + productId).value;
             var precioUnitario;
 
-            // Definir el precio unitario según la cantidad
-            if (cantidad >= 1 && cantidad <= 9) {
-                precioUnitario = 13;
-            } else if (cantidad >= 10 && cantidad <= 19) {
-                precioUnitario = 12;
-            } else if (cantidad >= 20 && cantidad <= 29) {
-                precioUnitario = 11;
-            } else if (cantidad >= 30 && cantidad <= 1000) {
-                precioUnitario = 10;
+            if (productId === '1') {
+                // Definir el precio unitario del primer producto según la cantidad
+                if (cantidad >= 1 && cantidad <= 9) {
+                    precioUnitario = 13;
+                } else if (cantidad >= 10 && cantidad <= 19) {
+                    precioUnitario = 12;
+                } else if (cantidad >= 20 && cantidad <= 29) {
+                    precioUnitario = 11;
+                } else if (cantidad >= 30 && cantidad <= 1000) {
+                    precioUnitario = 10;
+                } else {
+                    precioUnitario = 13; // Valor por defecto en caso de un error
+                }
             } else {
-                precioUnitario = 13; // Valor por defecto en caso de un error
+                // Precio fijo para el segundo producto
+                precioUnitario = 24.99;
             }
 
             var precioTotal = cantidad * precioUnitario;
-            
+
             // Verificar si se ingresó un código de descuento y si es válido
-            var codigoDescuento = document.getElementById("codigoDescuento").value;
-            var mensajeDescuento = document.getElementById("mensajeDescuento");
+            var codigoDescuento = document.getElementById("codigoDescuento" + productId).value;
+            var mensajeDescuento = document.getElementById("mensajeDescuento" + productId);
 
             if (codigoDescuento === "1589") {
                 precioTotal *= 0.5; // Aplicar descuento del 50%
@@ -148,8 +254,8 @@
             } else {
                 mensajeDescuento.textContent = "";
             }
-            
-            document.getElementById("precioTotal").textContent = precioTotal.toFixed(2);
+
+            document.getElementById("precioTotal" + productId).textContent = precioTotal.toFixed(2);
         }
     </script>
 </body>
