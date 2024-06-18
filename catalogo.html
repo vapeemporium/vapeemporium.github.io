@@ -78,7 +78,7 @@
         }
         /* Margen adicional para el primer producto */
         .producto:first-of-type {
-            margin-top: 450px;
+            margin-top: 1500px;
         }
         /* Estilo para las flechas de navegación */
         .flechas {
@@ -209,13 +209,49 @@
             <!-- Mensaje de descuento -->
             <div id="mensajeDescuento2" class="mensajeDescuento"></div>
         </div>
+        <!-- Tercer Producto -->
+        <div class="producto">
+            <h2>Producto 3</h2>
+            <!-- Imagen centrada con flechas -->
+            <div class="flechas">
+                <span class="flecha izquierda" onclick="cambiarImagen('producto3', -1)">&#9664;</span>
+                <img class="imagen-producto" id="producto3" src="principal.jpg.JPG" alt="Imagen de producto 3">
+                <span class="flecha derecha" onclick="cambiarImagen('producto3', 1)">&#9654;</span>
+            </div>
+            <!-- Opciones de selección -->
+            <div>
+                <label for="cantidad3">Cantidad:</label>
+                <input type="number" id="cantidad3" name="cantidad3" min="1" max="100" onchange="calcularPrecio('3')">
+            </div>
+            <div>
+                <label for="sabor3">Sabor:</label>
+                <select id="sabor3" name="sabor3">
+                    <option value="Sabor 1">Sabor 1 <span class="en-stock">(En stock)</span></option>
+                    <option value="Sabor 2">Sabor 2 <span class="en-stock">(En stock)</span></option>
+                    <option value="Sabor 3">Sabor 3 <span class="en-stock">(En stock)</span></option>
+                </select>
+            </div>
+            <div>
+                <label for="codigoDescuento3">Código de Descuento:</label>
+                <input type="text" id="codigoDescuento3" name="codigoDescuento3" onchange="calcularPrecio('3')">
+            </div>
+            <!-- Precio total -->
+            <div>
+                <label for="precioTotal3">Precio Total:</label>
+                <span id="precioTotal3" class="precioTotal">0</span> €
+            </div>
+            <!-- Mensaje de descuento -->
+            <div id="mensajeDescuento3" class="mensajeDescuento"></div>
+        </div>
     </div>
 
     <script>
         const imagenesProducto1 = ["nuevo.jpg", "azul.jpg", "melocoton.jpg", "morado.jpg", "verde.jpg"];
-        const imagenesProducto2 = ["negro.jpg", "neon.jpg", "","amarillo morado.jpg", "gris.jpg"];
+        const imagenesProducto2 = ["negro.jpg", "neon.jpg", "", "amarillo morado.jpg", "gris.jpg"];
+        const imagenesProducto3 = ["principal.jpg.JPG", "strawberry kiwi.jpg", "uva.jpg"];
         let indiceProducto1 = 0;
         let indiceProducto2 = 0;
+        let indiceProducto3 = 0;
 
         function cambiarImagen(productId, direccion) {
             let imagenes, indice;
@@ -223,9 +259,12 @@
             if (productId === 'producto1') {
                 imagenes = imagenesProducto1;
                 indice = indiceProducto1;
-            } else {
+            } else if (productId === 'producto2') {
                 imagenes = imagenesProducto2;
                 indice = indiceProducto2;
+            } else {
+                imagenes = imagenesProducto3;
+                indice = indiceProducto3;
             }
 
             indice = (indice + direccion + imagenes.length) % imagenes.length;
@@ -234,8 +273,10 @@
 
             if (productId === 'producto1') {
                 indiceProducto1 = indice;
-            } else {
+            } else if (productId === 'producto2') {
                 indiceProducto2 = indice;
+            } else {
+                indiceProducto3 = indice;
             }
         }
 
@@ -256,9 +297,12 @@
                 } else {
                     precioUnitario = 13; // Valor por defecto en caso de un error
                 }
-            } else {
+            } else if (productId === '2') {
                 // Precio fijo para el segundo producto
                 precioUnitario = 24.99;
+            } else {
+                // Precio fijo para el tercer producto
+                precioUnitario = 15;
             }
 
             var precioTotal = cantidad * precioUnitario;
@@ -283,6 +327,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 
