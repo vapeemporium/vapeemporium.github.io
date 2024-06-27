@@ -91,7 +91,7 @@
             <option value="grape ice">Grape Ice</option>
             <option value="mix fruit">Mix Fruit</option>
             <option value="blueberry mint">Blueberry Mint</option>
-            <option value="blueberry rasberry">Blueberry Raspberry</option>
+            <option value="blueberry raspberry">Blueberry Raspberry</option>
             <option value="strawberry ice">Strawberry Ice</option>
             <option value="strawberry kiwi">Strawberry Kiwi</option>
             <option value="watermelon bubble gum">Watermelon Bubble Gum</option>
@@ -127,10 +127,31 @@
         </tbody>
     </table>
 
-    <script>
-        let ventas = JSON.parse(localStorage.getItem('ventas')) || [];
-        let currentId = ventas.length ? ventas[ventas.length - 1].id + 1 : 1;
+    <!-- Incluye el SDK de Firebase -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js";
+        import { getDatabase, ref, set, get, child, update, remove, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyD_ofjTo3jd11rZpNlCNHSbLwdsprNphJY",
+            authDomain: "project-6216182694826177059.firebaseapp.com",
+            projectId: "project-6216182694826177059",
+            storageBucket: "project-6216182694826177059.appspot.com",
+            messagingSenderId: "421002902359",
+            appId: "1:421002902359:web:5b0bd24a4ef02b5a881c12",
+            measurementId: "G-WL6F8XPZ6M"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
+
         let editMode = false;
+        let currentId = 1;
 
         document.getElementById('ventaForm').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -142,101 +163,85 @@
             const ventaId = document.getElementById('ventaId').value;
 
             if (editMode) {
-                const ventaIndex = ventas.findIndex(v => v.id == ventaId);
-                ventas[ventaIndex].comprador = comprador;
-                ventas[ventaIndex].vendedor = vendedor;
-                ventas[ventaIndex].fecha = fecha;
-                ventas[ventaIndex].sabor = sabor;
-                ventas[ventaIndex].estado = estado;
-
-                localStorage.setItem('ventas', JSON.stringify(ventas));
-                actualizarFilaTabla(ventas[ventaIndex]);
+                const ventaData = { comprador, vendedor, fecha, sabor, estado };
+                update(ref(database, 'ventas/' + ventaId), ventaData);
                 document.getElementById('submitBtn').textContent = 'Registrar Venta';
                 editMode = false;
             } else {
-                const venta = {
-                    id: currentId++,
+                const newVentaRef = ref(database, 'ventas/' + currentId++);
+                set(newVentaRef, {
                     comprador,
                     vendedor,
                     fecha,
                     sabor,
                     estado
-                };
-
-                ventas.push(venta);
-                localStorage.setItem('ventas', JSON.stringify(ventas));
-                agregarVentaTabla(venta);
+                });
             }
             this.reset();
         });
 
-        function agregarVentaTabla(venta) {
+        function cargarVentas() {
+            onValue(ref(database, 'ventas'), (snapshot) => {
+                const ventas = snapshot.val();
+                const ventasTableBody = document.getElementById('ventasTableBody');
+                ventasTableBody.innerHTML = '';
+                for (let id in ventas) {
+                    agregarVentaTabla(id, ventas[id]);
+                }
+            });
+        }
+
+        function agregarVentaTabla(id, venta) {
             const row = document.createElement('tr');
             row.className = venta.estado.replace(' ', '-');
             row.innerHTML = `
-                <td>${venta.id}</td>
+                <td>${id}</td>
                 <td>${venta.comprador}</td>
                 <td>${venta.vendedor}</td>
                 <td>${venta.fecha}</td>
                 <td>${venta.sabor}</td>
                 <td>${venta.estado.charAt(0).toUpperCase() + venta.estado.slice(1)}</td>
                 <td>
-                    <button class="edit-btn" onclick="editarVenta(${venta.id})">Editar</button>
-                    <button class="delete-btn" onclick="eliminarVenta(${venta.id})">Eliminar</button>
+                    <button class="edit-btn" onclick="editarVenta('${id}')">Editar</button>
+                    <button class="delete-btn" onclick="eliminarVenta('${id}')">Eliminar</button>
                 </td>
             `;
-            row.id = `venta-${venta.id}`;
+            row.id = `venta-${id}`;
             document.getElementById('ventasTableBody').appendChild(row);
         }
 
-        function actualizarFilaTabla(venta) {
-            const row = document.getElementById(`venta-${venta.id}`);
-            row.className = venta.estado.replace(' ', '-');
-            row.innerHTML = `
-                <td>${venta.id}</td>
-                <td>${venta.comprador}</td>
-                <td>${venta.vendedor}</td>
-                <td>${venta.fecha}</td>
-                <td>${venta.sabor}</td>
-                <td>${venta.estado.charAt(0).toUpperCase() + venta.estado.slice(1)}</td>
-                <td>
-                    <button class="edit-btn" onclick="editarVenta(${venta.id})">Editar</button>
-                    <button class="delete-btn" onclick="eliminarVenta(${venta.id})">Eliminar</button>
-                </td>
-            `;
-        }
-
-        function cargarVentas() {
-            ventas.forEach(venta => agregarVentaTabla(venta));
-        }
-
         function buscarVenta() {
-            const id = parseInt(document.getElementById('buscarId').value);
-            const venta = ventas.find(v => v.id === id);
-            if (venta) {
-                alert(`ID: ${venta.id}\nComprador: ${venta.comprador}\nVendedor: ${venta.vendedor}\nFecha: ${venta.fecha}\nSabor: ${venta.sabor}\nEstado: ${venta.estado.charAt(0).toUpperCase() + venta.estado.slice(1)}`);
-            } else {
-                alert('Venta no encontrada');
-            }
+            const id = document.getElementById('buscarId').value;
+            get(child(ref(database), 'ventas/' + id)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const venta = snapshot.val();
+                    alert(`ID: ${id}\nComprador: ${venta.comprador}\nVendedor: ${venta.vendedor}\nFecha: ${venta.fecha}\nSabor: ${venta.sabor}\nEstado: ${venta.estado.charAt(0).toUpperCase() + venta.estado.slice(1)}`);
+                } else {
+                    alert('Venta no encontrada');
+                }
+            });
         }
 
         function editarVenta(id) {
-            const venta = ventas.find(v => v.id === id);
-            document.getElementById('comprador').value = venta.comprador;
-            document.getElementById('vendedor').value = venta.vendedor;
-            document.getElementById('fecha').value = venta.fecha;
-            document.getElementById('sabor').value = venta.sabor;
-            document.getElementById('estado').value = venta.estado;
-            document.getElementById('ventaId').value = venta.id;
-            document.getElementById('submitBtn').textContent = 'Guardar Cambios';
-            editMode = true;
+            get(child(ref(database), 'ventas/' + id)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const venta = snapshot.val();
+                    document.getElementById('comprador').value = venta.comprador;
+                    document.getElementById('vendedor').value = venta.vendedor;
+                    document.getElementById('fecha').value = venta.fecha;
+                    document.getElementById('sabor').value = venta.sabor;
+                    document.getElementById('estado').value = venta.estado;
+                    document.getElementById('ventaId').value = id;
+                    document.getElementById('submitBtn').textContent = 'Guardar Cambios';
+                    editMode = true;
+                }
+            });
         }
 
         function eliminarVenta(id) {
             const codigo = prompt("Ingrese el código de seguridad para eliminar el registro:");
             if (codigo === "7123") {
-                ventas = ventas.filter(venta => venta.id !== id);
-                localStorage.setItem('ventas', JSON.stringify(ventas));
+                remove(ref(database, 'ventas/' + id));
                 document.getElementById(`venta-${id}`).remove();
                 alert("Venta eliminada correctamente.");
             } else {
