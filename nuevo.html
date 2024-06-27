@@ -5,7 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Ventas</title>
     <style>
-        /* Estilos omitidos para brevedad */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #343a40;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        input, button, select {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #e9ecef;
+        }
+        .pagado {
+            background-color: #d4edda;
+        }
+        .sin-pagar {
+            background-color: #f8d7da;
+        }
+        .reservado {
+            background-color: #fff3cd;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .edit-btn {
+            background-color: #ffc107;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
@@ -52,82 +123,15 @@
             </tr>
         </thead>
         <tbody id="ventasTableBody">
-            <!-- Registros de ventas se cargarán dinámicamente -->
+            <!-- Registros de ventas -->
         </tbody>
     </table>
 
     <script>
-        // URL de la hoja de cálculo CSV
-        const csvURL = 'ventas.csv';
+        let ventas = JSON.parse(localStorage.getItem('ventas')) || [];
+        let currentId = ventas.length ? ventas[ventas.length - 1].id + 1 : 1;
+        let editMode = false;
 
-        // Variable para almacenar los datos de ventas
-        let ventas = [];
-
-        // Función para cargar datos desde el CSV
-        async function cargarDatos() {
-            try {
-                const response = await fetch(csvURL);
-                const data = await response.text();
-                ventas = parseCSV(data);
-                mostrarVentas();
-            } catch (error) {
-                console.error('Error al cargar datos:', error);
-            }
-        }
-
-        // Función para parsear el CSV y convertirlo en objetos JavaScript
-        function parseCSV(csv) {
-            const lines = csv.trim().split('\n');
-            const headers = lines.shift().split(',');
-            return lines.map(line => {
-                const values = line.split(',');
-                return headers.reduce((obj, header, index) => {
-                    obj[header.trim()] = values[index].trim();
-                    return obj;
-                }, {});
-            });
-        }
-
-        // Función para mostrar las ventas en la tabla HTML
-        function mostrarVentas() {
-            const tableBody = document.getElementById('ventasTableBody');
-            tableBody.innerHTML = '';
-            ventas.forEach(venta => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${venta.id}</td>
-                    <td>${venta.comprador}</td>
-                    <td>${venta.vendedor}</td>
-                    <td>${venta.fecha}</td>
-                    <td>${venta.sabor}</td>
-                    <td>${venta.estado}</td>
-                    <td>
-                        <button class="edit-btn" onclick="editarVenta(${venta.id})">Editar</button>
-                        <button class="delete-btn" onclick="eliminarVenta(${venta.id})">Eliminar</button>
-                    </td>
-                `;
-                row.id = `venta-${venta.id}`;
-                tableBody.appendChild(row);
-            });
-        }
-
-        // Función para guardar datos al CSV
-        async function guardarDatos() {
-            try {
-                const headers = Object.keys(ventas[0]).join(',');
-                const csv = ventas.map(venta => Object.values(venta).join(',')).join('\n');
-                const blob = new Blob([headers + '\n' + csv], { type: 'text/csv' });
-                const csvURL = window.URL.createObjectURL(blob);
-                const downloadLink = document.createElement('a');
-                downloadLink.href = csvURL;
-                downloadLink.download = 'ventas.csv';
-                downloadLink.click();
-            } catch (error) {
-                console.error('Error al guardar datos:', error);
-            }
-        }
-
-        // Evento submit del formulario de venta
         document.getElementById('ventaForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const comprador = document.getElementById('comprador').value;
@@ -144,37 +148,78 @@
                 ventas[ventaIndex].fecha = fecha;
                 ventas[ventaIndex].sabor = sabor;
                 ventas[ventaIndex].estado = estado;
-                mostrarVentas();
+
+                localStorage.setItem('ventas', JSON.stringify(ventas));
+                actualizarFilaTabla(ventas[ventaIndex]);
                 document.getElementById('submitBtn').textContent = 'Registrar Venta';
                 editMode = false;
             } else {
                 const venta = {
-                    id: ventas.length > 0 ? parseInt(ventas[ventas.length - 1].id) + 1 : 1,
+                    id: currentId++,
                     comprador,
                     vendedor,
                     fecha,
                     sabor,
                     estado
                 };
+
                 ventas.push(venta);
-                mostrarVentas();
+                localStorage.setItem('ventas', JSON.stringify(ventas));
+                agregarVentaTabla(venta);
             }
             this.reset();
-            guardarDatos(); // Guardar automáticamente después de cada cambio
         });
 
-        // Función para buscar una venta por ID
+        function agregarVentaTabla(venta) {
+            const row = document.createElement('tr');
+            row.className = venta.estado.replace(' ', '-');
+            row.innerHTML = `
+                <td>${venta.id}</td>
+                <td>${venta.comprador}</td>
+                <td>${venta.vendedor}</td>
+                <td>${venta.fecha}</td>
+                <td>${venta.sabor}</td>
+                <td>${venta.estado.charAt(0).toUpperCase() + venta.estado.slice(1)}</td>
+                <td>
+                    <button class="edit-btn" onclick="editarVenta(${venta.id})">Editar</button>
+                    <button class="delete-btn" onclick="eliminarVenta(${venta.id})">Eliminar</button>
+                </td>
+            `;
+            row.id = `venta-${venta.id}`;
+            document.getElementById('ventasTableBody').appendChild(row);
+        }
+
+        function actualizarFilaTabla(venta) {
+            const row = document.getElementById(`venta-${venta.id}`);
+            row.className = venta.estado.replace(' ', '-');
+            row.innerHTML = `
+                <td>${venta.id}</td>
+                <td>${venta.comprador}</td>
+                <td>${venta.vendedor}</td>
+                <td>${venta.fecha}</td>
+                <td>${venta.sabor}</td>
+                <td>${venta.estado.charAt(0).toUpperCase() + venta.estado.slice(1)}</td>
+                <td>
+                    <button class="edit-btn" onclick="editarVenta(${venta.id})">Editar</button>
+                    <button class="delete-btn" onclick="eliminarVenta(${venta.id})">Eliminar</button>
+                </td>
+            `;
+        }
+
+        function cargarVentas() {
+            ventas.forEach(venta => agregarVentaTabla(venta));
+        }
+
         function buscarVenta() {
             const id = parseInt(document.getElementById('buscarId').value);
             const venta = ventas.find(v => v.id === id);
             if (venta) {
-                alert(`ID: ${venta.id}\nComprador: ${venta.comprador}\nVendedor: ${venta.vendedor}\nFecha: ${venta.fecha}\nSabor: ${venta.sabor}\nEstado: ${venta.estado}`);
+                alert(`ID: ${venta.id}\nComprador: ${venta.comprador}\nVendedor: ${venta.vendedor}\nFecha: ${venta.fecha}\nSabor: ${venta.sabor}\nEstado: ${venta.estado.charAt(0).toUpperCase() + venta.estado.slice(1)}`);
             } else {
                 alert('Venta no encontrada');
             }
         }
 
-        // Función para editar una venta
         function editarVenta(id) {
             const venta = ventas.find(v => v.id === id);
             document.getElementById('comprador').value = venta.comprador;
@@ -187,23 +232,21 @@
             editMode = true;
         }
 
-        // Función para eliminar una venta
         function eliminarVenta(id) {
-            const confirmacion = confirm('¿Estás seguro de eliminar esta venta?');
-            if (confirmacion) {
-                ventas = ventas.filter(v => v.id !== id);
-                mostrarVentas();
-                guardarDatos(); // Guardar automáticamente después de cada cambio
+            const codigo = prompt("Ingrese el código de seguridad para eliminar el registro:");
+            if (codigo === "7123") {
+                ventas = ventas.filter(venta => venta.id !== id);
+                localStorage.setItem('ventas', JSON.stringify(ventas));
+                document.getElementById(`venta-${id}`).remove();
+                alert("Venta eliminada correctamente.");
+            } else {
+                alert("Código incorrecto. Venta no eliminada.");
             }
         }
 
-        // Cargar los datos al cargar la página
-        window.onload = cargarDatos;
+        window.onload = function() {
+            cargarVentas();
+        };
     </script>
 </body>
 </html>
-
-
-
-
-
