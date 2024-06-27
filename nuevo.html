@@ -127,12 +127,17 @@
         </tbody>
     </table>
 
-    <!-- Incluye el SDK de Firebase -->
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
+
     <script type="module">
         // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js";
-        import { getDatabase, ref, set, get, child, update, remove, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+        import { getDatabase, ref, set, push, onValue, remove, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
         // Your web app's Firebase configuration
         const firebaseConfig = {
@@ -151,7 +156,6 @@
         const database = getDatabase(app);
 
         let editMode = false;
-        let currentId = 1;
 
         document.getElementById('ventaForm').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -163,46 +167,41 @@
             const ventaId = document.getElementById('ventaId').value;
 
             if (editMode) {
-                const ventaData = { comprador, vendedor, fecha, sabor, estado };
-                update(ref(database, 'ventas/' + ventaId), ventaData)
-                    .then(() => {
-                        cargarVentas();
-                        document.getElementById('submitBtn').textContent = 'Registrar Venta';
-                        editMode = false;
-                    });
-            } else {
-                const newVentaRef = ref(database, 'ventas/' + currentId);
-                set(newVentaRef, {
-                    id: currentId,
+                const ventaRef = ref(database, 'ventas/' + ventaId);
+                set(ventaRef, {
                     comprador,
                     vendedor,
                     fecha,
                     sabor,
                     estado
                 }).then(() => {
-                    currentId++;
-                    cargarVentas();
+                    alert('Venta actualizada correctamente');
+                    location.reload();
+                });
+                document.getElementById('submitBtn').textContent = 'Registrar Venta';
+                editMode = false;
+            } else {
+                const ventasRef = ref(database, 'ventas');
+                const nuevaVentaRef = push(ventasRef);
+                set(nuevaVentaRef, {
+                    comprador,
+                    vendedor,
+                    fecha,
+                    sabor,
+                    estado
+                }).then(() => {
+                    alert('Venta registrada correctamente');
+                    location.reload();
                 });
             }
             this.reset();
         });
 
-        function cargarVentas() {
-            const ventasTableBody = document.getElementById('ventasTableBody');
-            ventasTableBody.innerHTML = '';
-            onValue(ref(database, 'ventas'), (snapshot) => {
-                const ventas = snapshot.val();
-                for (let id in ventas) {
-                    agregarVentaTabla(id, ventas[id]);
-                }
-            });
-        }
-
         function agregarVentaTabla(id, venta) {
             const row = document.createElement('tr');
             row.className = venta.estado.replace(' ', '-');
             row.innerHTML = `
-                <td>${venta.id}</td>
+                <td>${id}</td>
                 <td>${venta.comprador}</td>
                 <td>${venta.vendedor}</td>
                 <td>${venta.fecha}</td>
@@ -217,50 +216,68 @@
             document.getElementById('ventasTableBody').appendChild(row);
         }
 
-        function buscarVenta() {
-            const id = document.getElementById('buscarId').value;
-            get(child(ref(database), 'ventas/' + id)).then((snapshot) => {
-                if (snapshot.exists()) {
-                    const venta = snapshot.val();
-                    alert(`ID: ${venta.id}\nComprador: ${venta.comprador}\nVendedor: ${venta.vendedor}\nFecha: ${venta.fecha}\nSabor: ${venta.sabor}\nEstado: ${venta.estado.charAt(0).toUpperCase() + venta.estado.slice(1)}`);
-                } else {
-                    alert('Venta no encontrada');
+        function cargarVentas() {
+            const ventasRef = ref(database, 'ventas');
+            onValue(ventasRef, (snapshot) => {
+                const ventas = snapshot.val();
+                for (const id in ventas) {
+                    agregarVentaTabla(id, ventas[id]);
                 }
             });
         }
 
-        function editarVenta(id) {
-            get(child(ref(database), 'ventas/' + id)).then((snapshot) => {
+        function buscarVenta() {
+            const id = document.getElementById('buscarId').value;
+            const ventaRef = ref(database, 'ventas/' + id);
+            get(ventaRef).then((snapshot) => {
                 if (snapshot.exists()) {
                     const venta = snapshot.val();
+                    alert(`ID: ${id}\nComprador: ${venta.comprador}\nVendedor: ${venta.vendedor}\nFecha: ${venta.fecha}\nSabor: ${venta.sabor}\nEstado: ${venta.estado.charAt(0).toUpperCase() + venta.estado.slice(1)}`);
+                } else {
+                    alert('No se encontró ninguna venta con ese ID');
+                }
+            }).catch((error) => {
+                console.error('Error al buscar la venta:', error);
+            });
+        }
+
+        function editarVenta(id) {
+            const ventaRef = ref(database, 'ventas/' + id);
+            get(ventaRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const venta = snapshot.val();
+                    document.getElementById('ventaId').value = id;
                     document.getElementById('comprador').value = venta.comprador;
                     document.getElementById('vendedor').value = venta.vendedor;
                     document.getElementById('fecha').value = venta.fecha;
                     document.getElementById('sabor').value = venta.sabor;
                     document.getElementById('estado').value = venta.estado;
-                    document.getElementById('ventaId').value = id;
-                    document.getElementById('submitBtn').textContent = 'Guardar Cambios';
+                    document.getElementById('submitBtn').textContent = 'Actualizar Venta';
                     editMode = true;
+                } else {
+                    alert('No se encontró ninguna venta con ese ID');
                 }
+            }).catch((error) => {
+                console.error('Error al obtener la venta:', error);
             });
         }
 
         function eliminarVenta(id) {
-            const codigo = prompt("Ingrese el código de seguridad para eliminar el registro:");
-            if (codigo === "7123") {
-                remove(ref(database, 'ventas/' + id)).then(() => {
-                    document.getElementById(`venta-${id}`).remove();
-                    alert("Venta eliminada correctamente.");
+            if (confirm('¿Estás seguro de que quieres eliminar esta venta?')) {
+                const ventaRef = ref(database, 'ventas/' + id);
+                remove(ventaRef).then(() => {
+                    alert('Venta eliminada correctamente');
+                    location.reload();
+                }).catch((error) => {
+                    console.error('Error al eliminar la venta:', error);
                 });
-            } else {
-                alert("Código incorrecto. Venta no eliminada.");
             }
         }
 
-        window.onload = function() {
-            cargarVentas();
-        };
+        // Cargar las ventas al cargar la página
+        cargarVentas();
     </script>
 </body>
 </html>
+
 
