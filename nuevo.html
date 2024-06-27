@@ -164,27 +164,34 @@
 
             if (editMode) {
                 const ventaData = { comprador, vendedor, fecha, sabor, estado };
-                update(ref(database, 'ventas/' + ventaId), ventaData);
-                document.getElementById('submitBtn').textContent = 'Registrar Venta';
-                editMode = false;
+                update(ref(database, 'ventas/' + ventaId), ventaData)
+                    .then(() => {
+                        cargarVentas();
+                        document.getElementById('submitBtn').textContent = 'Registrar Venta';
+                        editMode = false;
+                    });
             } else {
-                const newVentaRef = ref(database, 'ventas/' + currentId++);
+                const newVentaRef = ref(database, 'ventas/' + currentId);
                 set(newVentaRef, {
+                    id: currentId,
                     comprador,
                     vendedor,
                     fecha,
                     sabor,
                     estado
+                }).then(() => {
+                    currentId++;
+                    cargarVentas();
                 });
             }
             this.reset();
         });
 
         function cargarVentas() {
+            const ventasTableBody = document.getElementById('ventasTableBody');
+            ventasTableBody.innerHTML = '';
             onValue(ref(database, 'ventas'), (snapshot) => {
                 const ventas = snapshot.val();
-                const ventasTableBody = document.getElementById('ventasTableBody');
-                ventasTableBody.innerHTML = '';
                 for (let id in ventas) {
                     agregarVentaTabla(id, ventas[id]);
                 }
@@ -195,7 +202,7 @@
             const row = document.createElement('tr');
             row.className = venta.estado.replace(' ', '-');
             row.innerHTML = `
-                <td>${id}</td>
+                <td>${venta.id}</td>
                 <td>${venta.comprador}</td>
                 <td>${venta.vendedor}</td>
                 <td>${venta.fecha}</td>
@@ -215,7 +222,7 @@
             get(child(ref(database), 'ventas/' + id)).then((snapshot) => {
                 if (snapshot.exists()) {
                     const venta = snapshot.val();
-                    alert(`ID: ${id}\nComprador: ${venta.comprador}\nVendedor: ${venta.vendedor}\nFecha: ${venta.fecha}\nSabor: ${venta.sabor}\nEstado: ${venta.estado.charAt(0).toUpperCase() + venta.estado.slice(1)}`);
+                    alert(`ID: ${venta.id}\nComprador: ${venta.comprador}\nVendedor: ${venta.vendedor}\nFecha: ${venta.fecha}\nSabor: ${venta.sabor}\nEstado: ${venta.estado.charAt(0).toUpperCase() + venta.estado.slice(1)}`);
                 } else {
                     alert('Venta no encontrada');
                 }
@@ -241,9 +248,10 @@
         function eliminarVenta(id) {
             const codigo = prompt("Ingrese el código de seguridad para eliminar el registro:");
             if (codigo === "7123") {
-                remove(ref(database, 'ventas/' + id));
-                document.getElementById(`venta-${id}`).remove();
-                alert("Venta eliminada correctamente.");
+                remove(ref(database, 'ventas/' + id)).then(() => {
+                    document.getElementById(`venta-${id}`).remove();
+                    alert("Venta eliminada correctamente.");
+                });
             } else {
                 alert("Código incorrecto. Venta no eliminada.");
             }
@@ -255,3 +263,4 @@
     </script>
 </body>
 </html>
+
