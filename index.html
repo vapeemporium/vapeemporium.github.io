@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Ventas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #343a40;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        input, button, select {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #e9ecef;
+        }
+        .pagado {
+            background-color: #d4edda;
+        }
+        .sin-pagar {
+            background-color: #f8d7da;
+        }
+        .reservado {
+            background-color: #fff3cd;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .edit-btn {
+            background-color: #ffc107;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registro de Ventas</h1>
+    <form id="ventaForm">
+        <input type="hidden" id="ventaId">
+        <input type="text" id="comprador" placeholder="Nombre del Comprador" required>
+        <input type="text" id="vendedor" placeholder="Nombre del Vendedor" required>
+        <input type="date" id="fecha" required>
+        <select id="sabor" required>
+            <option value="">Seleccione el Sabor</option>
+            <option value="grape ice">Grape Ice</option>
+            <option value="mix fruit">Mix Fruit</option>
+            <option value="blueberry mint">Blueberry Mint</option>
+            <option value="blueberry raspberry">Blueberry Raspberry</option>
+            <option value="strawberry ice">Strawberry Ice</option>
+            <option value="strawberry kiwi">Strawberry Kiwi</option>
+            <option value="watermelon bubble gum">Watermelon Bubble Gum</option>
+            <option value="watermelon ice">Watermelon Ice</option>
+            <option value="strawberry watermelon">Strawberry Watermelon</option>
+        </select>
+        <select id="estado" required>
+            <option value="">Seleccione el Estado</option>
+            <option value="pagado">Pagado</option>
+            <option value="sin-pagar">Sin pagar</option>
+            <option value="reservado">Reservado</option>
+        </select>
+        <button type="submit" id="submitBtn">Registrar Venta</button>
+    </form>
+
+    <h2>Ventas Registradas</h2>
+    <input type="number" id="buscarId" placeholder="Buscar por ID">
+    <button onclick="buscarVenta()">Buscar Venta</button>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre del Comprador</th>
+                <th>Nombre del Vendedor</th>
+                <th>Fecha</th>
+                <th>Sabor</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="ventasTableBody">
+            <!-- Registros de ventas -->
+        </tbody>
+    </table>
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
+
+    <!-- Importa el archivo de configuración -->
+    <script type="module">
+        import { agregarVenta } from './guardar.js';
+
+        document.getElementById('ventaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const comprador = document.getElementById('comprador').value;
+            const vendedor = document.getElementById('vendedor').value;
+            const fecha = document.getElementById('fecha').value;
+            const sabor = document.getElementById('sabor').value;
+            const estado = document.getElementById('estado').value;
+
+            agregarVenta(comprador, vendedor, fecha, sabor, estado);
+
+            this.reset();
+        });
+    </script>
+</body>
+</html>
