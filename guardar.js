@@ -1,5 +1,4 @@
-import { db } from './configuracion.js';
-import { collection, addDoc } from "firebase/firestore"; 
+import { collection, addDoc } from "./node_modules/firebase/firestore/dist/index.esm.js";
 
 async function agregarVenta(comprador, vendedor, fecha, sabor, estado) {
   try {
@@ -17,3 +16,4 @@ async function agregarVenta(comprador, vendedor, fecha, sabor, estado) {
 }
 
 export { agregarVenta };
+
