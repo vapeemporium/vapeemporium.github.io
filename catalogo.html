@@ -78,7 +78,7 @@
         }
         /* Margen adicional para el primer producto */
         .producto:first-of-type {
-            margin-top: 1000px;
+            margin-top: 1500px;
         }
         /* Estilo para las flechas de navegación */
         .flechas {
@@ -155,9 +155,9 @@
                     <option value="Grape ice">Grape ice <span class="en-stock">(En stock)</span></option>
                     <option value="Mixted fruits">Mixted fruits <span class="en-stock">(En stock)</span></option>
                     <option value="Menta">Menta <span class="en-stock">(En stock)</span></option>
-                     <option value="Mixted fruits">Strawberry Lychee <span class="en-stock">(En stock)</span></option>
-                     <option value="Mixted fruits">Strawberry Kiwi <span class="en-stock">(En stock)</span></option>
-                     <option value="Mixted fruits">Mango Peach Watermelon <span class="en-stock">(En stock)</span></option>
+                    <option value="Strawberry Lychee">Strawberry Lychee <span class="en-stock">(En stock)</span></option>
+                    <option value="Strawberry Kiwi">Strawberry Kiwi <span class="en-stock">(En stock)</span></option>
+                    <option value="Mango Peach Watermelon">Mango Peach Watermelon <span class="en-stock">(En stock)</span></option>
                 </select>
             </div>
             <div>
@@ -189,12 +189,11 @@
             <div>
                 <label for="sabor2">Sabor:</label>
                 <select id="sabor2" name="sabor2">
-                    <option value="Red bull">Dark Knight <span class="en-stock">(En stock)</span></option>
-                    <option value="Fresa sandía">Neon Street <span class="en-stock">(En stock)</span></option>
-                    <option value="Arándanos sandía">Saiyan Trunk <span class="en-stock">(En stock)</span></option>
-                    <option value="Fresa mango">Ice Blade <span class="en-stock">(En stock)</span></option>
-                    <option value="Bluberry raspberry">Hellsing Grey <span class="en-stock">(En stock)</span></option>
-                    
+                    <option value="Dark Knight">Dark Knight <span class="en-stock">(En stock)</span></option>
+                    <option value="Neon Street">Neon Street <span class="en-stock">(En stock)</span></option>
+                    <option value="Saiyan Trunk">Saiyan Trunk <span class="en-stock">(En stock)</span></option>
+                    <option value="Ice Blade">Ice Blade <span class="en-stock">(En stock)</span></option>
+                    <option value="Hellsing Grey">Hellsing Grey <span class="en-stock">(En stock)</span></option>
                 </select>
             </div>
             <div>
@@ -226,15 +225,9 @@
             <div>
                 <label for="sabor3">Sabor:</label>
                 <select id="sabor3" name="sabor3">
-                    <option value="Sabor 1">Grape Ice <span class="en-stock">(2)</span></option>
-                    <option value="Sabor 2">Mix Fruit <span class="en-stock">(En stock)</span></option>
-                    <option value="Sabor 3">Blueberry Mint <span class="en-stock">(En stock)</span></option>
-                    <option value="Sabor 4">Blueberry Raspberry <span class="en-stock">(En stock)</span></option>
-                    <option value="Sabor 5">Strawberry Ice <span class="en-stock">(3)</span></option>
-                    <option value="Sabor 6">Strawberry Kiwi<span class="en-stock">(No Disponible )</span></option>
-                    <option value="Sabor 7">Watermelon Bubble Gum <span class="en-stock">(1)</span></option>
-                    <option value="Sabor 8">Watermelon Ice <span class="en-stock">(En stock)</span></option>
-                    <option value="Sabor 9">Strawberry Watermelon <span class="en-stock">(3)</span></option>
+                    <option value="Sabor 1">Sabor 1 <span class="en-stock">(En stock)</span></option>
+                    <option value="Sabor 2">Sabor 2 <span class="en-stock">(En stock)</span></option>
+                    <option value="Sabor 3">Sabor 3 <span class="en-stock">(En stock)</span></option>
                 </select>
             </div>
             <div>
@@ -249,15 +242,55 @@
             <!-- Mensaje de descuento -->
             <div id="mensajeDescuento3" class="mensajeDescuento"></div>
         </div>
+        <!-- Cuarto Producto -->
+        <div class="producto">
+            <h2>Producto 4</h2>
+            <!-- Imagen centrada con flechas -->
+            <div class="flechas">
+                <span class="flecha izquierda" onclick="cambiarImagen('producto4', -1)">&#9664;</span>
+                <img class="imagen-producto" id="producto4" src="producto4.jpg" alt="Imagen de producto 4">
+                <span class="flecha derecha" onclick="cambiarImagen('producto4', 1)">&#9654;</span>
+            </div>
+            <!-- Opciones de selección -->
+            <div>
+                <label for="cantidad4">Cantidad:</label>
+                <input type="number" id="cantidad4" name="cantidad4" min="1" max="100" onchange="calcularPrecio('4')">
+            </div>
+            <div>
+                <label for="sabor4">Sabor:</label>
+                <select id="sabor4" name="sabor4">
+                    <option value="Bluberry ice - Black dragon ice">Bluberry ice - Black dragon ice <span class="en-stock">(En stock)</span></option>
+                    <option value="Red bull - Bluberry watermelon">Red bull - Bluberry watermelon <span class="en-stock">(En stock)</span></option>
+                    <option value="Watermelon ice - Bluberry mint">Watermelon ice - Bluberry mint <span class="en-stock">(En stock)</span></option>
+                    <option value="Strawberry kiwi - Sour apple raspberry">Strawberry kiwi - Sour apple raspberry <span class="en-stock">(En stock)</span></option>
+                    <option value="Bluberry rasberry - Peach mango watermelon">Bluberry rasberry - Peach mango watermelon <span class="en-stock">(En stock)</span></option>
+                    <option value="Strawberry kiwi - Peach ice">Strawberry kiwi - Peach ice <span class="en-stock">(En stock)</span></option>
+                </select>
+            </div>
+            <div>
+                <label for="codigoDescuento4">Código de Descuento:</label>
+                <input type="text" id="codigoDescuento4" name="codigoDescuento4" onchange="calcularPrecio('4')">
+            </div>
+            <!-- Precio total -->
+            <div>
+                <label for="precioTotal4">Precio Total:</label>
+                <span id="precioTotal4" class="precioTotal">0</span> €
+            </div>
+            <!-- Mensaje de descuento -->
+            <div id="mensajeDescuento4" class="mensajeDescuento"></div>
+        </div>
     </div>
 
     <script>
         const imagenesProducto1 = ["nuevo.jpg", "azul.jpg", "melocoton.jpg", "morado.jpg", "verde.jpg"];
-        const imagenesProducto2 = ["negro.jpg", "neon.jpg", "", "amarillo morado.jpg", "gris.jpg"];
+        const imagenesProducto2 = ["negro.jpg", "neon.jpg", "amarillo morado.jpg", "gris.jpg"];
         const imagenesProducto3 = ["principal.jpg.JPG", "strawberry kiwi.jpg", "uva.jpg"];
+        const imagenesProducto4 = ["2-1-2.jpg", "3-4-5.jpg"];
+
         let indiceProducto1 = 0;
         let indiceProducto2 = 0;
         let indiceProducto3 = 0;
+        let indiceProducto4 = 0;
 
         function cambiarImagen(productId, direccion) {
             let imagenes, indice;
@@ -268,9 +301,12 @@
             } else if (productId === 'producto2') {
                 imagenes = imagenesProducto2;
                 indice = indiceProducto2;
-            } else {
+            } else if (productId === 'producto3') {
                 imagenes = imagenesProducto3;
                 indice = indiceProducto3;
+            } else {
+                imagenes = imagenesProducto4;
+                indice = indiceProducto4;
             }
 
             indice = (indice + direccion + imagenes.length) % imagenes.length;
@@ -281,8 +317,10 @@
                 indiceProducto1 = indice;
             } else if (productId === 'producto2') {
                 indiceProducto2 = indice;
-            } else {
+            } else if (productId === 'producto3') {
                 indiceProducto3 = indice;
+            } else {
+                indiceProducto4 = indice;
             }
         }
 
@@ -306,9 +344,12 @@
             } else if (productId === '2') {
                 // Precio fijo para el segundo producto
                 precioUnitario = 24.99;
-            } else {
+            } else if (productId === '3') {
                 // Precio fijo para el tercer producto
                 precioUnitario = 15;
+            } else if (productId === '4') {
+                // Precio fijo para el cuarto producto
+                precioUnitario = 17;
             }
 
             var precioTotal = cantidad * precioUnitario;
