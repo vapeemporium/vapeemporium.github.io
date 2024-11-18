@@ -7,16 +7,12 @@
     <title>Catálogo</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Estilo para ajustar el tamaño de la imagen */
-        .imagen-producto {
-            max-width: 50%;
-            height: auto;
+        /* Ajustes generales */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
         }
-        /* Estilo para ajustar el tamaño de la barra de cantidad */
-        input[type="number"] {
-            width: 50px;
-        }
-        /* Estilo para el contenedor del catálogo */
         .container {
             max-width: 600px;
             margin: 20px auto;
@@ -25,13 +21,45 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        /* Estilo para el título */
         h1 {
             text-align: center;
             color: #333;
             font-size: 24px;
         }
-        /* Estilo para los botones */
+        h2 {
+            text-align: center;
+            color: #333;
+            font-size: 20px;
+        }
+        .imagen-producto {
+            max-width: 50%;
+            height: auto;
+            margin: 20px auto;
+            display: block;
+        }
+        /* Imagen superior */
+        .imagen-superior {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto; /* Espaciado superior e inferior */
+        }
+        /* Estilo de precios */
+        .oferta {
+            font-size: 22px;
+            color: #e74c3c; /* Rojo para ofertas */
+            font-weight: bold;
+        }
+        .precio-normal {
+            font-size: 22px;
+            color: #333; /* Neutro para precios normales */
+        }
+        .rebajado {
+            font-size: 18px;
+            text-decoration: line-through;
+            color: #aaa;
+        }
+        /* Botones */
         button {
             display: block;
             margin: 10px auto;
@@ -47,46 +75,10 @@
         button:hover {
             background-color: #0056b3;
         }
-        /* Estilo para las opciones de selección */
-        input[type="number"], select {
-            margin-bottom: 10px;
-            padding: 8px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        /* Estilo para el precio total */
-        .precioTotal {
-            font-size: 18px;
-            font-weight: bold;
-            color: #007bff;
-        }
-        /* Estilo para la palabra "En stock" */
-        .en-stock {
-            color: green;
-            font-size: 12px;
-        }
-        /* Estilo para el mensaje de descuento */
-        .mensajeDescuento {
-            color: red;
-            font-style: italic;
-            margin-top: 10px;
-        }
-        /* Margen entre productos */
-        .producto {
-            margin: 50px 0;
-        }
-        /* Margen adicional para el primer producto */
-        .producto:first-of-type {
-            margin-top: 1500px;
-        }
-        /* Estilo para las flechas de navegación */
+        /* Flechas de navegación */
         .flechas {
             position: relative;
             text-align: center;
-        }
-        .flechas img {
-            display: inline;
         }
         .flechas .flecha {
             position: absolute;
@@ -102,286 +94,83 @@
         .flechas .flecha.derecha {
             right: 0;
         }
-        /* Estilo para el botón de inicio */
-        .boton-inicio {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-        }
-        .boton-inicio a {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .boton-inicio a:hover {
-            background-color: #0056b3;
+        /* Espaciado entre productos */
+        .producto {
+            margin: 50px 0;
         }
     </style>
 </head>
 <body>
-    <div class="boton-inicio">
-        <a href="index.html">Inicio</a>
-    </div>
     <div class="container">
+        <!-- Imagen superior con espaciado ajustado -->
+       
+        
         <h1>Catálogo de Productos</h1>
-        <!-- Primer Producto -->
+        
+        <!-- Producto 1 -->
         <div class="producto">
             <h2>20.000</h2>
-            <!-- Imagen centrada con flechas -->
             <div class="flechas">
                 <span class="flecha izquierda" onclick="cambiarImagen('producto1', -1)">&#9664;</span>
                 <img class="imagen-producto" id="producto1" src="nuevo.jpg" alt="Imagen de producto 1">
                 <span class="flecha derecha" onclick="cambiarImagen('producto1', 1)">&#9654;</span>
             </div>
-            <!-- Opciones de selección -->
-            <div>
-                <label for="cantidad1">Cantidad:</label>
-                <input type="number" id="cantidad1" name="cantidad1" min="1" max="100" onchange="calcularPrecio('1')">
-            </div>
-            <div>
-                <label for="sabor1">Sabor:</label>
-                <select id="sabor1" name="sabor1">
-                    <option value="Red bull">Red bull <span class="en-stock">(En stock)</span></option>
-                    <option value="Fresa sandía">Fresa sandía <span class="en-stock">(En stock)</span></option>
-                    <option value="Arándanos sandía">Arándanos sandía <span class="en-stock">(En stock)</span></option>
-                    <option value="Fresa mango">Fresa mango <span class="en-stock">(En stock)</span></option>
-                    <option value="Bluberry raspberry">Bluberry raspberry <span class="en-stock">(En stock)</span></option>
-                    <option value="Melocotón helado">Melocotón helado <span class="en-stock">(En stock)</span></option>
-                    <option value="Sandía helada">Sandía helada <span class="en-stock">(En stock)</span></option>
-                    <option value="Bluberry ice">Bluberry ice <span class="en-stock">(En stock)</span></option>
-                    <option value="Grape ice">Grape ice <span class="en-stock">(En stock)</span></option>
-                    <option value="Mixted fruits">Mixted fruits <span class="en-stock">(En stock)</span></option>
-                    <option value="Menta">Menta <span class="en-stock">(En stock)</span></option>
-                    <option value="Strawberry Lychee">Strawberry Lychee <span class="en-stock">(En stock)</span></option>
-                    <option value="Strawberry Kiwi">Strawberry Kiwi <span class="en-stock">(En stock)</span></option>
-                    <option value="Mango Peach Watermelon">Mango Peach Watermelon <span class="en-stock">(En stock)</span></option>
-                </select>
-            </div>
-            <div>
-                <label for="codigoDescuento1">Código de Descuento:</label>
-                <input type="text" id="codigoDescuento1" name="codigoDescuento1" onchange="calcularPrecio('1')">
-            </div>
-            <!-- Precio total -->
-            <div>
-                <label for="precioTotal1">Precio Total:</label>
-                <span id="precioTotal1" class="precioTotal">0</span> €
-            </div>
-            <!-- Mensaje de descuento -->
-            <div id="mensajeDescuento1" class="mensajeDescuento"></div>
+            <p class="oferta">Oferta Flash: 7,99€</p>
+            <p class="rebajado">Antes: 13€</p>
+            <label for="sabor1">Sabor:</label>
+            <select id="sabor1" name="sabor1">
+                <option value="Red bull">Red bull (En stock)</option>
+                <option value="Fresa sandía">Fresa sandía (En stock)</option>
+                <option value="Arándanos sandía">Arándanos sandía (En stock)</option>
+            </select>
         </div>
-        <!-- Segundo Producto -->
+        
+        <!-- Producto 2 -->
         <div class="producto">
-            <h2>Producto 2</h2>
-            <!-- Imagen centrada con flechas -->
+            <h2>30.000</h2>
             <div class="flechas">
                 <span class="flecha izquierda" onclick="cambiarImagen('producto2', -1)">&#9664;</span>
-                <img class="imagen-producto" id="producto2" src="negro.jpg" alt="Imagen de producto 2">
+                <img class="imagen-producto" id="producto2" src="30.000NEWS.JPG" alt="Imagen de producto 2">
                 <span class="flecha derecha" onclick="cambiarImagen('producto2', 1)">&#9654;</span>
             </div>
-            <!-- Opciones de selección -->
-            <div>
-                <label for="cantidad2">Cantidad:</label>
-                <input type="number" id="cantidad2" name="cantidad2" min="1" max="100" onchange="calcularPrecio('2')">
-            </div>
-            <div>
-                <label for="sabor2">Sabor:</label>
-                <select id="sabor2" name="sabor2">
-                    <option value="Dark Knight">Dark Knight <span class="en-stock">(En stock)</span></option>
-                    <option value="Neon Street">Neon Street <span class="en-stock">(En stock)</span></option>
-                    <option value="Saiyan Trunk">Saiyan Trunk <span class="en-stock">(En stock)</span></option>
-                    <option value="Ice Blade">Ice Blade <span class="en-stock">(En stock)</span></option>
-                    <option value="Hellsing Grey">Hellsing Grey <span class="en-stock">(En stock)</span></option>
-                </select>
-            </div>
-            <div>
-                <label for="codigoDescuento2">Código de Descuento:</label>
-                <input type="text" id="codigoDescuento2" name="codigoDescuento2" onchange="calcularPrecio('2')">
-            </div>
-            <!-- Precio total -->
-            <div>
-                <label for="precioTotal2">Precio Total:</label>
-                <span id="precioTotal2" class="precioTotal">0</span> €
-            </div>
-            <!-- Mensaje de descuento -->
-            <div id="mensajeDescuento2" class="mensajeDescuento"></div>
+            <p class="precio-normal">Precio: 14,99€</p>
+            <label for="sabor2">Sabor:</label>
+            <select id="sabor2" name="sabor2">
+                <option value="">strawberry watermelon(En stock)</option>
+                <option value="">freshmint(En stock)</option>
+                <option value="">raspberyy dark sparhle (En stock)</option>
+                <option value="">bluberry oranberry cherry (En stock)</option>
+                <option value="">strawberry grape (En stock)</option>
+                <option value="">strawberry Kiwi(En stock)</option>
+                <option value="">watermelon(En stock)</option>
+                <option value="">bluberry raspberry(En stock)</option>
+                <option value="">strawberry Kiwi (En stock)</option>
+                <option value=""> triple berry(En stock)</option>
+                <option value="">bluberry ice(En stock)</option>
+                <option value="">minty blue razz(En stock)</option>
+                <option value=""> watermelon cherry(En stock)</option>
+            </select>
         </div>
         <!-- Tercer Producto -->
         <div class="producto">
-            <h2>25.000</h2>
-            <!-- Imagen centrada con flechas -->
-            <div class="flechas">
-                <span class="flecha izquierda" onclick="cambiarImagen('producto3', -1)">&#9664;</span>
-                <img class="imagen-producto" id="producto3" src="principal.jpg.JPG" alt="Imagen de producto 3">
-                <span class="flecha derecha" onclick="cambiarImagen('producto3', 1)">&#9654;</span>
-            </div>
-            <!-- Opciones de selección -->
-            <div>
-                <label for="cantidad3">Cantidad:</label>
-                <input type="number" id="cantidad3" name="cantidad3" min="1" max="100" onchange="calcularPrecio('3')">
-            </div>
-            <div>
-                <label for="sabor3">Sabor:</label>
-                <select id="sabor3" name="sabor3">
-                    <option value="Sabor 1">Mix Fruit  <span class="en-stock">(2)</span></option>
-                    <option value="Sabor 2">Bluberry Mint <span class="en-stock">(1)</span></option>
-                    <option value="Sabor 3">bluberry raspberry <span class="en-stock">(1)</span></option>
-                </select>
-            </div>
-            <div>
-                <label for="codigoDescuento3">Código de Descuento:</label>
-                <input type="text" id="codigoDescuento3" name="codigoDescuento3" onchange="calcularPrecio('3')">
-            </div>
-            <!-- Precio total -->
-            <div>
-                <label for="precioTotal3">Precio Total:</label>
-                <span id="precioTotal3" class="precioTotal">0</span> €
-            </div>
-            <!-- Mensaje de descuento -->
-            <div id="mensajeDescuento3" class="mensajeDescuento"></div>
-        </div>
-        <!-- Cuarto Producto -->
-        <div class="producto">
             <h2>30.000</h2>
-            <!-- Imagen centrada con flechas -->
             <div class="flechas">
                 <span class="flecha izquierda" onclick="cambiarImagen('producto4', -1)">&#9664;</span>
                 <img class="imagen-producto" id="producto4" src="2-1-2.jpg" alt="Imagen de producto 4">
                 <span class="flecha derecha" onclick="cambiarImagen('producto4', 1)">&#9654;</span>
             </div>
-            <!-- Opciones de selección -->
-            <div>
-                <label for="cantidad4">Cantidad:</label>
-                <input type="number" id="cantidad4" name="cantidad4" min="1" max="100" onchange="calcularPrecio('4')">
-            </div>
-            <div>
-                <label for="sabor4">Sabor:</label>
-                <select id="sabor4" name="sabor4">
-                    <option value="Bluberry ice - Black dragon ice">strawberry watermelon / kiwi passion fruit guava <span class="en-stock">(En stock)</span></option>
-                    <option value="Red bull - Bluberry watermelon">red bull / bluberry watermelon <span class="en-stock">(En stock)</span></option>
-                    <option value="Watermelon ice - Bluberry mint">bluberry ice / strawberry and banana<span class="en-stock">(En stock)</span></option>
-                    <option value="Strawberry kiwi - Sour apple raspberry">bluberry raspberry /peach mango watermelon <span class="en-stock">(En stock)</span></option>
-                    <option value="Bluberry rasberry - Peach mango watermelon">bluberry rasberry/mixed mouldy fruit <span class="en-stock">(En stock)</span></option>
-                    <option value="Strawberry kiwi - Peach ice">strawberry kiwi/ peach ice<span class="en-stock">(En stock)</span></option>
-                    <option value="Strawberry kiwi - Peach ice">bluberry ice / black dragon ice <span class="en-stock">(En stock)</span></option>
-                    <option value="Strawberry kiwi - Peach ice">red bull / watermelon bubble candy <span class="en-stock">(En stock)</span></option>
-                    <option value="Strawberry kiwi - Peach ice">watermelon ice / bluberry mint <span class="en-stock">(En stock)</span></option>
-                    <option value="Strawberry kiwi - Peach ice">watermelon ice / strawberry and mango <span class="en-stock">(En stock)</span></option>
-                    <option value="Strawberry kiwi - Peach ice">strawberry kiwi / sour apple raspberry <span class="en-stock">(En stock)</span></option>
-                    <option value="Strawberry kiwi - Peach ice">strawberry and watermelon / grape ice <span class="en-stock">(En stock)</span></option>
-                </select>
-            </div>
-            <div>
-                <label for="codigoDescuento4">Código de Descuento:</label>
-                <input type="text" id="codigoDescuento4" name="codigoDescuento4" onchange="calcularPrecio('4')">
-            </div>
-            <!-- Precio total -->
-            <div>
-                <label for="precioTotal4">Precio Total:</label>
-                <span id="precioTotal4" class="precioTotal">0</span> €
-            </div>
-            <!-- Mensaje de descuento -->
-            <div id="mensajeDescuento4" class="mensajeDescuento"></div>
+            <p class="oferta">Oferta Flash: 12,99€</p>
+            <p class="rebajado">Antes: 15€</p>
+            <label for="sabor4">Sabor:</label>
+            <select id="sabor4" name="sabor4">
+                <option value="Red bull">red bull / bluberry watermelon (En stock)</option>
+                <option value="Strawberry Kiwi">watermelon ice / bluberry mint (En stock)</option>
+                <option value="Strawberry Kiwi">strawberry and watermelon / grape ice (En stock)</option>
+            </select>
         </div>
     </div>
-
-    <script>
-        const imagenesProducto1 = ["nuevo.jpg", "azul.jpg", "melocoton.jpg", "morado.jpg", "verde.jpg"];
-        const imagenesProducto2 = ["negro.jpg", "neon.jpg", "amarillo morado.jpg", "gris.jpg"];
-        const imagenesProducto3 = ["principal.jpg.JPG", "strawberry kiwi.jpg", "uva.jpg"];
-        const imagenesProducto4 = ["2-1-2.jpg", "3-4-5.jpeg"];
-
-        let indiceProducto1 = 0;
-        let indiceProducto2 = 0;
-        let indiceProducto3 = 0;
-        let indiceProducto4 = 0;
-
-        function cambiarImagen(productId, direccion) {
-            let imagenes, indice;
-
-            if (productId === 'producto1') {
-                imagenes = imagenesProducto1;
-                indice = indiceProducto1;
-            } else if (productId === 'producto2') {
-                imagenes = imagenesProducto2;
-                indice = indiceProducto2;
-            } else if (productId === 'producto3') {
-                imagenes = imagenesProducto3;
-                indice = indiceProducto3;
-            } else {
-                imagenes = imagenesProducto4;
-                indice = indiceProducto4;
-            }
-
-            indice = (indice + direccion + imagenes.length) % imagenes.length;
-
-            document.getElementById(productId).src = imagenes[indice];
-
-            if (productId === 'producto1') {
-                indiceProducto1 = indice;
-            } else if (productId === 'producto2') {
-                indiceProducto2 = indice;
-            } else if (productId === 'producto3') {
-                indiceProducto3 = indice;
-            } else {
-                indiceProducto4 = indice;
-            }
-        }
-
-        function calcularPrecio(productId) {
-            var cantidad = document.getElementById("cantidad" + productId).value;
-            var precioUnitario;
-
-            if (productId === '1') {
-                // Definir el precio unitario del primer producto según la cantidad
-                if (cantidad >= 1 && cantidad <= 9) {
-                    precioUnitario = 13;
-                } else if (cantidad >= 10 && cantidad <= 19) {
-                    precioUnitario = 12;
-                } else if (cantidad >= 20 && cantidad <= 29) {
-                    precioUnitario = 11;
-                } else if (cantidad >= 30 && cantidad <= 1000) {
-                    precioUnitario = 10;
-                } else {
-                    precioUnitario = 13; // Valor por defecto en caso de un error
-                }
-            } else if (productId === '2') {
-                // Precio fijo para el segundo producto
-                precioUnitario = 24.99;
-            } else if (productId === '3') {
-                // Precio fijo para el tercer producto
-                precioUnitario = 15;
-            } else if (productId === '4') {
-                // Precio fijo para el cuarto producto
-                precioUnitario = 17;
-            }
-
-            var precioTotal = cantidad * precioUnitario;
-
-            // Verificar si se ingresó un código de descuento y si es válido
-            var codigoDescuento = document.getElementById("codigoDescuento" + productId).value;
-            var mensajeDescuento = document.getElementById("mensajeDescuento" + productId);
-
-            if (codigoDescuento === "1589") {
-                precioTotal *= 0.5; // Aplicar descuento del 50%
-                mensajeDescuento.textContent = "El código de descuento es válido. Se ha aplicado un 50% de descuento.";
-                mensajeDescuento.style.color = "green";
-            } else if (codigoDescuento) {
-                mensajeDescuento.textContent = "El código de descuento no es válido.";
-                mensajeDescuento.style.color = "red";
-            } else {
-                mensajeDescuento.textContent = "";
-            }
-
-            document.getElementById("precioTotal" + productId).textContent = precioTotal.toFixed(2);
-        }
-    </script>
 </body>
 </html>
-
-
 
 
 
