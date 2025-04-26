@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Comidas</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .charts-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .chart-box {
+            width: 250px;
+            height: 250px;
+            position: relative;
+        }
+        .chart-center-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-weight: bold;
+        }
+        .chart-center-text .main-value {
+            font-size: 24px;
+            color: #333;
+        }
+        .chart-center-text .sub-value {
+            font-size: 16px;
+            color: #666;
+        }
+        .section {
+            margin-bottom: 30px;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .food-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: white;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        button.delete-btn {
+            background-color: #e74c3c;
+        }
+        button.delete-btn:hover {
+            background-color: #c0392b;
+        }
+        input {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-section {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .form-grid input {
+            width: 100%;
+        }
+        .added-foods {
+            margin-top: 20px;
+        }
+        .added-food-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            margin-bottom: 5px;
+            background: #fff;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+        }
+        @media (max-width: 768px) {
+            .charts-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Contador Diario</h1>
+
+<div class="charts-container">
+    <div class="chart-box">
+        <canvas id="caloriesChart"></canvas>
+        <div class="chart-center-text">
+            <div class="main-value" id="caloriesValue">0</div>
+            <div class="sub-value">de 2600 kcal</div>
+        </div>
+    </div>
+    <div class="chart-box">
+        <canvas id="proteinChart"></canvas>
+        <div class="chart-center-text">
+            <div class="main-value" id="proteinValue">0</div>
+            <div class="sub-value">de 140 g</div>
+        </div>
+    </div>
+    <div class="chart-box">
+        <canvas id="fatChart"></canvas>
+        <div class="chart-center-text">
+            <div class="main-value" id="fatValue">0</div>
+            <div class="sub-value">de 55 g</div>
+        </div>
+    </div>
+    <div class="chart-box">
+        <canvas id="saturatedFatChart"></canvas>
+        <div class="chart-center-text">
+            <div class="main-value" id="saturatedFatValue">0</div>
+            <div class="sub-value">de 20 g</div>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <h2>Alimentos Agregados Hoy</h2>
+    <div id="added-foods" class="added-foods">
+        <!-- Aquí aparecerán los alimentos que vayas agregando -->
+    </div>
+</div>
+
+<div class="section">
+    <h2>Mis Alimentos</h2>
+    <div id="predefined-foods">
+        <!-- AQUI AÑADES TUS ALIMENTOS MANUALMENTE -->
+        <div class="food-item" data-calories="190" data-protein="10" data-fat="5" data-saturatedFat="5">
+            Bocadillo de longaniza 
+            <button onclick="addPredefinedFood(this)">+</button>
+        </div>
+        <div class="food-item" data-calories="50" data-protein="3" data-fat="2" data-saturatedFat="1">
+            Vaso de leche
+            <button onclick="addPredefinedFood(this)">+</button>
+        </div>
+        <!-- SIGUE AÑADIENDO AQUI TUS ALIMENTOS -->
+    </div>
+</div>
+
+<div class="section form-section">
+    <h2>Añadir Alimento Nuevo</h2>
+    <input type="text" id="foodName" placeholder="Nombre del alimento">
+    <div class="form-grid">
+        <div>
+            <input type="number" id="calories" placeholder="Calorías">
+        </div>
+        <div>
+            <input type="number" id="protein" placeholder="Proteínas (g)">
+        </div>
+        <div>
+            <input type="number" id="fat" placeholder="Grasas (g)">
+        </div>
+        <div>
+            <input type="number" id="saturatedFat" placeholder="Grasas Saturadas (g)">
+        </div>
+    </div>
+    <button onclick="addFood()" style="margin-top: 10px;">Añadir</button>
+</div>
+
+<div class="section">
+    <button onclick="resetAll()" style="background-color: #e74c3c;">Borrar Todo</button>
+</div>
+
+<script>
+    const maxCalories = 2600;
+    const maxProtein = 140;
+    const maxFat = 55;
+    const maxSaturatedFat = 20;
+
+    let totalCalories = 0;
+    let totalProtein = 0;
+    let totalFat = 0;
+    let totalSaturatedFat = 0;
+    let addedFoods = [];
+
+    // Actualizar los valores numéricos en el centro de las gráficas
+    function updateCenterValues() {
+        document.getElementById('caloriesValue').textContent = `${totalCalories} / ${maxCalories - totalCalories}`;
+        document.getElementById('proteinValue').textContent = `${totalProtein} / ${maxProtein - totalProtein}`;
+        document.getElementById('fatValue').textContent = `${totalFat} / ${maxFat - totalFat}`;
+        document.getElementById('saturatedFatValue').textContent = `${totalSaturatedFat} / ${maxSaturatedFat - totalSaturatedFat}`;
+    }
+
+    const caloriesChart = new Chart(document.getElementById('caloriesChart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Consumidas', 'Restantes'],
+            datasets: [{
+                data: [0, maxCalories],
+                backgroundColor: ['#f39c12', '#ecf0f1']
+            }]
+        },
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: false,
+            cutout: '70%',
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.label}: ${context.raw} kcal`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    const proteinChart = new Chart(document.getElementById('proteinChart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Consumidas', 'Restantes'],
+            datasets: [{
+                data: [0, maxProtein],
+                backgroundColor: ['#27ae60', '#ecf0f1']
+            }]
+        },
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: false,
+            cutout: '70%',
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.label}: ${context.raw} g`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    const fatChart = new Chart(document.getElementById('fatChart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Consumidas', 'Restantes'],
+            datasets: [{
+                data: [0, maxFat],
+                backgroundColor: ['#e67e22', '#ecf0f1']
+            }]
+        },
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: false,
+            cutout: '70%',
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.label}: ${context.raw} g`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    const saturatedFatChart = new Chart(document.getElementById('saturatedFatChart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Consumidas', 'Restantes'],
+            datasets: [{
+                data: [0, maxSaturatedFat],
+                backgroundColor: ['#c0392b', '#ecf0f1']
+            }]
+        },
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: false,
+            cutout: '70%',
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.label}: ${context.raw} g`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    function updateCharts() {
+        caloriesChart.data.datasets[0].data = [totalCalories, Math.max(maxCalories - totalCalories, 0)];
+        proteinChart.data.datasets[0].data = [totalProtein, Math.max(maxProtein - totalProtein, 0)];
+        fatChart.data.datasets[0].data = [totalFat, Math.max(maxFat - totalFat, 0)];
+        saturatedFatChart.data.datasets[0].data = [totalSaturatedFat, Math.max(maxSaturatedFat - totalSaturatedFat, 0)];
+        
+        caloriesChart.update();
+        proteinChart.update();
+        fatChart.update();
+        saturatedFatChart.update();
+        
+        updateCenterValues();
+    }
+
+    function addFood() {
+        const name = document.getElementById('foodName').value.trim();
+        const calories = parseInt(document.getElementById('calories').value);
+        const protein = parseInt(document.getElementById('protein').value);
+        const fat = parseInt(document.getElementById('fat').value);
+        const saturatedFat = parseInt(document.getElementById('saturatedFat').value);
+
+        if (!name || isNaN(calories) || isNaN(protein) || isNaN(fat) || isNaN(saturatedFat)) {
+            alert("Por favor completa todos los campos.");
+            return;
+        }
+
+        // Sumar valores
+        totalCalories += calories;
+        totalProtein += protein;
+        totalFat += fat;
+        totalSaturatedFat += saturatedFat;
+
+        // Añadir a la lista de alimentos agregados
+        const foodId = Date.now(); // ID único para cada alimento
+        addedFoods.push({
+            id: foodId,
+            name: name,
+            calories: calories,
+            protein: protein,
+            fat: fat,
+            saturatedFat: saturatedFat
+        });
+
+        updateAddedFoodsList();
+        updateCharts();
+
+        // Añadir a la lista de alimentos predefinidos
+        const foodList = document.getElementById('predefined-foods');
+        const newItem = document.createElement('div');
+        newItem.className = 'food-item';
+        newItem.setAttribute('data-calories', calories);
+        newItem.setAttribute('data-protein', protein);
+        newItem.setAttribute('data-fat', fat);
+        newItem.setAttribute('data-saturatedFat', saturatedFat);
+        newItem.innerHTML = `${name} <button onclick="addPredefinedFood(this)">+</button>`;
+        foodList.appendChild(newItem);
+
+        // Limpiar inputs
+        document.getElementById('foodName').value = "";
+        document.getElementById('calories').value = "";
+        document.getElementById('protein').value = "";
+        document.getElementById('fat').value = "";
+        document.getElementById('saturatedFat').value = "";
+    }
+
+    function addPredefinedFood(button) {
+        const parent = button.parentElement;
+        const calories = parseInt(parent.getAttribute('data-calories'));
+        const protein = parseInt(parent.getAttribute('data-protein'));
+        const fat = parseInt(parent.getAttribute('data-fat'));
+        const saturatedFat = parseInt(parent.getAttribute('data-saturatedFat'));
+        const name = parent.textContent.replace('+', '').trim();
+
+        totalCalories += calories;
+        totalProtein += protein;
+        totalFat += fat;
+        totalSaturatedFat += saturatedFat;
+
+        // Añadir a la lista de alimentos agregados
+        const foodId = Date.now();
+        addedFoods.push({
+            id: foodId,
+            name: name,
+            calories: calories,
+            protein: protein,
+            fat: fat,
+            saturatedFat: saturatedFat
+        });
+
+        updateAddedFoodsList();
+        updateCharts();
+    }
+
+    function updateAddedFoodsList() {
+        const addedFoodsList = document.getElementById('added-foods');
+        addedFoodsList.innerHTML = '';
+
+        if (addedFoods.length === 0) {
+            addedFoodsList.innerHTML = '<p>No has agregado alimentos aún.</p>';
+            return;
+        }
+
+        addedFoods.forEach(food => {
+            const foodItem = document.createElement('div');
+            foodItem.className = 'added-food-item';
+            foodItem.innerHTML = `
+                <span>${food.name} (${food.calories} kcal, ${food.protein}g prot.)</span>
+                <button class="delete-btn" onclick="removeFood(${food.id})">×</button>
+            `;
+            addedFoodsList.appendChild(foodItem);
+        });
+    }
+
+    function removeFood(foodId) {
+        const foodIndex = addedFoods.findIndex(food => food.id === foodId);
+        if (foodIndex !== -1) {
+            const food = addedFoods[foodIndex];
+            totalCalories -= food.calories;
+            totalProtein -= food.protein;
+            totalFat -= food.fat;
+            totalSaturatedFat -= food.saturatedFat;
+            
+            addedFoods.splice(foodIndex, 1);
+            updateAddedFoodsList();
+            updateCharts();
+        }
+    }
+
+    function resetAll() {
+        totalCalories = 0;
+        totalProtein = 0;
+        totalFat = 0;
+        totalSaturatedFat = 0;
+        addedFoods = [];
+        updateAddedFoodsList();
+        updateCharts();
+    }
+
+    // Inicializar los valores al cargar la página
+    updateCenterValues();
+</script>
+
+</body>
+</html>
