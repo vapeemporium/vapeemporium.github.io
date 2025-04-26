@@ -212,11 +212,21 @@
     const maxFat = 55;
     const maxSaturatedFat = 20;
 
-    let totalCalories = 0;
-    let totalProtein = 0;
-    let totalFat = 0;
-    let totalSaturatedFat = 0;
-    let addedFoods = [];
+    // Cargar datos del localStorage al iniciar
+    let totalCalories = parseInt(localStorage.getItem('totalCalories')) || 0;
+    let totalProtein = parseInt(localStorage.getItem('totalProtein')) || 0;
+    let totalFat = parseInt(localStorage.getItem('totalFat')) || 0;
+    let totalSaturatedFat = parseInt(localStorage.getItem('totalSaturatedFat')) || 0;
+    let addedFoods = JSON.parse(localStorage.getItem('addedFoods')) || [];
+
+    // Guardar datos en el localStorage
+    function saveData() {
+        localStorage.setItem('totalCalories', totalCalories);
+        localStorage.setItem('totalProtein', totalProtein);
+        localStorage.setItem('totalFat', totalFat);
+        localStorage.setItem('totalSaturatedFat', totalSaturatedFat);
+        localStorage.setItem('addedFoods', JSON.stringify(addedFoods));
+    }
 
     // Actualizar los valores numéricos en el centro de las gráficas
     function updateCenterValues() {
@@ -350,6 +360,7 @@
         saturatedFatChart.update();
         
         updateCenterValues();
+        saveData(); // Guardar datos cada vez que se actualiza
     }
 
     function addFood() {
@@ -467,17 +478,23 @@
     }
 
     function resetAll() {
-        totalCalories = 0;
-        totalProtein = 0;
-        totalFat = 0;
-        totalSaturatedFat = 0;
-        addedFoods = [];
-        updateAddedFoodsList();
-        updateCharts();
+        if (confirm("¿Estás seguro de que quieres borrar todos los datos?")) {
+            totalCalories = 0;
+            totalProtein = 0;
+            totalFat = 0;
+            totalSaturatedFat = 0;
+            addedFoods = [];
+            updateAddedFoodsList();
+            updateCharts();
+            localStorage.clear(); // Limpiar todo el almacenamiento local
+        }
     }
 
-    // Inicializar los valores al cargar la página
-    updateCenterValues();
+    // Inicializar la aplicación al cargar
+    window.onload = function() {
+        updateCharts();
+        updateAddedFoodsList();
+    };
 </script>
 
 </body>
