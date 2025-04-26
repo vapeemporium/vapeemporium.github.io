@@ -75,6 +75,14 @@
             display: none;
             background: white;
         }
+        .search-box {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
         .food-item {
             display: flex;
             justify-content: space-between;
@@ -84,6 +92,18 @@
             border: 1px solid #eee;
             border-radius: 8px;
             background: #fafafa;
+        }
+        .food-quantity {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .quantity-input {
+            width: 50px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 4px;
         }
         button {
             background-color: #3498db;
@@ -198,21 +218,29 @@
             <span>▼</span>
         </div>
         <div id="desayuno" class="meal-content">
-            <div class="food-item" data-calories="68,8" data-protein="8" data-fat="0,8" data-saturatedFat="0,48">
-                cafe con leche
-                <button onclick="addPredefinedFood(this)">+</button>
+            <input type="text" class="search-box" placeholder="Buscar alimento..." onkeyup="filterFoods('desayuno', this.value)">
+            <div class="food-item" data-calories="68.8" data-protein="8" data-fat="0.8" data-saturatedFat="0.48">
+                <span>cafe con leche</span>
+                <div class="food-quantity">
+                    <input type="number" class="quantity-input" value="1" min="1">
+                    <button onclick="addPredefinedFood(this)">+</button>
+                </div>
             </div>
-            <div class="food-item" data-calories="127,8" data-protein="19,5" data-fat="1,7" data-saturatedFat="1,03">
-             cafe con leche +proteina
-                <button onclick="addPredefinedFood(this)">+</button>
+            <div class="food-item" data-calories="127.8" data-protein="19.5" data-fat="1.7" data-saturatedFat="1.03">
+                <span>cafe con leche +proteina</span>
+                <div class="food-quantity">
+                    <input type="number" class="quantity-input" value="1" min="1">
+                    <button onclick="addPredefinedFood(this)">+</button>
+                </div>
             </div>
-            <div class="food-item" data-calories="27,03" data-protein="3,75" data-fat="0,89" data-saturatedFat="0,21">
-                1 panecillo 
-                <button onclick="addPredefinedFood(this)">+</button>
+            <div class="food-item" data-calories="27.03" data-protein="3.75" data-fat="0.89" data-saturatedFat="0.21">
+                <span>1 panecillo</span>
+                <div class="food-quantity">
+                    <input type="number" class="quantity-input" value="1" min="1">
+                    <button onclick="addPredefinedFood(this)">+</button>
+                </div>
             </div>
-             <div class="food-item" data-calories="108,12" data-protein="15" data-fat="3,56" data-saturatedFat="1,05">
-                4 panecillo 
-                <button onclick="addPredefinedFood(this)">+</button>
+            </div>
         </div>
     </div>
     
@@ -222,13 +250,20 @@
             <span>▼</span>
         </div>
         <div id="almuerzo" class="meal-content">
+            <input type="text" class="search-box" placeholder="Buscar alimento..." onkeyup="filterFoods('almuerzo', this.value)">
             <div class="food-item" data-calories="400" data-protein="25" data-fat="15" data-saturatedFat="5">
-                Bocadillo de jamón
-                <button onclick="addPredefinedFood(this)">+</button>
+                <span>Bocadillo de jamón</span>
+                <div class="food-quantity">
+                    <input type="number" class="quantity-input" value="1" min="1">
+                    <button onclick="addPredefinedFood(this)">+</button>
+                </div>
             </div>
             <div class="food-item" data-calories="200" data-protein="10" data-fat="8" data-saturatedFat="3">
-                Fruta
-                <button onclick="addPredefinedFood(this)">+</button>
+                <span>Fruta</span>
+                <div class="food-quantity">
+                    <input type="number" class="quantity-input" value="1" min="1">
+                    <button onclick="addPredefinedFood(this)">+</button>
+                </div>
             </div>
         </div>
     </div>
@@ -239,13 +274,20 @@
             <span>▼</span>
         </div>
         <div id="comida" class="meal-content">
-    <div class="food-item" data-calories="68,8" data-protein="8" data-fat="0,8" data-saturatedFat="0,48">
-                cafe con leche
-                <button onclick="addPredefinedFood(this)">+</button>
+            <input type="text" class="search-box" placeholder="Buscar alimento..." onkeyup="filterFoods('comida', this.value)">
+            <div class="food-item" data-calories="68.8" data-protein="8" data-fat="0.8" data-saturatedFat="0.48">
+                <span>cafe con leche</span>
+                <div class="food-quantity">
+                    <input type="number" class="quantity-input" value="1" min="1">
+                    <button onclick="addPredefinedFood(this)">+</button>
+                </div>
             </div>
-            <div class="food-item" data-calories="127,8" data-protein="19,5" data-fat="1,7" data-saturatedFat="1,03">
-             cafe con leche +proteina
-                <button onclick="addPredefinedFood(this)">+</button>
+            <div class="food-item" data-calories="127.8" data-protein="19.5" data-fat="1.7" data-saturatedFat="1.03">
+                <span>cafe con leche +proteina</span>
+                <div class="food-quantity">
+                    <input type="number" class="quantity-input" value="1" min="1">
+                    <button onclick="addPredefinedFood(this)">+</button>
+                </div>
             </div>
         </div>
     </div>
@@ -256,13 +298,20 @@
             <span>▼</span>
         </div>
         <div id="merienda" class="meal-content">
+            <input type="text" class="search-box" placeholder="Buscar alimento..." onkeyup="filterFoods('merienda', this.value)">
             <div class="food-item" data-calories="200" data-protein="10" data-fat="5" data-saturatedFat="2">
-                Frutos secos
-                <button onclick="addPredefinedFood(this)">+</button>
+                <span>Frutos secos</span>
+                <div class="food-quantity">
+                    <input type="number" class="quantity-input" value="1" min="1">
+                    <button onclick="addPredefinedFood(this)">+</button>
+                </div>
             </div>
             <div class="food-item" data-calories="150" data-protein="8" data-fat="3" data-saturatedFat="1">
-                Yogur natural
-                <button onclick="addPredefinedFood(this)">+</button>
+                <span>Yogur natural</span>
+                <div class="food-quantity">
+                    <input type="number" class="quantity-input" value="1" min="1">
+                    <button onclick="addPredefinedFood(this)">+</button>
+                </div>
             </div>
         </div>
     </div>
@@ -273,13 +322,14 @@
             <span>▼</span>
         </div>
         <div id="cena" class="meal-content">
-       <div class="food-item" data-calories="27,03" data-protein="3,75" data-fat="0,89" data-saturatedFat="0,21">
-                1 panecillo 
-                <button onclick="addPredefinedFood(this)">+</button>
+            <input type="text" class="search-box" placeholder="Buscar alimento..." onkeyup="filterFoods('cena', this.value)">
+            <div class="food-item" data-calories="27.03" data-protein="3.75" data-fat="0.89" data-saturatedFat="0.21">
+                <span>1 panecillo</span>
+                <div class="food-quantity">
+                    <input type="number" class="quantity-input" value="1" min="1">
+                    <button onclick="addPredefinedFood(this)">+</button>
+                </div>
             </div>
-             <div class="food-item" data-calories="108,12" data-protein="15" data-fat="3,56" data-saturatedFat="1,05">
-                4 panecillo 
-                <button onclick="addPredefinedFood(this)">+</button>
             </div>
         </div>
     </div>
@@ -297,16 +347,16 @@
     <input type="text" id="foodName" placeholder="Nombre del alimento">
     <div class="form-grid">
         <div>
-            <input type="number" id="calories" placeholder="Calorías">
+            <input type="number" step="0.01" id="calories" placeholder="Calorías">
         </div>
         <div>
-            <input type="number" id="protein" placeholder="Proteínas (g)">
+            <input type="number" step="0.01" id="protein" placeholder="Proteínas (g)">
         </div>
         <div>
-            <input type="number" id="fat" placeholder="Grasas (g)">
+            <input type="number" step="0.01" id="fat" placeholder="Grasas (g)">
         </div>
         <div>
-            <input type="number" id="saturatedFat" placeholder="Grasas Saturadas (g)">
+            <input type="number" step="0.01" id="saturatedFat" placeholder="Grasas Saturadas (g)">
         </div>
     </div>
     <button onclick="addFood()" style="margin-top: 10px;">Añadir</button>
@@ -323,11 +373,43 @@
     const maxSaturatedFat = 20;
 
     // Cargar datos del localStorage al iniciar
-    let totalCalories = parseInt(localStorage.getItem('totalCalories')) || 0;
-    let totalProtein = parseInt(localStorage.getItem('totalProtein')) || 0;
-    let totalFat = parseInt(localStorage.getItem('totalFat')) || 0;
-    let totalSaturatedFat = parseInt(localStorage.getItem('totalSaturatedFat')) || 0;
+    let totalCalories = parseFloat(localStorage.getItem('totalCalories')) || 0;
+    let totalProtein = parseFloat(localStorage.getItem('totalProtein')) || 0;
+    let totalFat = parseFloat(localStorage.getItem('totalFat')) || 0;
+    let totalSaturatedFat = parseFloat(localStorage.getItem('totalSaturatedFat')) || 0;
     let addedFoods = JSON.parse(localStorage.getItem('addedFoods')) || [];
+
+    // Función para normalizar texto (eliminar acentos y convertir a minúsculas)
+    function normalizeText(text) {
+        return text.toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    // Función para filtrar alimentos
+    function filterFoods(mealId, searchText) {
+        const mealContent = document.getElementById(mealId);
+        const foodItems = mealContent.querySelectorAll('.food-item');
+        const normalizedSearch = normalizeText(searchText);
+
+        foodItems.forEach(item => {
+            const foodName = normalizeText(item.querySelector('span').textContent);
+            if (foodName.includes(normalizedSearch)) {
+                item.style.display = 'flex';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    // Función para parsear números con comas
+    function parseNumber(value) {
+        if (typeof value === 'string') {
+            // Reemplazar comas por puntos para el parseo
+            return parseFloat(value.replace(',', '.'));
+        }
+        return value;
+    }
 
     // Guardar datos en el localStorage
     function saveData() {
@@ -349,15 +431,20 @@
         } else {
             mealContent.style.display = 'block';
             mealHeader.querySelector('span:last-child').textContent = '▲';
+            // Limpiar el buscador al abrir
+            mealContent.querySelector('.search-box').value = '';
+            // Mostrar todos los items
+            const foodItems = mealContent.querySelectorAll('.food-item');
+            foodItems.forEach(item => item.style.display = 'flex');
         }
     }
 
     // Actualizar los valores numéricos en el centro de las gráficas
     function updateCenterValues() {
-        document.getElementById('caloriesValue').textContent = `${totalCalories} / ${maxCalories - totalCalories}`;
-        document.getElementById('proteinValue').textContent = `${totalProtein} / ${maxProtein - totalProtein}`;
-        document.getElementById('fatValue').textContent = `${totalFat} / ${maxFat - totalFat}`;
-        document.getElementById('saturatedFatValue').textContent = `${totalSaturatedFat} / ${maxSaturatedFat - totalSaturatedFat}`;
+        document.getElementById('caloriesValue').textContent = `${totalCalories.toFixed(2)} / ${(maxCalories - totalCalories).toFixed(2)}`;
+        document.getElementById('proteinValue').textContent = `${totalProtein.toFixed(2)} / ${(maxProtein - totalProtein).toFixed(2)}`;
+        document.getElementById('fatValue').textContent = `${totalFat.toFixed(2)} / ${(maxFat - totalFat).toFixed(2)}`;
+        document.getElementById('saturatedFatValue').textContent = `${totalSaturatedFat.toFixed(2)} / ${(maxSaturatedFat - totalSaturatedFat).toFixed(2)}`;
     }
 
     const caloriesChart = new Chart(document.getElementById('caloriesChart'), {
@@ -380,7 +467,7 @@
                 tooltip: {
                     callbacks: {
                         label: function(context) {
-                            return `${context.label}: ${context.raw} kcal`;
+                            return `${context.label}: ${context.raw.toFixed(2)} kcal`;
                         }
                     }
                 }
@@ -408,7 +495,7 @@
                 tooltip: {
                     callbacks: {
                         label: function(context) {
-                            return `${context.label}: ${context.raw} g`;
+                            return `${context.label}: ${context.raw.toFixed(2)} g`;
                         }
                     }
                 }
@@ -436,7 +523,7 @@
                 tooltip: {
                     callbacks: {
                         label: function(context) {
-                            return `${context.label}: ${context.raw} g`;
+                            return `${context.label}: ${context.raw.toFixed(2)} g`;
                         }
                     }
                 }
@@ -464,7 +551,7 @@
                 tooltip: {
                     callbacks: {
                         label: function(context) {
-                            return `${context.label}: ${context.raw} g`;
+                            return `${context.label}: ${context.raw.toFixed(2)} g`;
                         }
                     }
                 }
@@ -490,10 +577,10 @@
     function addFood() {
         const mealType = document.getElementById('mealType').value;
         const name = document.getElementById('foodName').value.trim();
-        const calories = parseInt(document.getElementById('calories').value);
-        const protein = parseInt(document.getElementById('protein').value);
-        const fat = parseInt(document.getElementById('fat').value);
-        const saturatedFat = parseInt(document.getElementById('saturatedFat').value);
+        const calories = parseNumber(document.getElementById('calories').value);
+        const protein = parseNumber(document.getElementById('protein').value);
+        const fat = parseNumber(document.getElementById('fat').value);
+        const saturatedFat = parseNumber(document.getElementById('saturatedFat').value);
 
         if (!name || isNaN(calories) || isNaN(protein) || isNaN(fat) || isNaN(saturatedFat)) {
             alert("Por favor completa todos los campos.");
@@ -508,7 +595,13 @@
         newItem.setAttribute('data-protein', protein);
         newItem.setAttribute('data-fat', fat);
         newItem.setAttribute('data-saturatedFat', saturatedFat);
-        newItem.innerHTML = `${name} <button onclick="addPredefinedFood(this)">+</button>`;
+        newItem.innerHTML = `
+            <span>${name}</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button onclick="addPredefinedFood(this)">+</button>
+            </div>
+        `;
         mealContent.appendChild(newItem);
 
         // Limpiar inputs
@@ -520,12 +613,15 @@
     }
 
     function addPredefinedFood(button) {
-        const parent = button.parentElement;
-        const calories = parseInt(parent.getAttribute('data-calories'));
-        const protein = parseInt(parent.getAttribute('data-protein'));
-        const fat = parseInt(parent.getAttribute('data-fat'));
-        const saturatedFat = parseInt(parent.getAttribute('data-saturatedFat'));
-        const name = parent.textContent.replace('+', '').trim();
+        const parent = button.closest('.food-item');
+        const quantityInput = parent.querySelector('.quantity-input');
+        const quantity = parseInt(quantityInput.value) || 1;
+        
+        const calories = parseNumber(parent.getAttribute('data-calories')) * quantity;
+        const protein = parseNumber(parent.getAttribute('data-protein')) * quantity;
+        const fat = parseNumber(parent.getAttribute('data-fat')) * quantity;
+        const saturatedFat = parseNumber(parent.getAttribute('data-saturatedFat')) * quantity;
+        const name = parent.querySelector('span').textContent + (quantity > 1 ? ` (x${quantity})` : '');
 
         totalCalories += calories;
         totalProtein += protein;
@@ -540,11 +636,15 @@
             calories: calories,
             protein: protein,
             fat: fat,
-            saturatedFat: saturatedFat
+            saturatedFat: saturatedFat,
+            quantity: quantity
         });
 
         updateAddedFoodsList();
         updateCharts();
+        
+        // Resetear el contador a 1 después de agregar
+        quantityInput.value = 1;
     }
 
     function updateAddedFoodsList() {
@@ -560,7 +660,7 @@
             const foodItem = document.createElement('div');
             foodItem.className = 'added-food-item';
             foodItem.innerHTML = `
-                <span>${food.name} (${food.calories} kcal, ${food.protein}g prot.)</span>
+                <span>${food.name} (${food.calories.toFixed(2)} kcal, ${food.protein.toFixed(2)}g prot.)</span>
                 <button class="delete-btn" onclick="removeFood(${food.id})">×</button>
             `;
             addedFoodsList.appendChild(foodItem);
