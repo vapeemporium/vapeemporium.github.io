@@ -52,15 +52,38 @@
             padding: 15px;
             border-radius: 8px;
         }
+        .meal-type {
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .meal-header {
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .meal-header:hover {
+            background-color: #2980b9;
+        }
+        .meal-content {
+            padding: 10px;
+            display: none;
+            background: white;
+        }
         .food-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 8px;
             padding: 8px;
-            border: 1px solid #ccc;
+            border: 1px solid #eee;
             border-radius: 8px;
-            background: white;
+            background: #fafafa;
         }
         button {
             background-color: #3498db;
@@ -167,23 +190,115 @@
 </div>
 
 <div class="section">
-    <h2>Mis Alimentos</h2>
-    <div id="predefined-foods">
-        <!-- AQUI AÑADES TUS ALIMENTOS MANUALMENTE -->
-        <div class="food-item" data-calories="190" data-protein="10" data-fat="5" data-saturatedFat="5">
-            Bocadillo de longaniza 
-            <button onclick="addPredefinedFood(this)">+</button>
+    <h2>Mis Comidas</h2>
+    
+    <div class="meal-type">
+        <div class="meal-header" onclick="toggleMeal('desayuno')">
+            <span>Desayuno</span>
+            <span>▼</span>
         </div>
-        <div class="food-item" data-calories="50" data-protein="3" data-fat="2" data-saturatedFat="1">
-            Vaso de leche
-            <button onclick="addPredefinedFood(this)">+</button>
+        <div id="desayuno" class="meal-content">
+            <div class="food-item" data-calories="300" data-protein="15" data-fat="10" data-saturatedFat="3">
+                Tostadas con aguacate
+                <button onclick="addPredefinedFood(this)">+</button>
+            </div>
+            <div class="food-item" data-calories="250" data-protein="20" data-fat="5" data-saturatedFat="2">
+                Yogur con frutas
+                <button onclick="addPredefinedFood(this)">+</button>
+            </div>
+            <div class="food-item" data-calories="150" data-protein="5" data-fat="3" data-saturatedFat="1">
+                Café con leche
+                <button onclick="addPredefinedFood(this)">+</button>
+            </div>
         </div>
-        <!-- SIGUE AÑADIENDO AQUI TUS ALIMENTOS -->
+    </div>
+    
+    <div class="meal-type">
+        <div class="meal-header" onclick="toggleMeal('almuerzo')">
+            <span>Almuerzo</span>
+            <span>▼</span>
+        </div>
+        <div id="almuerzo" class="meal-content">
+            <div class="food-item" data-calories="400" data-protein="25" data-fat="15" data-saturatedFat="5">
+                Bocadillo de jamón
+                <button onclick="addPredefinedFood(this)">+</button>
+            </div>
+            <div class="food-item" data-calories="200" data-protein="10" data-fat="8" data-saturatedFat="3">
+                Fruta
+                <button onclick="addPredefinedFood(this)">+</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="meal-type">
+        <div class="meal-header" onclick="toggleMeal('comida')">
+            <span>Comida</span>
+            <span>▼</span>
+        </div>
+        <div id="comida" class="meal-content">
+            <div class="food-item" data-calories="500" data-protein="30" data-fat="20" data-saturatedFat="6">
+                Pasta con pollo
+                <button onclick="addPredefinedFood(this)">+</button>
+            </div>
+            <div class="food-item" data-calories="350" data-protein="15" data-fat="12" data-saturatedFat="4">
+                Ensalada mixta
+                <button onclick="addPredefinedFood(this)">+</button>
+            </div>
+            <div class="food-item" data-calories="150" data-protein="2" data-fat="0" data-saturatedFat="0">
+                Pan integral
+                <button onclick="addPredefinedFood(this)">+</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="meal-type">
+        <div class="meal-header" onclick="toggleMeal('merienda')">
+            <span>Merienda</span>
+            <span>▼</span>
+        </div>
+        <div id="merienda" class="meal-content">
+            <div class="food-item" data-calories="200" data-protein="10" data-fat="5" data-saturatedFat="2">
+                Frutos secos
+                <button onclick="addPredefinedFood(this)">+</button>
+            </div>
+            <div class="food-item" data-calories="150" data-protein="8" data-fat="3" data-saturatedFat="1">
+                Yogur natural
+                <button onclick="addPredefinedFood(this)">+</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="meal-type">
+        <div class="meal-header" onclick="toggleMeal('cena')">
+            <span>Cena</span>
+            <span>▼</span>
+        </div>
+        <div id="cena" class="meal-content">
+            <div class="food-item" data-calories="450" data-protein="35" data-fat="15" data-saturatedFat="5">
+                Pescado con verduras
+                <button onclick="addPredefinedFood(this)">+</button>
+            </div>
+            <div class="food-item" data-calories="300" data-protein="20" data-fat="10" data-saturatedFat="3">
+                Tortilla francesa
+                <button onclick="addPredefinedFood(this)">+</button>
+            </div>
+            <div class="food-item" data-calories="100" data-protein="2" data-fat="1" data-saturatedFat="0">
+                Infusión
+                <button onclick="addPredefinedFood(this)">+</button>
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="section form-section">
     <h2>Añadir Alimento Nuevo</h2>
+    <select id="mealType" style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 4px;">
+        <option value="desayuno">Desayuno</option>
+        <option value="almuerzo">Almuerzo</option>
+        <option value="comida">Comida</option>
+        <option value="merienda">Merienda</option>
+        <option value="cena">Cena</option>
+    </select>
     <input type="text" id="foodName" placeholder="Nombre del alimento">
     <div class="form-grid">
         <div>
@@ -226,6 +341,20 @@
         localStorage.setItem('totalFat', totalFat);
         localStorage.setItem('totalSaturatedFat', totalSaturatedFat);
         localStorage.setItem('addedFoods', JSON.stringify(addedFoods));
+    }
+
+    // Alternar visibilidad de las comidas
+    function toggleMeal(mealId) {
+        const mealContent = document.getElementById(mealId);
+        const mealHeader = mealContent.previousElementSibling;
+        
+        if (mealContent.style.display === 'block') {
+            mealContent.style.display = 'none';
+            mealHeader.querySelector('span:last-child').textContent = '▼';
+        } else {
+            mealContent.style.display = 'block';
+            mealHeader.querySelector('span:last-child').textContent = '▲';
+        }
     }
 
     // Actualizar los valores numéricos en el centro de las gráficas
@@ -360,10 +489,11 @@
         saturatedFatChart.update();
         
         updateCenterValues();
-        saveData(); // Guardar datos cada vez que se actualiza
+        saveData();
     }
 
     function addFood() {
+        const mealType = document.getElementById('mealType').value;
         const name = document.getElementById('foodName').value.trim();
         const calories = parseInt(document.getElementById('calories').value);
         const protein = parseInt(document.getElementById('protein').value);
@@ -375,28 +505,8 @@
             return;
         }
 
-        // Sumar valores
-        totalCalories += calories;
-        totalProtein += protein;
-        totalFat += fat;
-        totalSaturatedFat += saturatedFat;
-
-        // Añadir a la lista de alimentos agregados
-        const foodId = Date.now(); // ID único para cada alimento
-        addedFoods.push({
-            id: foodId,
-            name: name,
-            calories: calories,
-            protein: protein,
-            fat: fat,
-            saturatedFat: saturatedFat
-        });
-
-        updateAddedFoodsList();
-        updateCharts();
-
-        // Añadir a la lista de alimentos predefinidos
-        const foodList = document.getElementById('predefined-foods');
+        // Añadir a la lista de alimentos correspondiente
+        const mealContent = document.getElementById(mealType);
         const newItem = document.createElement('div');
         newItem.className = 'food-item';
         newItem.setAttribute('data-calories', calories);
@@ -404,7 +514,7 @@
         newItem.setAttribute('data-fat', fat);
         newItem.setAttribute('data-saturatedFat', saturatedFat);
         newItem.innerHTML = `${name} <button onclick="addPredefinedFood(this)">+</button>`;
-        foodList.appendChild(newItem);
+        mealContent.appendChild(newItem);
 
         // Limpiar inputs
         document.getElementById('foodName').value = "";
@@ -486,7 +596,7 @@
             addedFoods = [];
             updateAddedFoodsList();
             updateCharts();
-            localStorage.clear(); // Limpiar todo el almacenamiento local
+            localStorage.clear();
         }
     }
 
@@ -494,6 +604,11 @@
     window.onload = function() {
         updateCharts();
         updateAddedFoodsList();
+        
+        // Mostrar todos los menús desplegables al inicio
+        document.querySelectorAll('.meal-content').forEach(meal => {
+            meal.style.display = 'none';
+        });
     };
 </script>
 
