@@ -198,12 +198,35 @@
         grid-template-columns: 1fr;
     }
 
+    /* Mejorar el display de los detalles en móvil */
     .food-details {
         width: 100%;
         box-sizing: border-box;
         margin-top: 10px;
         padding: 10px;
+        position: relative;
+        left: 0;
+        right: 0;
+        overflow: hidden;
     }
+    
+    .food-details p {
+        margin: 5px 0;
+        font-size: 14px;
+        word-break: break-word;
+    }
+    
+    /* Ajustar el contenedor de alimentos */
+    .food-item {
+        flex-wrap: wrap;
+    }
+    
+    .food-quantity {
+        width: 100%;
+        margin-top: 8px;
+        justify-content: flex-end;
+    }
+}
     
     /* Modal para detalles en móvil */
     .modal {
