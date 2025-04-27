@@ -38,14 +38,6 @@
             text-align: center;
             font-weight: bold;
         }
-        .chart-center-text .main-value {
-            font-size: 24px;
-            color: #333;
-        }
-        .chart-center-text .sub-value {
-            font-size: 16px;
-            color: #666;
-        }
         .section {
             margin-bottom: 30px;
             background: #f9f9f9;
@@ -75,7 +67,7 @@
             display: none;
             background: white;
         }
-        .search-box {
+        .search-box, .global-search-box {
             width: 100%;
             padding: 8px;
             margin-bottom: 10px;
@@ -92,13 +84,14 @@
             border: 1px solid #eee;
             border-radius: 8px;
             background: #fafafa;
+            flex-wrap: wrap;
         }
         .food-quantity {
             display: flex;
             align-items: center;
             gap: 5px;
         }
-        .quantity-input {
+        .quantity-input, .weight-input {
             width: 50px;
             padding: 5px;
             text-align: center;
@@ -176,102 +169,6 @@
         .global-search-container {
             margin-bottom: 20px;
         }
-        .global-search-box {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .weight-display {
-            font-size: 12px;
-            color: #666;
-            margin-left: 5px;
-        }
-        
-        @media (max-width: 768px) {
-    .charts-container {
-        flex-direction: column;
-        align-items: center;
-    }
-    .form-grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* Mejorar el display de los detalles en móvil */
-    .food-details {
-        width: 100%;
-        box-sizing: border-box;
-        margin-top: 10px;
-        padding: 10px;
-        position: relative;
-        left: 0;
-        right: 0;
-        overflow: hidden;
-    }
-    
-    .food-details p {
-        margin: 5px 0;
-        font-size: 14px;
-        word-break: break-word;
-    }
-    
-    /* Ajustar el contenedor de alimentos */
-    .food-item {
-        flex-wrap: wrap;
-    }
-    
-    .food-quantity {
-        width: 100%;
-        margin-top: 8px;
-        justify-content: flex-end;
-    }
-}
-    
-    /* Modal para detalles en móvil */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.4);
-    }
-    .modal-content {
-        background-color: #fefefe;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-        border-radius: 8px;
-        position: relative;
-    }
-    .close {
-        position: absolute;
-        right: 10px;
-        top: 5px;
-        color: #aaa;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-    .close:hover {
-        color: black;
-    }
-}
-
-        
-        /* Mostrar siempre el campo de peso */
-        .weight-input {
-            display: block !important;
-            width: 80px;
-            margin-top: 5px;
-        }
-        
-        /* Resultados de búsqueda global */
         .global-search-results {
             display: none;
             position: absolute;
@@ -292,7 +189,36 @@
         .search-result-item:hover {
             background-color: #f5f5f5;
         }
-    </style>
+        
+        @media (max-width: 768px) {
+            .charts-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .food-details {
+                width: 100%;
+                box-sizing: border-box;
+                margin-top: 10px;
+                padding: 10px;
+                position: relative;
+                left: 0;
+                right: 0;
+                overflow: hidden;
+            }
+            .food-item {
+                flex-wrap: wrap;
+            }
+            .food-quantity {
+                width: 100%;
+                margin-top: 8px;
+                justify-content: flex-end;
+            }
+        }
+        </style>
+        
 </head>
 <body>
 
@@ -349,7 +275,10 @@
     <div class="global-search-container">
         <input type="text" class="global-search-box" placeholder="Buscar en todos los alimentos..." onkeyup="globalFilterFoods(this.value)">
     </div>
-    
+
+    <!-- AQUÍ añadimos para mostrar resultados de la búsqueda global -->
+    <div class="global-search-results" style="display: none;"></div>
+
     <div class="meal-type">
         <div class="meal-header" onclick="toggleMeal('desayuno')">
             <span>Desayuno</span>
@@ -1781,99 +1710,102 @@
         </div>
         
         <script>
+            // Definir máximos
             const maxCalories = 2600;
             const maxProtein = 140;
             const maxFat = 55;
             const maxSaturatedFat = 20;
             const maxCarbs = 540;
-        
-            // Cargar datos del localStorage al iniciar
+            
+            // Cargar datos del localStorage
             let totalCalories = parseFloat(localStorage.getItem('totalCalories')) || 0;
             let totalProtein = parseFloat(localStorage.getItem('totalProtein')) || 0;
             let totalFat = parseFloat(localStorage.getItem('totalFat')) || 0;
             let totalSaturatedFat = parseFloat(localStorage.getItem('totalSaturatedFat')) || 0;
             let totalCarbs = parseFloat(localStorage.getItem('totalCarbs')) || 0;
             let addedFoods = JSON.parse(localStorage.getItem('addedFoods')) || [];
-        
-            // Función para normalizar texto (eliminar acentos y convertir a minúsculas)
-            function normalizeText(text) {
-                return text.toLowerCase()
-                    .normalize("NFD")
-                    .replace(/[\u0300-\u036f]/g, "");
-            }
-        
-            // Función para filtrar alimentos en una categoría específica
-            function filterFoods(mealId, searchText) {
-                const mealContent = document.getElementById(mealId);
-                const foodItems = mealContent.querySelectorAll('.food-item');
-                const normalizedSearch = normalizeText(searchText);
-        
-                foodItems.forEach(item => {
-                    const foodName = normalizeText(item.querySelector('span').textContent);
-                    if (foodName.includes(normalizedSearch)) {
-                        item.style.display = 'flex';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            }
-        
-            // Función para filtrar en todos los alimentos
-            function globalFilterFoods(searchText) {
-                const normalizedSearch = normalizeText(searchText);
-                const allFoodItems = document.querySelectorAll('.food-item');
-                
-                allFoodItems.forEach(item => {
-                    const foodName = normalizeText(item.querySelector('span').textContent);
-                    if (foodName.includes(normalizedSearch)) {
-                        item.style.display = 'flex';
-                        // Asegurarse de que el contenedor padre esté visible
-                        let parent = item.closest('.meal-content');
-                        while (parent) {
-                            parent.style.display = 'block';
-                            const header = parent.previousElementSibling;
-                            if (header && header.classList.contains('meal-header')) {
-                                header.querySelector('span:last-child').textContent = '▲';
-                            }
-                            parent = parent.parentElement.closest('.meal-content');
-                        }
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            }
-        
+            
             // Función para parsear números con comas
             function parseNumber(value) {
                 if (typeof value === 'string') {
-                    // Reemplazar comas por puntos para el parseo
                     return parseFloat(value.replace(',', '.'));
                 }
                 return value;
             }
-        
-            // Guardar datos en el localStorage
-            function saveData() {
-                localStorage.setItem('totalCalories', totalCalories);
-                localStorage.setItem('totalProtein', totalProtein);
-                localStorage.setItem('totalFat', totalFat);
-                localStorage.setItem('totalSaturatedFat', totalSaturatedFat);
-                localStorage.setItem('totalCarbs', totalCarbs);
-                localStorage.setItem('addedFoods', JSON.stringify(addedFoods));
+            
+            // Normalizar texto para búsquedas
+            function normalizeText(text) {
+                return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             }
-        
-            // Alternar visibilidad de las comidas
+            
+            // Filtrar dentro de cada comida
+            function filterFoods(mealId, searchText) {
+                const mealContent = document.getElementById(mealId);
+                const foodItems = mealContent.querySelectorAll('.food-item');
+                const normalizedSearch = normalizeText(searchText);
+            
+                foodItems.forEach(item => {
+                    const foodName = normalizeText(item.querySelector('span').textContent);
+                    item.style.display = foodName.includes(normalizedSearch) ? 'flex' : 'none';
+                });
+            }
+            
+            // Búsqueda global de alimentos
+            function globalFilterFoods(searchText) {
+                const normalizedSearch = normalizeText(searchText);
+                const allFoodItems = document.querySelectorAll('.meal-content .food-item');
+                const resultsContainer = document.querySelector('.global-search-results');
+                resultsContainer.innerHTML = '';
+            
+                if (normalizedSearch.trim() === '') {
+                    resultsContainer.style.display = 'none';
+                    return;
+                }
+            
+                let foundSomething = false;
+                allFoodItems.forEach(item => {
+                    const foodName = normalizeText(item.querySelector('span').textContent);
+                    if (foodName.includes(normalizedSearch)) {
+                        const clone = item.cloneNode(true);
+                        
+                        // Limpiar eventos y añadirlos correctamente
+                        const addButton = clone.querySelector('button[onclick^="addPredefinedFood"]');
+                        if (addButton) {
+                            addButton.onclick = function() {
+                                addPredefinedFood(this);
+                                resultsContainer.style.display = 'none';
+                            };
+                        }
+            
+                        const detailsButton = clone.querySelector('button.details-btn');
+                        if (detailsButton) {
+                            detailsButton.onclick = function() {
+                                toggleDetails(this);
+                            };
+                        }
+            
+                        clone.classList.add('search-result-item');
+                        clone.style.display = 'flex';
+                        clone.style.flexDirection = 'column';
+                        
+                        resultsContainer.appendChild(clone);
+                        foundSomething = true;
+                    }
+                });
+            
+                resultsContainer.style.display = foundSomething ? 'block' : 'none';
+            }
+            
+            // Alternar abrir/cerrar comidas
             function toggleMeal(mealId) {
                 const mealContent = document.getElementById(mealId);
                 const mealHeader = mealContent.previousElementSibling;
-                
                 if (mealContent.style.display === 'block') {
                     mealContent.style.display = 'none';
                     mealHeader.querySelector('span:last-child').textContent = '▼';
                 } else {
                     mealContent.style.display = 'block';
                     mealHeader.querySelector('span:last-child').textContent = '▲';
-                    // Limpiar el buscador al abrir
                     const searchBox = mealContent.querySelector('.search-box');
                     if (searchBox) {
                         searchBox.value = '';
@@ -1881,12 +1813,11 @@
                     }
                 }
             }
-        
-            // Alternar visibilidad de los detalles del alimento
+            
+            // Mostrar detalles de alimento
             function toggleDetails(button) {
                 const foodItem = button.closest('.food-item');
                 const details = foodItem.querySelector('.food-details');
-                
                 if (details.style.display === 'block') {
                     details.style.display = 'none';
                     button.textContent = '+';
@@ -1895,294 +1826,136 @@
                     button.textContent = '-';
                 }
             }
-        
-            // Actualizar los valores numéricos en el centro de las gráficas
-            function updateCenterValues() {
-                document.getElementById('caloriesValue').textContent = `${totalCalories.toFixed(2)} / ${(maxCalories - totalCalories).toFixed(2)}`;
-                document.getElementById('proteinValue').textContent = `${totalProtein.toFixed(2)} / ${(maxProtein - totalProtein).toFixed(2)}`;
-                document.getElementById('fatValue').textContent = `${totalFat.toFixed(2)} / ${(maxFat - totalFat).toFixed(2)}`;
-                document.getElementById('saturatedFatValue').textContent = `${totalSaturatedFat.toFixed(2)} / ${(maxSaturatedFat - totalSaturatedFat).toFixed(2)}`;
-                document.getElementById('carbsValue').textContent = `${totalCarbs.toFixed(2)} / ${(maxCarbs - totalCarbs).toFixed(2)}`;
-            }
-        
-            // Inicializar gráficas
-            const caloriesChart = new Chart(document.getElementById('caloriesChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: ['Consumidas', 'Restantes'],
-                    datasets: [{
-                        data: [0, maxCalories],
-                        backgroundColor: ['#f39c12', '#ecf0f1']
-                    }]
-                },
-                options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false,
-                    cutout: '70%',
-                    plugins: {
-                        legend: {
-                            position: 'bottom'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.label}: ${context.raw.toFixed(2)} kcal`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        
-            const proteinChart = new Chart(document.getElementById('proteinChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: ['Consumidas', 'Restantes'],
-                    datasets: [{
-                        data: [0, maxProtein],
-                        backgroundColor: ['#27ae60', '#ecf0f1']
-                    }]
-                },
-                options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false,
-                    cutout: '70%',
-                    plugins: {
-                        legend: {
-                            position: 'bottom'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.label}: ${context.raw.toFixed(2)} g`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        
-            const fatChart = new Chart(document.getElementById('fatChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: ['Consumidas', 'Restantes'],
-                    datasets: [{
-                        data: [0, maxFat],
-                        backgroundColor: ['#e67e22', '#ecf0f1']
-                    }]
-                },
-                options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false,
-                    cutout: '70%',
-                    plugins: {
-                        legend: {
-                            position: 'bottom'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.label}: ${context.raw.toFixed(2)} g`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        
-            const saturatedFatChart = new Chart(document.getElementById('saturatedFatChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: ['Consumidas', 'Restantes'],
-                    datasets: [{
-                        data: [0, maxSaturatedFat],
-                        backgroundColor: ['#c0392b', '#ecf0f1']
-                    }]
-                },
-                options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false,
-                    cutout: '70%',
-                    plugins: {
-                        legend: {
-                            position: 'bottom'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.label}: ${context.raw.toFixed(2)} g`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        
-            const carbsChart = new Chart(document.getElementById('carbsChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: ['Consumidas', 'Restantes'],
-                    datasets: [{
-                        data: [0, maxCarbs],
-                        backgroundColor: ['#8e44ad', '#ecf0f1']
-                    }]
-                },
-                options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false,
-                    cutout: '70%',
-                    plugins: {
-                        legend: {
-                            position: 'bottom'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.label}: ${context.raw.toFixed(2)} g`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        
-            function updateCharts() {
-                caloriesChart.data.datasets[0].data = [totalCalories, Math.max(maxCalories - totalCalories, 0)];
-                proteinChart.data.datasets[0].data = [totalProtein, Math.max(maxProtein - totalProtein, 0)];
-                fatChart.data.datasets[0].data = [totalFat, Math.max(maxFat - totalFat, 0)];
-                saturatedFatChart.data.datasets[0].data = [totalSaturatedFat, Math.max(maxSaturatedFat - totalSaturatedFat, 0)];
-                carbsChart.data.datasets[0].data = [totalCarbs, Math.max(maxCarbs - totalCarbs, 0)];
-                
-                caloriesChart.update();
-                proteinChart.update();
-                fatChart.update();
-                saturatedFatChart.update();
-                carbsChart.update();
-                
-                updateCenterValues();
-                saveData();
-            }
-        
-            function addFood() {
-                const mealType = document.getElementById('mealType').value;
-                const name = document.getElementById('foodName').value.trim();
-                const calories = parseNumber(document.getElementById('calories').value);
-                const protein = parseNumber(document.getElementById('protein').value);
-                const fat = parseNumber(document.getElementById('fat').value);
-                const saturatedFat = parseNumber(document.getElementById('saturatedFat').value);
-                const carbs = parseNumber(document.getElementById('carbs').value);
-                const defaultWeight = parseNumber(document.getElementById('defaultWeight').value);
-        
-                if (!name || isNaN(calories) || isNaN(protein) || isNaN(fat) || isNaN(saturatedFat) || isNaN(carbs) || isNaN(defaultWeight)) {
-                    alert("Por favor completa todos los campos.");
-                    return;
-                }
-        
-                // Añadir a la lista de alimentos correspondiente
-                const mealContent = document.getElementById(mealType);
-                const newItem = document.createElement('div');
-                newItem.className = 'food-item';
-                newItem.setAttribute('data-calories', calories);
-                newItem.setAttribute('data-protein', protein);
-                newItem.setAttribute('data-fat', fat);
-                newItem.setAttribute('data-saturatedFat', saturatedFat);
-                newItem.setAttribute('data-carbs', carbs);
-                newItem.setAttribute('data-default-weight', defaultWeight);
-                newItem.innerHTML = `
-                    <span>${name}</span>
-                    <div class="food-quantity">
-                        <input type="number" class="quantity-input" value="1" min="1">
-                        <button class="details-btn" onclick="toggleDetails(this)">+</button>
-                        <button onclick="addPredefinedFood(this)">Agregar</button>
-                    </div>
-                    <div class="food-details">
-                        <p>Kilocalorías: ${calories} kcal</p>
-                        <p>Proteínas: ${protein} g</p>
-                        <p>Grasas: ${fat} g</p>
-                        <p>Grasas saturadas: ${saturatedFat} g</p>
-                        <p>Carbohidratos: ${carbs} g</p>
-                        <p>Peso por unidad: ${defaultWeight} g</p>
-                        <input type="number" class="weight-input" value="${defaultWeight}" min="1" placeholder="Peso en gramos">
-                    </div>
-                `;
-                mealContent.appendChild(newItem);
-        
-                // Limpiar inputs
-                document.getElementById('foodName').value = "";
-                document.getElementById('calories').value = "";
-                document.getElementById('protein').value = "";
-                document.getElementById('fat').value = "";
-                document.getElementById('saturatedFat').value = "";
-                document.getElementById('carbs').value = "";
-                document.getElementById('defaultWeight').value = "";
-            }
-        
+            
+            // Añadir alimento a la lista de agregados
             function addPredefinedFood(button) {
                 const parent = button.closest('.food-item');
                 const quantityInput = parent.querySelector('.quantity-input');
                 const weightInput = parent.querySelector('.weight-input');
-                const quantity = parseInt(quantityInput.value) || 1;
-                const weight = parseInt(weightInput.value) || parseInt(parent.getAttribute('data-default-weight'));
-                
-                // Calcular proporción del peso respecto a 100g
+                const quantity = parseInt(quantityInput?.value) || 1;
+                const weight = parseInt(weightInput?.value) || parseInt(parent.getAttribute('data-default-weight')) || 100;
+            
                 const proportion = weight / 100;
-                
+            
                 const calories = parseNumber(parent.getAttribute('data-calories')) * proportion * quantity;
                 const protein = parseNumber(parent.getAttribute('data-protein')) * proportion * quantity;
                 const fat = parseNumber(parent.getAttribute('data-fat')) * proportion * quantity;
                 const saturatedFat = parseNumber(parent.getAttribute('data-saturatedFat')) * proportion * quantity;
                 const carbs = parseNumber(parent.getAttribute('data-carbs')) * proportion * quantity;
-                const name = parent.querySelector('span').textContent + (quantity > 1 ? ` (x${quantity})` : '');
-        
+            
+                const foodName = parent.querySelector('span').textContent + (quantity > 1 ? ` (x${quantity})` : '');
+            
                 totalCalories += calories;
                 totalProtein += protein;
                 totalFat += fat;
                 totalSaturatedFat += saturatedFat;
                 totalCarbs += carbs;
-        
-                // Añadir a la lista de alimentos agregados
+            
                 const foodId = Date.now();
                 addedFoods.push({
                     id: foodId,
-                    name: name,
-                    calories: calories,
-                    protein: protein,
-                    fat: fat,
-                    saturatedFat: saturatedFat,
-                    carbs: carbs,
-                    quantity: quantity,
-                    weight: weight
+                    name: foodName,
+                    calories,
+                    protein,
+                    fat,
+                    saturatedFat,
+                    carbs,
+                    quantity,
+                    weight
                 });
-        
+            
                 updateAddedFoodsList();
                 updateCharts();
-                
-                // Resetear el contador a 1 después de agregar
-                quantityInput.value = 1;
-                // Restablecer el peso al valor por defecto
-                weightInput.value = parent.getAttribute('data-default-weight');
+                saveData();
+            
+                if (quantityInput) quantityInput.value = 1;
+                if (weightInput) weightInput.value = parent.getAttribute('data-default-weight') || 100;
             }
-        
+            
+            // Añadir nuevo alimento personalizado
+            function addFood() {
+    const mealType = document.getElementById('mealType').value;
+    const name = document.getElementById('foodName').value.trim();
+    const calories = parseFloat(document.getElementById('calories').value);
+    const protein = parseFloat(document.getElementById('protein').value);
+    const fat = parseFloat(document.getElementById('fat').value);
+    const saturatedFat = parseFloat(document.getElementById('saturatedFat').value);
+    const carbs = parseFloat(document.getElementById('carbs').value);
+    const defaultWeight = parseFloat(document.getElementById('defaultWeight').value);
+
+    if (!name || isNaN(calories) || isNaN(protein) || isNaN(fat) || isNaN(saturatedFat) || isNaN(carbs) || isNaN(defaultWeight)) {
+        alert("Por favor completa todos los campos.");
+        return;
+    }
+
+    // Añadir a la lista de alimentos correspondiente
+    const mealContent = document.getElementById(mealType);
+    const newItem = document.createElement('div');
+    newItem.className = 'food-item';
+    newItem.setAttribute('data-calories', calories);
+    newItem.setAttribute('data-protein', protein);
+    newItem.setAttribute('data-fat', fat);
+    newItem.setAttribute('data-saturatedFat', saturatedFat);
+    newItem.setAttribute('data-carbs', carbs);
+    newItem.setAttribute('data-default-weight', defaultWeight);
+    newItem.innerHTML = `
+        <span>${name}</span>
+        <div class="food-quantity">
+            <input type="number" class="quantity-input" value="1" min="1">
+            <button class="details-btn" onclick="toggleDetails(this)">+</button>
+            <button onclick="addPredefinedFood(this)">Agregar</button>
+        </div>
+        <div class="food-details" style="display:none;">
+            <p>Kilocalorías: ${calories} kcal</p>
+            <p>Proteínas: ${protein} g</p>
+            <p>Grasas: ${fat} g</p>
+            <p>Grasas saturadas: ${saturatedFat} g</p>
+            <p>Carbohidratos: ${carbs} g</p>
+            <p>Peso por unidad: ${defaultWeight} g</p>
+            <input type="number" class="weight-input" value="${defaultWeight}" min="1" placeholder="Peso en gramos">
+        </div>
+    `;
+    mealContent.appendChild(newItem);
+
+    // Limpiar inputs
+    document.getElementById('foodName').value = "";
+    document.getElementById('calories').value = "";
+    document.getElementById('protein').value = "";
+    document.getElementById('fat').value = "";
+    document.getElementById('saturatedFat').value = "";
+    document.getElementById('carbs').value = "";
+    document.getElementById('defaultWeight').value = "";
+}
+            
+            // Actualizar lista de alimentos agregados
             function updateAddedFoodsList() {
                 const addedFoodsList = document.getElementById('added-foods');
                 addedFoodsList.innerHTML = '';
-        
+            
                 if (addedFoods.length === 0) {
                     addedFoodsList.innerHTML = '<p>No has agregado alimentos aún.</p>';
                     return;
                 }
-        
+            
                 addedFoods.forEach(food => {
                     const foodItem = document.createElement('div');
                     foodItem.className = 'added-food-item';
                     foodItem.innerHTML = `
-                        <span>${food.name} (${food.weight}g - ${food.calories.toFixed(2)} kcal, ${food.protein.toFixed(2)}g prot., ${food.carbs.toFixed(2)}g carb.)</span>
+                        <span>${food.name} (${food.weight}g - ${food.calories.toFixed(2)} kcal, ${food.protein.toFixed(2)}g prot.)</span>
                         <button class="delete-btn" onclick="removeFood(${food.id})">×</button>
                     `;
                     addedFoodsList.appendChild(foodItem);
                 });
+            
+                // Actualizar los valores en los gráficos
+                document.getElementById('caloriesValue').textContent = totalCalories.toFixed(0);
+                document.getElementById('proteinValue').textContent = totalProtein.toFixed(0);
+                document.getElementById('fatValue').textContent = totalFat.toFixed(0);
+                document.getElementById('saturatedFatValue').textContent = totalSaturatedFat.toFixed(0);
+                document.getElementById('carbsValue').textContent = totalCarbs.toFixed(0);
             }
-        
+            
+            // Eliminar alimento agregado
             function removeFood(foodId) {
                 const foodIndex = addedFoods.findIndex(food => food.id === foodId);
                 if (foodIndex !== -1) {
@@ -2192,38 +1965,170 @@
                     totalFat -= food.fat;
                     totalSaturatedFat -= food.saturatedFat;
                     totalCarbs -= food.carbs;
-                    
+            
                     addedFoods.splice(foodIndex, 1);
                     updateAddedFoodsList();
                     updateCharts();
+                    saveData();
                 }
             }
-        
+            
+            // Resetear todo
             function resetAll() {
-                if (confirm("¿Estás seguro de que quieres borrar todos los datos?")) {
+                if (confirm('¿Estás seguro de que quieres borrar todos los datos?')) {
                     totalCalories = 0;
                     totalProtein = 0;
                     totalFat = 0;
                     totalSaturatedFat = 0;
                     totalCarbs = 0;
                     addedFoods = [];
+                    
                     updateAddedFoodsList();
                     updateCharts();
-                    localStorage.clear();
+                    saveData();
                 }
             }
-        
-            // Inicializar la aplicación al cargar
+            
+            // Guardar en localStorage
+            function saveData() {
+                localStorage.setItem('totalCalories', totalCalories);
+                localStorage.setItem('totalProtein', totalProtein);
+                localStorage.setItem('totalFat', totalFat);
+                localStorage.setItem('totalSaturatedFat', totalSaturatedFat);
+                localStorage.setItem('totalCarbs', totalCarbs);
+                localStorage.setItem('addedFoods', JSON.stringify(addedFoods));
+            }
+            
+            // Actualizar gráficos
+            function updateCharts() {
+                caloriesChart.data.datasets[0].data = [totalCalories, Math.max(maxCalories - totalCalories, 0)];
+                proteinChart.data.datasets[0].data = [totalProtein, Math.max(maxProtein - totalProtein, 0)];
+                fatChart.data.datasets[0].data = [totalFat, Math.max(maxFat - totalFat, 0)];
+                saturatedFatChart.data.datasets[0].data = [totalSaturatedFat, Math.max(maxSaturatedFat - totalSaturatedFat, 0)];
+                carbsChart.data.datasets[0].data = [totalCarbs, Math.max(maxCarbs - totalCarbs, 0)];
+            
+                caloriesChart.update();
+                proteinChart.update();
+                fatChart.update();
+                saturatedFatChart.update();
+                carbsChart.update();
+            }
+            
+            // Inicializar todo al cargar la página
             window.onload = function() {
                 updateCharts();
                 updateAddedFoodsList();
-                
-                // Mostrar todos los menús desplegables al inicio
                 document.querySelectorAll('.meal-content').forEach(meal => {
                     meal.style.display = 'none';
                 });
+                
+                // Cerrar resultados de búsqueda al hacer clic fuera
+                document.addEventListener('click', function(event) {
+                    const searchResults = document.querySelector('.global-search-results');
+                    const searchBox = document.querySelector('.global-search-box');
+                    
+                    if (searchResults.style.display === 'block' && 
+                        !searchResults.contains(event.target) && 
+                        event.target !== searchBox) {
+                        searchResults.style.display = 'none';
+                    }
+                });
             };
-        </script>
+            
+            // Gráficos (Chart.js)
+            const caloriesChart = new Chart(document.getElementById('caloriesChart'), {
+                type: 'doughnut',
+                data: { 
+                    datasets: [{ 
+                        data: [0, maxCalories], 
+                        backgroundColor: ['#f39c12', '#ecf0f1'],
+                        borderWidth: 0
+                    }] 
+                },
+                options: { 
+                    cutout: '70%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    }
+                }
+            });
+            
+            const proteinChart = new Chart(document.getElementById('proteinChart'), {
+                type: 'doughnut',
+                data: { 
+                    datasets: [{ 
+                        data: [0, maxProtein], 
+                        backgroundColor: ['#27ae60', '#ecf0f1'],
+                        borderWidth: 0
+                    }] 
+                },
+                options: { 
+                    cutout: '70%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    }
+                }
+            });
+            
+            const fatChart = new Chart(document.getElementById('fatChart'), {
+                type: 'doughnut',
+                data: { 
+                    datasets: [{ 
+                        data: [0, maxFat], 
+                        backgroundColor: ['#e67e22', '#ecf0f1'],
+                        borderWidth: 0
+                    }] 
+                },
+                options: { 
+                    cutout: '70%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    }
+                }
+            });
+            
+            const saturatedFatChart = new Chart(document.getElementById('saturatedFatChart'), {
+                type: 'doughnut',
+                data: { 
+                    datasets: [{ 
+                        data: [0, maxSaturatedFat], 
+                        backgroundColor: ['#c0392b', '#ecf0f1'],
+                        borderWidth: 0
+                    }] 
+                },
+                options: { 
+                    cutout: '70%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    }
+                }
+            });
+            
+            const carbsChart = new Chart(document.getElementById('carbsChart'), {
+                type: 'doughnut',
+                data: { 
+                    datasets: [{ 
+                        data: [0, maxCarbs], 
+                        backgroundColor: ['#8e44ad', '#ecf0f1'],
+                        borderWidth: 0
+                    }] 
+                },
+                options: { 
+                    cutout: '70%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    }
+                }
+            });
+            </script>
+            
+            
+            
         
         </body>
         </html>
