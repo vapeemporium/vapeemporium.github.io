@@ -189,50 +189,57 @@
             margin-left: 5px;
         }
         
-        /* Estilos para móvil */
         @media (max-width: 768px) {
-            .charts-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            /* Modal para detalles en móvil */
-            .modal {
-                display: none;
-                position: fixed;
-                z-index: 1;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                overflow: auto;
-                background-color: rgba(0,0,0,0.4);
-            }
-            .modal-content {
-                background-color: #fefefe;
-                margin: 15% auto;
-                padding: 20px;
-                border: 1px solid #888;
-                width: 80%;
-                border-radius: 8px;
-                position: relative;
-            }
-            .close {
-                position: absolute;
-                right: 10px;
-                top: 5px;
-                color: #aaa;
-                font-size: 28px;
-                font-weight: bold;
-                cursor: pointer;
-            }
-            .close:hover {
-                color: black;
-            }
-        }
+    .charts-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .food-details {
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 10px;
+        padding: 10px;
+    }
+    
+    /* Modal para detalles en móvil */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+    }
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        border-radius: 8px;
+        position: relative;
+    }
+    .close {
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .close:hover {
+        color: black;
+    }
+}
+
         
         /* Mostrar siempre el campo de peso */
         .weight-input {
