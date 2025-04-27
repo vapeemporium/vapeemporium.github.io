@@ -1718,20 +1718,35 @@
                 });
             }
         
-            // Función para filtrar en todos los alimentos sin abrir menús
+            // Función para filtrar en todos los alimentos
             function globalFilterFoods(searchText) {
                 const normalizedSearch = normalizeText(searchText);
                 const allFoodItems = document.querySelectorAll('.food-item');
                 
                 allFoodItems.forEach(item => {
                     const foodName = normalizeText(item.querySelector('span').textContent);
-                    item.style.display = foodName.includes(normalizedSearch) ? 'flex' : 'none';
+                    if (foodName.includes(normalizedSearch)) {
+                        item.style.display = 'flex';
+                        // Asegurarse de que el contenedor padre esté visible
+                        let parent = item.closest('.meal-content');
+                        while (parent) {
+                            parent.style.display = 'block';
+                            const header = parent.previousElementSibling;
+                            if (header && header.classList.contains('meal-header')) {
+                                header.querySelector('span:last-child').textContent = '▲';
+                            }
+                            parent = parent.parentElement.closest('.meal-content');
+                        }
+                    } else {
+                        item.style.display = 'none';
+                    }
                 });
             }
         
             // Función para parsear números con comas
             function parseNumber(value) {
                 if (typeof value === 'string') {
+                    // Reemplazar comas por puntos para el parseo
                     return parseFloat(value.replace(',', '.'));
                 }
                 return value;
@@ -1764,6 +1779,20 @@
                         searchBox.value = '';
                         filterFoods(mealId, '');
                     }
+                }
+            }
+        
+            // Alternar visibilidad de los detalles del alimento
+            function toggleDetails(button) {
+                const foodItem = button.closest('.food-item');
+                const details = foodItem.querySelector('.food-details');
+                
+                if (details.style.display === 'block') {
+                    details.style.display = 'none';
+                    button.textContent = '+';
+                } else {
+                    details.style.display = 'block';
+                    button.textContent = '-';
                 }
             }
         
@@ -1942,9 +1971,9 @@
                 const fat = parseNumber(document.getElementById('fat').value);
                 const saturatedFat = parseNumber(document.getElementById('saturatedFat').value);
                 const carbs = parseNumber(document.getElementById('carbs').value);
-                const defaultWeight = 100; // Valor fijo de 100g
+                const defaultWeight = parseNumber(document.getElementById('defaultWeight').value);
         
-                if (!name || isNaN(calories) || isNaN(protein) || isNaN(fat) || isNaN(saturatedFat) || isNaN(carbs)) {
+                if (!name || isNaN(calories) || isNaN(protein) || isNaN(fat) || isNaN(saturatedFat) || isNaN(carbs) || isNaN(defaultWeight)) {
                     alert("Por favor completa todos los campos.");
                     return;
                 }
@@ -1963,6 +1992,7 @@
                     <span>${name}</span>
                     <div class="food-quantity">
                         <input type="number" class="quantity-input" value="1" min="1">
+                        <button class="details-btn" onclick="toggleDetails(this)">+</button>
                         <button onclick="addPredefinedFood(this)">Agregar</button>
                     </div>
                     <div class="food-details">
@@ -1984,6 +2014,7 @@
                 document.getElementById('fat').value = "";
                 document.getElementById('saturatedFat').value = "";
                 document.getElementById('carbs').value = "";
+                document.getElementById('defaultWeight').value = "";
             }
         
             function addPredefinedFood(button) {
@@ -1991,7 +2022,7 @@
                 const quantityInput = parent.querySelector('.quantity-input');
                 const weightInput = parent.querySelector('.weight-input');
                 const quantity = parseInt(quantityInput.value) || 1;
-                const weight = parseInt(weightInput.value) || 100; // Valor por defecto 100g
+                const weight = parseInt(weightInput.value) || parseInt(parent.getAttribute('data-default-weight'));
                 
                 // Calcular proporción del peso respecto a 100g
                 const proportion = weight / 100;
@@ -2028,8 +2059,8 @@
                 
                 // Resetear el contador a 1 después de agregar
                 quantityInput.value = 1;
-                // Restablecer el peso a 100g
-                weightInput.value = 100;
+                // Restablecer el peso al valor por defecto
+                weightInput.value = parent.getAttribute('data-default-weight');
             }
         
             function updateAddedFoodsList() {
@@ -2087,7 +2118,7 @@
                 updateCharts();
                 updateAddedFoodsList();
                 
-                // Ocultar todos los menús desplegables al inicio
+                // Mostrar todos los menús desplegables al inicio
                 document.querySelectorAll('.meal-content').forEach(meal => {
                     meal.style.display = 'none';
                 });
