@@ -1669,6 +1669,1395 @@
                         </div>
                     </div>
                 </div>
+                 <!-- Nueva sección "Pescados" -->
+<div class="meal-type">
+    <div class="meal-header" onclick="toggleMeal('pescados')">
+        <span>Pescados</span>
+        <span>▼</span>
+    </div>
+    <div id="pescados" class="meal-content">
+        <input type="text" class="search-box" placeholder="Buscar pescado..." onkeyup="filterFoods('pescados', this.value)">
+        
+        <!-- Merluza -->
+        <div class="food-item" data-calories="94" data-protein="20" data-fat="1" data-saturatedFat="0.2" data-carbs="0" data-default-weight="300">
+            <span>Merluza</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 94 kcal</p>
+                <p>Proteínas: 20 g</p>
+                <p>Grasas: 1 g</p>
+                <p>Grasas saturadas: 0.2 g</p>
+                <p>Carbohidratos: 0 g</p>
+                <p>Peso por unidad: 300 g</p>
+                <input type="number" class="weight-input" value="300" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- Dorada -->
+        <div class="food-item" data-calories="96" data-protein="18" data-fat="2.5" data-saturatedFat="0.6" data-carbs="0" data-default-weight="500">
+            <span>Dorada</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 96 kcal</p>
+                <p>Proteínas: 18 g</p>
+                <p>Grasas: 2.5 g</p>
+                <p>Grasas saturadas: 0.6 g</p>
+                <p>Carbohidratos: 0 g</p>
+                <p>Peso por unidad: 500 g</p>
+                <input type="number" class="weight-input" value="500" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- Lubina -->
+        <div class="food-item" data-calories="98" data-protein="19" data-fat="2" data-saturatedFat="0.4" data-carbs="0" data-default-weight="300">
+            <span>Lubina</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 98 kcal</p>
+                <p>Proteínas: 19 g</p>
+                <p>Grasas: 2 g</p>
+                <p>Grasas saturadas: 0.4 g</p>
+                <p>Carbohidratos: 0 g</p>
+                <p>Peso por unidad: 300 g</p>
+                <input type="number" class="weight-input" value="300" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- Salmón (salvaje) -->
+        <div class="food-item" data-calories="180" data-protein="20" data-fat="10" data-saturatedFat="2" data-carbs="0" data-default-weight="200">
+            <span>Salmón (salvaje)</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 180 kcal</p>
+                <p>Proteínas: 20 g</p>
+                <p>Grasas: 10 g</p>
+                <p>Grasas saturadas: 2 g</p>
+                <p>Carbohidratos: 0 g</p>
+                <p>Peso por unidad: 200 g</p>
+                <input type="number" class="weight-input" value="200" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- Sardinas -->
+        <div class="food-item" data-calories="118" data-protein="20" data-fat="5" data-saturatedFat="1.2" data-carbs="0" data-default-weight="100">
+            <span>Sardinas</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 118 kcal</p>
+                <p>Proteínas: 20 g</p>
+                <p>Grasas: 5 g</p>
+                <p>Grasas saturadas: 1.2 g</p>
+                <p>Carbohidratos: 0 g</p>
+                <p>Peso por unidad: 100 g</p>
+                <input type="number" class="weight-input" value="100" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- Gallineta nórdica -->
+        <div class="food-item" data-calories="79" data-protein="20" data-fat="1" data-saturatedFat="0.2" data-carbs="0" data-default-weight="380">
+            <span>Gallineta nórdica</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 79 kcal</p>
+                <p>Proteínas: 20 g</p>
+                <p>Grasas: 1 g</p>
+                <p>Grasas saturadas: 0.2 g</p>
+                <p>Carbohidratos: 0 g</p>
+                <p>Peso por unidad: 380 g</p>
+                <input type="number" class="weight-input" value="380" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- Trucha -->
+        <div class="food-item" data-calories="103" data-protein="20" data-fat="3" data-saturatedFat="0.6" data-carbs="0" data-default-weight="250">
+            <span>Trucha</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 103 kcal</p>
+                <p>Proteínas: 20 g</p>
+                <p>Grasas: 3 g</p>
+                <p>Grasas saturadas: 0.6 g</p>
+                <p>Carbohidratos: 0 g</p>
+                <p>Peso por unidad: 250 g</p>
+                <input type="number" class="weight-input" value="250" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- Pez espada -->
+        <div class="food-item" data-calories="117" data-protein="20" data-fat="4" data-saturatedFat="1" data-carbs="0" data-default-weight="200">
+            <span>Pez espada</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 117 kcal</p>
+                <p>Proteínas: 20 g</p>
+                <p>Grasas: 4 g</p>
+                <p>Grasas saturadas: 1 g</p>
+                <p>Carbohidratos: 0 g</p>
+                <p>Peso por unidad: 200 g</p>
+                <input type="number" class="weight-input" value="200" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- Pulpo -->
+        <div class="food-item" data-calories="81" data-protein="15" data-fat="1" data-saturatedFat="0.2" data-carbs="2" data-default-weight="100">
+            <span>Pulpo</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 81 kcal</p>
+                <p>Proteínas: 15 g</p>
+                <p>Grasas: 1 g</p>
+                <p>Grasas saturadas: 0.2 g</p>
+                <p>Carbohidratos: 2 g</p>
+                <p>Peso por unidad: 100 g</p>
+                <input type="number" class="weight-input" value="100" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- Mejillones -->
+        <div class="food-item" data-calories="171" data-protein="24" data-fat="4" data-saturatedFat="0.8" data-carbs="7" data-default-weight="100">
+            <span>Mejillones</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 171 kcal</p>
+                <p>Proteínas: 24 g</p>
+                <p>Grasas: 4 g</p>
+                <p>Grasas saturadas: 0.8 g</p>
+                <p>Carbohidratos: 7 g</p>
+                <p>Peso por unidad: 100 g</p>
+                <input type="number" class="weight-input" value="100" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+    </div>
+</div>
+           <!-- Nueva sección "Bebidas" -->
+<div class="meal-type">
+    <div class="meal-header" onclick="toggleMeal('bebidas')">
+        <span>Bebidas</span>
+        <span>▼</span>
+    </div>
+    <div id="bebidas" class="meal-content">
+        <input type="text" class="search-box" placeholder="Buscar bebida..." onkeyup="filterFoods('bebidas', this.value)">
+        
+        <!-- Agua mineral -->
+        <div class="food-item" data-calories="0" data-protein="0" data-fat="0" data-saturatedFat="0" data-carbs="0" data-default-weight="250">
+            <span>Agua mineral</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 0 kcal</p>
+                <p>Proteínas: 0 g</p>
+                <p>Grasas: 0 g</p>
+                <p>Grasas saturadas: 0 g</p>
+                <p>Carbohidratos: 0 g</p>
+                <p>Peso por unidad: 250 ml</p>
+                <input type="number" class="weight-input" value="250" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- Agua con gas -->
+        <div class="food-item" data-calories="0" data-protein="0" data-fat="0" data-saturatedFat="0" data-carbs="0" data-default-weight="250">
+            <span>Agua con gas</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 0 kcal</p>
+                <p>Proteínas: 0 g</p>
+                <p>Grasas: 0 g</p>
+                <p>Grasas saturadas: 0 g</p>
+                <p>Carbohidratos: 0 g</p>
+                <p>Peso por unidad: 250 ml</p>
+                <input type="number" class="weight-input" value="250" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- Batido de chocolate -->
+        <div class="food-item" data-calories="110" data-protein="3" data-fat="3.5" data-saturatedFat="2" data-carbs="17" data-default-weight="250">
+            <span>Batido de chocolate</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 110 kcal</p>
+                <p>Proteínas: 3 g</p>
+                <p>Grasas: 3.5 g</p>
+                <p>Grasas saturadas: 2 g</p>
+                <p>Carbohidratos: 17 g</p>
+                <p>Peso por unidad: 250 ml</p>
+                <input type="number" class="weight-input" value="250" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- Limonada casera -->
+        <div class="food-item" data-calories="50" data-protein="0" data-fat="0" data-saturatedFat="0" data-carbs="12" data-default-weight="250">
+            <span>Limonada casera</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 50 kcal</p>
+                <p>Proteínas: 0 g</p>
+                <p>Grasas: 0 g</p>
+                <p>Grasas saturadas: 0 g</p>
+                <p>Carbohidratos: 12 g</p>
+                <p>Peso por unidad: 250 ml</p>
+                <input type="number" class="weight-input" value="250" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- Té helado -->
+        <div class="food-item" data-calories="40" data-protein="0" data-fat="0" data-saturatedFat="0" data-carbs="10" data-default-weight="250">
+            <span>Té helado</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 40 kcal</p>
+                <p>Proteínas: 0 g</p>
+                <p>Grasas: 0 g</p>
+                <p>Grasas saturadas: 0 g</p>
+                <p>Carbohidratos: 10 g</p>
+                <p>Peso por unidad: 250 ml</p>
+                <input type="number" class="weight-input" value="250" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- Bebida de soja -->
+        <div class="food-item" data-calories="33" data-protein="3" data-fat="1.8" data-saturatedFat="0.2" data-carbs="1" data-default-weight="250">
+            <span>Bebida de soja</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 33 kcal</p>
+                <p>Proteínas: 3 g</p>
+                <p>Grasas: 1.8 g</p>
+                <p>Grasas saturadas: 0.2 g</p>
+                <p>Carbohidratos: 1 g</p>
+                <p>Peso por unidad: 250 ml</p>
+                <input type="number" class="weight-input" value="250" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- Cerveza rubia -->
+        <div class="food-item" data-calories="43" data-protein="0.5" data-fat="0" data-saturatedFat="0" data-carbs="3.6" data-default-weight="330">
+            <span>Cerveza rubia</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 43 kcal</p>
+                <p>Proteínas: 0.5 g</p>
+                <p>Grasas: 0 g</p>
+                <p>Grasas saturadas: 0 g</p>
+                <p>Carbohidratos: 3.6 g</p>
+                <p>Peso por unidad: 330 ml</p>
+                <input type="number" class="weight-input" value="330" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- Cerveza sin alcohol -->
+        <div class="food-item" data-calories="20" data-protein="0.2" data-fat="0" data-saturatedFat="0" data-carbs="4.5" data-default-weight="330">
+            <span>Cerveza sin alcohol</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 20 kcal</p>
+                <p>Proteínas: 0.2 g</p>
+                <p>Grasas: 0 g</p>
+                <p>Grasas saturadas: 0 g</p>
+                <p>Carbohidratos: 4.5 g</p>
+                <p>Peso por unidad: 330 ml</p>
+                <input type="number" class="weight-input" value="330" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- Vino tinto -->
+        <div class="food-item" data-calories="85" data-protein="0.1" data-fat="0" data-saturatedFat="0" data-carbs="2.6" data-default-weight="125">
+            <span>Vino tinto</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 85 kcal</p>
+                <p>Proteínas: 0.1 g</p>
+                <p>Grasas: 0 g</p>
+                <p>Grasas saturadas: 0 g</p>
+                <p>Carbohidratos: 2.6 g</p>
+                <p>Peso por unidad: 125 ml</p>
+                <input type="number" class="weight-input" value="125" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- Vino blanco -->
+        <div class="food-item" data-calories="82" data-protein="0.1" data-fat="0" data-saturatedFat="0" data-carbs="2.3" data-default-weight="125">
+            <span>Vino blanco</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 82 kcal</p>
+                <p>Proteínas: 0.1 g</p>
+                <p>Grasas: 0 g</p>
+                <p>Grasas saturadas: 0 g</p>
+                <p>Carbohidratos: 2.3 g</p>
+                <p>Peso por unidad: 125 ml</p>
+                <input type="number" class="weight-input" value="125" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+    </div>
+</div>
+
+             <!-- Nueva sección "Burger King" -->
+<div class="meal-type">
+    <div class="meal-header" onclick="toggleMeal('burger-king')">
+        <span>Burger King</span>
+        <span>▼</span>
+    </div>
+    <div id="burger-king" class="meal-content">
+        <input type="text" class="search-box" placeholder="Buscar producto..." onkeyup="filterFoods('burger-king', this.value)">
+        
+        <!-- Whopper -->
+        <div class="food-item" data-calories="657" data-protein="28" data-fat="37" data-saturatedFat="10" data-carbs="49" data-default-weight="300">
+            <span>Whopper</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 657 kcal</p>
+                <p>Proteínas: 28 g</p>
+                <p>Grasas: 37 g</p>
+                <p>Grasas saturadas: 10 g</p>
+                <p>Carbohidratos: 49 g</p>
+                <p>Peso por unidad: 300 g</p>
+                <input type="number" class="weight-input" value="300" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- Chicken Royale -->
+        <div class="food-item" data-calories="500" data-protein="22" data-fat="24" data-saturatedFat="3" data-carbs="48" data-default-weight="200">
+            <span>Chicken Royale</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 500 kcal</p>
+                <p>Proteínas: 22 g</p>
+                <p>Grasas: 24 g</p>
+                <p>Grasas saturadas: 3 g</p>
+                <p>Carbohidratos: 48 g</p>
+                <p>Peso por unidad: 200 g</p>
+                <input type="number" class="weight-input" value="200" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- Patatas fritas pequeñas -->
+        <div class="food-item" data-calories="230" data-protein="3" data-fat="11" data-saturatedFat="1" data-carbs="32" data-default-weight="90">
+            <span>Patatas fritas pequeñas</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 230 kcal</p>
+                <p>Proteínas: 3 g</p>
+                <p>Grasas: 11 g</p>
+                <p>Grasas saturadas: 1 g</p>
+                <p>Carbohidratos: 32 g</p>
+                <p>Peso por unidad: 90 g</p>
+                <input type="number" class="weight-input" value="90" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- Aros de cebolla -->
+        <div class="food-item" data-calories="270" data-protein="2" data-fat="18" data-saturatedFat="2" data-carbs="25" data-default-weight="100">
+            <span>Aros de cebolla</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 270 kcal</p>
+                <p>Proteínas: 2 g</p>
+                <p>Grasas: 18 g</p>
+                <p>Grasas saturadas: 2 g</p>
+                <p>Carbohidratos: 25 g</p>
+                <p>Peso por unidad: 100 g</p>
+                <input type="number" class="weight-input" value="100" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+        
+        <!-- McFlurry Oreo -->
+        <div class="food-item" data-calories="400" data-protein="5" data-fat="22" data-saturatedFat="13" data-carbs="42" data-default-weight="200">
+            <span>McFlurry Oreo</span>
+            <div class="food-quantity">
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                <button onclick="addPredefinedFood(this)">Agregar</button>
+            </div>
+            <div class="food-details">
+                <p>Kilocalorías: 400 kcal</p>
+                <p>Proteínas: 5 g</p>
+                <p>Grasas: 22 g</p>
+                <p>Grasas saturadas: 13 g</p>
+                <p>Carbohidratos: 42 g</p>
+                <p>Peso por unidad: 200 g</p>
+                <input type="number" class="weight-input" value="200" min="1" placeholder="Peso en gramos">
+            </div>
+        </div>
+    </div>
+</div>
+        <!-- Nueva sección "Cereales y Derivados" -->
+        <div class="meal-type">
+            <div class="meal-header" onclick="toggleMeal('cereales')">
+                <span>Cereales y Derivados</span>
+                <span>▼</span>
+            </div>
+            <div id="cereales" class="meal-content">
+                <input type="text" class="search-box" placeholder="Buscar cereales..." onkeyup="filterFoods('cereales', this.value)">
+                
+                <!-- Subcategoría Panes -->
+                <div class="meal-type">
+                    <div class="meal-header" onclick="toggleMeal('panes')">
+                        <span>Panes</span>
+                        <span>▼</span>
+                    </div>
+                    <div id="panes" class="meal-content">
+                        <input type="text" class="search-box" placeholder="Buscar panes..." onkeyup="filterFoods('panes', this.value)">
+                        <!-- Pan blanco -->
+                        <div class="food-item" data-calories="266" data-protein="7.6" data-fat="3.3" data-saturatedFat="0.7" data-carbs="50.6" data-default-weight="25">
+                            <span>Pan blanco</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 266 kcal</p>
+                                <p>Proteínas: 7.6 g</p>
+                                <p>Grasas: 3.3 g</p>
+                                <p>Grasas saturadas: 0.7 g</p>
+                                <p>Carbohidratos: 50.6 g</p>
+                                <p>Peso por unidad: 25 g (1 rebanada)</p>
+                                <input type="number" class="weight-input" value="25" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                        <!-- Pan integral -->
+                        <div class="food-item" data-calories="247" data-protein="8.8" data-fat="2.5" data-saturatedFat="0.5" data-carbs="41" data-default-weight="30">
+                            <span>Pan integral</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 247 kcal</p>
+                                <p>Proteínas: 8.8 g</p>
+                                <p>Grasas: 2.5 g</p>
+                                <p>Grasas saturadas: 0.5 g</p>
+                                <p>Carbohidratos: 41 g</p>
+                                <p>Peso por unidad: 30 g (1 rebanada)</p>
+                                <input type="number" class="weight-input" value="30" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                        <!-- Pan de centeno -->
+                        <div class="food-item" data-calories="259" data-protein="8.5" data-fat="3.3" data-saturatedFat="0.4" data-carbs="48.3" data-default-weight="30">
+                            <span>Pan de centeno</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 259 kcal</p>
+                                <p>Proteínas: 8.5 g</p>
+                                <p>Grasas: 3.3 g</p>
+                                <p>Grasas saturadas: 0.4 g</p>
+                                <p>Carbohidratos: 48.3 g</p>
+                                <p>Peso por unidad: 30 g (1 rebanada)</p>
+                                <input type="number" class="weight-input" value="30" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                        <!-- Pan de molde -->
+                        <div class="food-item" data-calories="265" data-protein="8" data-fat="3.5" data-saturatedFat="0.8" data-carbs="49" data-default-weight="25">
+                            <span>Pan de molde</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 265 kcal</p>
+                                <p>Proteínas: 8 g</p>
+                                <p>Grasas: 3.5 g</p>
+                                <p>Grasas saturadas: 0.8 g</p>
+                                <p>Carbohidratos: 49 g</p>
+                                <p>Peso por unidad: 25 g (1 rebanada)</p>
+                                <input type="number" class="weight-input" value="25" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                        <!-- Pan tostado -->
+                        <div class="food-item" data-calories="350" data-protein="10" data-fat="5" data-saturatedFat="1" data-carbs="60" data-default-weight="20">
+                            <span>Pan tostado</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 350 kcal</p>
+                                <p>Proteínas: 10 g</p>
+                                <p>Grasas: 5 g</p>
+                                <p>Grasas saturadas: 1 g</p>
+                                <p>Carbohidratos: 60 g</p>
+                                <p>Peso por unidad: 20 g (1 tostada)</p>
+                                <input type="number" class="weight-input" value="20" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Subcategoría Cereales -->
+                <div class="meal-type">
+                    <div class="meal-header" onclick="toggleMeal('cereales-grano')">
+                        <span>Cereales en grano</span>
+                        <span>▼</span>
+                    </div>
+                    <div id="cereales-grano" class="meal-content">
+                        <input type="text" class="search-box" placeholder="Buscar cereales..." onkeyup="filterFoods('cereales-grano', this.value)">
+                        <!-- Arroz blanco -->
+                        <div class="food-item" data-calories="365" data-protein="7.1" data-fat="0.7" data-saturatedFat="0.2" data-carbs="80" data-default-weight="180">
+                            <span>Arroz blanco (cocido)</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 365 kcal</p>
+                                <p>Proteínas: 7.1 g</p>
+                                <p>Grasas: 0.7 g</p>
+                                <p>Grasas saturadas: 0.2 g</p>
+                                <p>Carbohidratos: 80 g</p>
+                                <p>Peso por unidad: 180 g (1 taza cocida)</p>
+                                <input type="number" class="weight-input" value="180" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                        <!-- Arroz integral -->
+                        <div class="food-item" data-calories="370" data-protein="7.9" data-fat="2.7" data-saturatedFat="0.5" data-carbs="77" data-default-weight="180">
+                            <span>Arroz integral (cocido)</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 370 kcal</p>
+                                <p>Proteínas: 7.9 g</p>
+                                <p>Grasas: 2.7 g</p>
+                                <p>Grasas saturadas: 0.5 g</p>
+                                <p>Carbohidratos: 77 g</p>
+                                <p>Peso por unidad: 180 g (1 taza cocida)</p>
+                                <input type="number" class="weight-input" value="180" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                        <!-- Quinoa -->
+                        <div class="food-item" data-calories="368" data-protein="14" data-fat="6" data-saturatedFat="0.7" data-carbs="64" data-default-weight="185">
+                            <span>Quinoa (cocida)</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 368 kcal</p>
+                                <p>Proteínas: 14 g</p>
+                                <p>Grasas: 6 g</p>
+                                <p>Grasas saturadas: 0.7 g</p>
+                                <p>Carbohidratos: 64 g</p>
+                                <p>Peso por unidad: 185 g (1 taza cocida)</p>
+                                <input type="number" class="weight-input" value="185" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                        <!-- Avena -->
+                        <div class="food-item" data-calories="389" data-protein="17" data-fat="7" data-saturatedFat="1.2" data-carbs="66" data-default-weight="40">
+                            <span>Avena (cruda)</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 389 kcal</p>
+                                <p>Proteínas: 17 g</p>
+                                <p>Grasas: 7 g</p>
+                                <p>Grasas saturadas: 1.2 g</p>
+                                <p>Carbohidratos: 66 g</p>
+                                <p>Peso por unidad: 40 g (1 taza cruda)</p>
+                                <input type="number" class="weight-input" value="40" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Subcategoría Pastas -->
+                <div class="meal-type">
+                    <div class="meal-header" onclick="toggleMeal('pastas')">
+                        <span>Pastas</span>
+                        <span>▼</span>
+                    </div>
+                    <div id="pastas" class="meal-content">
+                        <input type="text" class="search-box" placeholder="Buscar pastas..." onkeyup="filterFoods('pastas', this.value)">
+                        <!-- Espaguetis -->
+                        <div class="food-item" data-calories="371" data-protein="13" data-fat="1.5" data-saturatedFat="0.3" data-carbs="75" data-default-weight="140">
+                            <span>Espaguetis (cocidos)</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 371 kcal</p>
+                                <p>Proteínas: 13 g</p>
+                                <p>Grasas: 1.5 g</p>
+                                <p>Grasas saturadas: 0.3 g</p>
+                                <p>Carbohidratos: 75 g</p>
+                                <p>Peso por unidad: 140 g (1 taza cocida)</p>
+                                <input type="number" class="weight-input" value="140" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                        <!-- Macarrones -->
+                        <div class="food-item" data-calories="371" data-protein="13" data-fat="1.5" data-saturatedFat="0.3" data-carbs="75" data-default-weight="140">
+                            <span>Macarrones (cocidos)</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 371 kcal</p>
+                                <p>Proteínas: 13 g</p>
+                                <p>Grasas: 1.5 g</p>
+                                <p>Grasas saturadas: 0.3 g</p>
+                                <p>Carbohidratos: 75 g</p>
+                                <p>Peso por unidad: 140 g (1 taza cocida)</p>
+                                <input type="number" class="weight-input" value="140" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                        <!-- Fideos de arroz -->
+                        <div class="food-item" data-calories="109" data-protein="0.9" data-fat="0.2" data-saturatedFat="0.02" data-carbs="24.9" data-default-weight="180">
+                            <span>Fideos de arroz (cocidos)</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 109 kcal</p>
+                                <p>Proteínas: 0.9 g</p>
+                                <p>Grasas: 0.2 g</p>
+                                <p>Grasas saturadas: 0.02 g</p>
+                                <p>Carbohidratos: 24.9 g</p>
+                                <p>Peso por unidad: 180 g (1 taza cocida)</p>
+                                <input type="number" class="weight-input" value="180" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Nueva sección "Lácteos" -->
+        <div class="meal-type">
+            <div class="meal-header" onclick="toggleMeal('lacteos')">
+                <span>Lácteos</span>
+                <span>▼</span>
+            </div>
+            <div id="lacteos" class="meal-content">
+                <input type="text" class="search-box" placeholder="Buscar lácteos..." onkeyup="filterFoods('lacteos', this.value)">
+                
+                <!-- Subcategoría Leches -->
+                <div class="meal-type">
+                    <div class="meal-header" onclick="toggleMeal('leches')">
+                        <span>Leches</span>
+                        <span>▼</span>
+                    </div>
+                    <div id="leches" class="meal-content">
+                        <input type="text" class="search-box" placeholder="Buscar leches..." onkeyup="filterFoods('leches', this.value)">
+                        <!-- Leche entera -->
+                        <div class="food-item" data-calories="61" data-protein="3.1" data-fat="3.3" data-saturatedFat="2.1" data-carbs="4.7" data-default-weight="200">
+                            <span>Leche entera</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 61 kcal</p>
+                                <p>Proteínas: 3.1 g</p>
+                                <p>Grasas: 3.3 g</p>
+                                <p>Grasas saturadas: 2.1 g</p>
+                                <p>Carbohidratos: 4.7 g</p>
+                                <p>Peso por unidad: 200 ml (1 vaso)</p>
+                                <input type="number" class="weight-input" value="200" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                        <!-- Leche semidesnatada -->
+                        <div class="food-item" data-calories="47" data-protein="3.3" data-fat="1.6" data-saturatedFat="1.1" data-carbs="4.9" data-default-weight="200">
+                            <span>Leche semidesnatada</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 47 kcal</p>
+                                <p>Proteínas: 3.3 g</p>
+                                <p>Grasas: 1.6 g</p>
+                                <p>Grasas saturadas: 1.1 g</p>
+                                <p>Carbohidratos: 4.9 g</p>
+                                <p>Peso por unidad: 200 ml (1 vaso)</p>
+                                <input type="number" class="weight-input" value="200" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                        <!-- Leche desnatada -->
+                        <div class="food-item" data-calories="35" data-protein="3.4" data-fat="0.2" data-saturatedFat="0.1" data-carbs="5" data-default-weight="200">
+                            <span>Leche desnatada</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 35 kcal</p>
+                                <p>Proteínas: 3.4 g</p>
+                                <p>Grasas: 0.2 g</p>
+                                <p>Grasas saturadas: 0.1 g</p>
+                                <p>Carbohidratos: 5 g</p>
+                                <p>Peso por unidad: 200 ml (1 vaso)</p>
+                                <input type="number" class="weight-input" value="200" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Subcategoría Quesos -->
+                <div class="meal-type">
+                    <div class="meal-header" onclick="toggleMeal('quesos')">
+                        <span>Quesos</span>
+                        <span>▼</span>
+                    </div>
+                    <div id="quesos" class="meal-content">
+                        <input type="text" class="search-box" placeholder="Buscar quesos..." onkeyup="filterFoods('quesos', this.value)">
+                        <!-- Queso fresco -->
+                        <div class="food-item" data-calories="145" data-protein="11" data-fat="10" data-saturatedFat="6.5" data-carbs="2" data-default-weight="100">
+                            <span>Queso fresco</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 145 kcal</p>
+                                <p>Proteínas: 11 g</p>
+                                <p>Grasas: 10 g</p>
+                                <p>Grasas saturadas: 6.5 g</p>
+                                <p>Carbohidratos: 2 g</p>
+                                <p>Peso por unidad: 100 g (1 porción)</p>
+                                <input type="number" class="weight-input" value="100" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                        <!-- Queso semicurado -->
+                        <div class="food-item" data-calories="384" data-protein="25" data-fat="32" data-saturatedFat="20" data-carbs="1" data-default-weight="30">
+                            <span>Queso semicurado</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 384 kcal</p>
+                                <p>Proteínas: 25 g</p>
+                                <p>Grasas: 32 g</p>
+                                <p>Grasas saturadas: 20 g</p>
+                                <p>Carbohidratos: 1 g</p>
+                                <p>Peso por unidad: 30 g (1 porción)</p>
+                                <input type="number" class="weight-input" value="30" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                        <!-- Queso curado -->
+                        <div class="food-item" data-calories="452" data-protein="30" data-fat="37" data-saturatedFat="24" data-carbs="1" data-default-weight="30">
+                            <span>Queso curado</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 452 kcal</p>
+                                <p>Proteínas: 30 g</p>
+                                <p>Grasas: 37 g</p>
+                                <p>Grasas saturadas: 24 g</p>
+                                <p>Carbohidratos: 1 g</p>
+                                <p>Peso por unidad: 30 g (1 porción)</p>
+                                <input type="number" class="weight-input" value="30" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Subcategoría Yogures -->
+                <div class="meal-type">
+                    <div class="meal-header" onclick="toggleMeal('yogures')">
+                        <span>Yogures</span>
+                        <span>▼</span>
+                    </div>
+                    <div id="yogures" class="meal-content">
+                        <input type="text" class="search-box" placeholder="Buscar yogures..." onkeyup="filterFoods('yogures', this.value)">
+                        <!-- Yogur natural entero -->
+                        <div class="food-item" data-calories="61" data-protein="3.5" data-fat="3" data-saturatedFat="2" data-carbs="4.7" data-default-weight="125">
+                            <span>Yogur natural entero</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 61 kcal</p>
+                                <p>Proteínas: 3.5 g</p>
+                                <p>Grasas: 3 g</p>
+                                <p>Grasas saturadas: 2 g</p>
+                                <p>Carbohidratos: 4.7 g</p>
+                                <p>Peso por unidad: 125 g (1 unidad)</p>
+                                <input type="number" class="weight-input" value="125" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                        <!-- Yogur natural desnatado -->
+                        <div class="food-item" data-calories="36" data-protein="4.3" data-fat="0.1" data-saturatedFat="0.1" data-carbs="5" data-default-weight="125">
+                            <span>Yogur natural desnatado</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 36 kcal</p>
+                                <p>Proteínas: 4.3 g</p>
+                                <p>Grasas: 0.1 g</p>
+                                <p>Grasas saturadas: 0.1 g</p>
+                                <p>Carbohidratos: 5 g</p>
+                                <p>Peso por unidad: 125 g (1 unidad)</p>
+                                <input type="number" class="weight-input" value="125" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                        <!-- Yogur griego -->
+                        <div class="food-item" data-calories="115" data-protein="9" data-fat="5" data-saturatedFat="3.5" data-carbs="3.5" data-default-weight="125">
+                            <span>Yogur griego</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 115 kcal</p>
+                                <p>Proteínas: 9 g</p>
+                                <p>Grasas: 5 g</p>
+                                <p>Grasas saturadas: 3.5 g</p>
+                                <p>Carbohidratos: 3.5 g</p>
+                                <p>Peso por unidad: 125 g (1 unidad)</p>
+                                <input type="number" class="weight-input" value="125" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Nueva sección "Legumbres" -->
+        <div class="meal-type">
+            <div class="meal-header" onclick="toggleMeal('legumbres')">
+                <span>Legumbres</span>
+                <span>▼</span>
+            </div>
+            <div id="legumbres" class="meal-content">
+                <input type="text" class="search-box" placeholder="Buscar legumbres..." onkeyup="filterFoods('legumbres', this.value)">
+                
+                <!-- Subcategoría Legumbres secas -->
+                <div class="meal-type">
+                    <div class="meal-header" onclick="toggleMeal('legumbres-secas')">
+                        <span>Legumbres secas</span>
+                        <span>▼</span>
+                    </div>
+                    <div id="legumbres-secas" class="meal-content">
+                        <input type="text" class="search-box" placeholder="Buscar legumbres secas..." onkeyup="filterFoods('legumbres-secas', this.value)">
+                        <!-- Lentejas -->
+                        <div class="food-item" data-calories="353" data-protein="25" data-fat="1.1" data-saturatedFat="0.2" data-carbs="60" data-default-weight="10">
+                            <span>Lentejas (crudas)</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 353 kcal</p>
+                                <p>Proteínas: 25 g</p>
+                                <p>Grasas: 1.1 g</p>
+                                <p>Grasas saturadas: 0.2 g</p>
+                                <p>Carbohidratos: 60 g</p>
+                                <p>Peso por unidad: 10 g (1 cucharada)</p>
+                                <input type="number" class="weight-input" value="10" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                        <!-- Garbanzos -->
+                        <div class="food-item" data-calories="364" data-protein="19" data-fat="6" data-saturatedFat="0.6" data-carbs="61" data-default-weight="12">
+                            <span>Garbanzos (crudos)</span>
+                            <div class="food-quantity">
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                            </div>
+                            <div class="food-details">
+                                <p>Kilocalorías: 364 kcal</p>
+                                <p>Proteínas: 19 g</p>
+                                <p>Grasas: 6 g</p>
+                                <p>Grasas saturadas: 0.6 g</p>
+                                <p>Carbohidratos: 61 g</p>
+                                <p>Peso por unidad: 12 g (1 cucharada)</p>
+                                <input type="number" class="weight-input" value="12" min="1" placeholder="Peso en gramos">
+                            </div>
+                        </div>
+                                                <!-- Judías blancas -->
+                                                <div class="food-item" data-calories="335" data-protein="21" data-fat="1.6" data-saturatedFat="0.3" data-carbs="60" data-default-weight="10">
+                                                    <span>Judías blancas (crudas)</span>
+                                                    <div class="food-quantity">
+                                                        <input type="number" class="quantity-input" value="1" min="1">
+                                                        <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                                        <button onclick="addPredefinedFood(this)">Agregar</button>
+                                                    </div>
+                                                    <div class="food-details">
+                                                        <p>Kilocalorías: 335 kcal</p>
+                                                        <p>Proteínas: 21 g</p>
+                                                        <p>Grasas: 1.6 g</p>
+                                                        <p>Grasas saturadas: 0.3 g</p>
+                                                        <p>Carbohidratos: 60 g</p>
+                                                        <p>Peso por unidad: 10 g (1 cucharada)</p>
+                                                        <input type="number" class="weight-input" value="10" min="1" placeholder="Peso en gramos">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Subcategoría Legumbres cocidas -->
+                                        <div class="meal-type">
+                                            <div class="meal-header" onclick="toggleMeal('legumbres-cocidas')">
+                                                <span>Legumbres cocidas</span>
+                                                <span>▼</span>
+                                            </div>
+                                            <div id="legumbres-cocidas" class="meal-content">
+                                                <input type="text" class="search-box" placeholder="Buscar legumbres cocidas..." onkeyup="filterFoods('legumbres-cocidas', this.value)">
+                                                <!-- Lentejas cocidas -->
+                                                <div class="food-item" data-calories="116" data-protein="9" data-fat="0.4" data-saturatedFat="0.1" data-carbs="20" data-default-weight="200">
+                                                    <span>Lentejas cocidas</span>
+                                                    <div class="food-quantity">
+                                                        <input type="number" class="quantity-input" value="1" min="1">
+                                                        <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                                        <button onclick="addPredefinedFood(this)">Agregar</button>
+                                                    </div>
+                                                    <div class="food-details">
+                                                        <p>Kilocalorías: 116 kcal</p>
+                                                        <p>Proteínas: 9 g</p>
+                                                        <p>Grasas: 0.4 g</p>
+                                                        <p>Grasas saturadas: 0.1 g</p>
+                                                        <p>Carbohidratos: 20 g</p>
+                                                        <p>Peso por unidad: 200 g (1 taza cocida)</p>
+                                                        <input type="number" class="weight-input" value="200" min="1" placeholder="Peso en gramos">
+                                                    </div>
+                                                </div>
+                                                <!-- Garbanzos cocidos -->
+                                                <div class="food-item" data-calories="164" data-protein="9" data-fat="2.6" data-saturatedFat="0.3" data-carbs="27" data-default-weight="200">
+                                                    <span>Garbanzos cocidos</span>
+                                                    <div class="food-quantity">
+                                                        <input type="number" class="quantity-input" value="1" min="1">
+                                                        <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                                        <button onclick="addPredefinedFood(this)">Agregar</button>
+                                                    </div>
+                                                    <div class="food-details">
+                                                        <p>Kilocalorías: 164 kcal</p>
+                                                        <p>Proteínas: 9 g</p>
+                                                        <p>Grasas: 2.6 g</p>
+                                                        <p>Grasas saturadas: 0.3 g</p>
+                                                        <p>Carbohidratos: 27 g</p>
+                                                        <p>Peso por unidad: 200 g (1 taza cocida)</p>
+                                                        <input type="number" class="weight-input" value="200" min="1" placeholder="Peso en gramos">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Nueva sección "Huevos" -->
+                                <div class="meal-type">
+                                    <div class="meal-header" onclick="toggleMeal('huevos')">
+                                        <span>Huevos</span>
+                                        <span>▼</span>
+                                    </div>
+                                    <div id="huevos" class="meal-content">
+                                        <input type="text" class="search-box" placeholder="Buscar huevos..." onkeyup="filterFoods('huevos', this.value)">
+                                        <!-- Huevo entero -->
+                                        <div class="food-item" data-calories="143" data-protein="12.6" data-fat="10" data-saturatedFat="3.1" data-carbs="0.7" data-default-weight="60">
+                                            <span>Huevo de gallina (entero)</span>
+                                            <div class="food-quantity">
+                                                <input type="number" class="quantity-input" value="1" min="1">
+                                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                                            </div>
+                                            <div class="food-details">
+                                                <p>Kilocalorías: 143 kcal</p>
+                                                <p>Proteínas: 12.6 g</p>
+                                                <p>Grasas: 10 g</p>
+                                                <p>Grasas saturadas: 3.1 g</p>
+                                                <p>Carbohidratos: 0.7 g</p>
+                                                <p>Peso por unidad: 60 g (1 huevo)</p>
+                                                <input type="number" class="weight-input" value="60" min="1" placeholder="Peso en gramos">
+                                            </div>
+                                        </div>
+                                        <!-- Clara de huevo -->
+                                        <div class="food-item" data-calories="52" data-protein="11" data-fat="0.2" data-saturatedFat="0" data-carbs="0.7" data-default-weight="33">
+                                            <span>Clara de huevo</span>
+                                            <div class="food-quantity">
+                                                <input type="number" class="quantity-input" value="1" min="1">
+                                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                                            </div>
+                                            <div class="food-details">
+                                                <p>Kilocalorías: 52 kcal</p>
+                                                <p>Proteínas: 11 g</p>
+                                                <p>Grasas: 0.2 g</p>
+                                                <p>Grasas saturadas: 0 g</p>
+                                                <p>Carbohidratos: 0.7 g</p>
+                                                <p>Peso por unidad: 33 g (1 clara)</p>
+                                                <input type="number" class="weight-input" value="33" min="1" placeholder="Peso en gramos">
+                                            </div>
+                                        </div>
+                                        <!-- Yema de huevo -->
+                                        <div class="food-item" data-calories="322" data-protein="16" data-fat="27" data-saturatedFat="9.6" data-carbs="3.6" data-default-weight="17">
+                                            <span>Yema de huevo</span>
+                                            <div class="food-quantity">
+                                                <input type="number" class="quantity-input" value="1" min="1">
+                                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                                            </div>
+                                            <div class="food-details">
+                                                <p>Kilocalorías: 322 kcal</p>
+                                                <p>Proteínas: 16 g</p>
+                                                <p>Grasas: 27 g</p>
+                                                <p>Grasas saturadas: 9.6 g</p>
+                                                <p>Carbohidratos: 3.6 g</p>
+                                                <p>Peso por unidad: 17 g (1 yema)</p>
+                                                <input type="number" class="weight-input" value="17" min="1" placeholder="Peso en gramos">
+                                            </div>
+                                        </div>
+                                        <!-- Huevo cocido -->
+                                        <div class="food-item" data-calories="155" data-protein="12.6" data-fat="10.6" data-saturatedFat="3.3" data-carbs="1.1" data-default-weight="50">
+                                            <span>Huevo cocido</span>
+                                            <div class="food-quantity">
+                                                <input type="number" class="quantity-input" value="1" min="1">
+                                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                                            </div>
+                                            <div class="food-details">
+                                                <p>Kilocalorías: 155 kcal</p>
+                                                <p>Proteínas: 12.6 g</p>
+                                                <p>Grasas: 10.6 g</p>
+                                                <p>Grasas saturadas: 3.3 g</p>
+                                                <p>Carbohidratos: 1.1 g</p>
+                                                <p>Peso por unidad: 50 g (1 huevo sin cáscara)</p>
+                                                <input type="number" class="weight-input" value="50" min="1" placeholder="Peso en gramos">
+                                            </div>
+                                        </div>
+                                        <!-- Huevo frito -->
+                                        <div class="food-item" data-calories="196" data-protein="13" data-fat="15" data-saturatedFat="4.2" data-carbs="1.1" data-default-weight="60">
+                                            <span>Huevo frito</span>
+                                            <div class="food-quantity">
+                                                <input type="number" class="quantity-input" value="1" min="1">
+                                                <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                                <button onclick="addPredefinedFood(this)">Agregar</button>
+                                            </div>
+                                            <div class="food-details">
+                                                <p>Kilocalorías: 196 kcal</p>
+                                                <p>Proteínas: 13 g</p>
+                                                <p>Grasas: 15 g</p>
+                                                <p>Grasas saturadas: 4.2 g</p>
+                                                <p>Carbohidratos: 1.1 g</p>
+                                                <p>Peso por unidad: 60 g (1 huevo)</p>
+                                                <input type="number" class="weight-input" value="60" min="1" placeholder="Peso en gramos">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Nueva sección "Bollería y Dulces" -->
+                                <div class="meal-type">
+                                    <div class="meal-header" onclick="toggleMeal('bolleria')">
+                                        <span>Bollería y Dulces</span>
+                                        <span>▼</span>
+                                    </div>
+                                    <div id="bolleria" class="meal-content">
+                                        <input type="text" class="search-box" placeholder="Buscar bollería..." onkeyup="filterFoods('bolleria', this.value)">
+                                        
+                                        <!-- Subcategoría Bollería -->
+                                        <div class="meal-type">
+                                            <div class="meal-header" onclick="toggleMeal('bolleria-tipica')">
+                                                <span>Bollería</span>
+                                                <span>▼</span>
+                                            </div>
+                                            <div id="bolleria-tipica" class="meal-content">
+                                                <input type="text" class="search-box" placeholder="Buscar bollería..." onkeyup="filterFoods('bolleria-tipica', this.value)">
+                                                <!-- Croissant -->
+                                                <div class="food-item" data-calories="406" data-protein="8.2" data-fat="21" data-saturatedFat="12" data-carbs="46" data-default-weight="60">
+                                                    <span>Croissant</span>
+                                                    <div class="food-quantity">
+                                                        <input type="number" class="quantity-input" value="1" min="1">
+                                                        <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                                        <button onclick="addPredefinedFood(this)">Agregar</button>
+                                                    </div>
+                                                    <div class="food-details">
+                                                        <p>Kilocalorías: 406 kcal</p>
+                                                        <p>Proteínas: 8.2 g</p>
+                                                        <p>Grasas: 21 g</p>
+                                                        <p>Grasas saturadas: 12 g</p>
+                                                        <p>Carbohidratos: 46 g</p>
+                                                        <p>Peso por unidad: 60 g (1 unidad)</p>
+                                                        <input type="number" class="weight-input" value="60" min="1" placeholder="Peso en gramos">
+                                                    </div>
+                                                </div>
+                                                <!-- Donut -->
+                                                <div class="food-item" data-calories="452" data-protein="5.3" data-fat="25" data-saturatedFat="12" data-carbs="51" data-default-weight="70">
+                                                    <span>Donut</span>
+                                                    <div class="food-quantity">
+                                                        <input type="number" class="quantity-input" value="1" min="1">
+                                                        <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                                        <button onclick="addPredefinedFood(this)">Agregar</button>
+                                                    </div>
+                                                    <div class="food-details">
+                                                        <p>Kilocalorías: 452 kcal</p>
+                                                        <p>Proteínas: 5.3 g</p>
+                                                        <p>Grasas: 25 g</p>
+                                                        <p>Grasas saturadas: 12 g</p>
+                                                        <p>Carbohidratos: 51 g</p>
+                                                        <p>Peso por unidad: 70 g (1 unidad)</p>
+                                                        <input type="number" class="weight-input" value="70" min="1" placeholder="Peso en gramos">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Subcategoría Dulces -->
+                                        <div class="meal-type">
+                                            <div class="meal-header" onclick="toggleMeal('dulces')">
+                                                <span>Dulces</span>
+                                                <span>▼</span>
+                                            </div>
+                                            <div id="dulces" class="meal-content">
+                                                <input type="text" class="search-box" placeholder="Buscar dulces..." onkeyup="filterFoods('dulces', this.value)">
+                                                <!-- Chocolate negro -->
+                                                <div class="food-item" data-calories="546" data-protein="4.9" data-fat="31" data-saturatedFat="19" data-carbs="61" data-default-weight="30">
+                                                    <span>Chocolate negro</span>
+                                                    <div class="food-quantity">
+                                                        <input type="number" class="quantity-input" value="1" min="1">
+                                                        <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                                        <button onclick="addPredefinedFood(this)">Agregar</button>
+                                                    </div>
+                                                    <div class="food-details">
+                                                        <p>Kilocalorías: 546 kcal</p>
+                                                        <p>Proteínas: 4.9 g</p>
+                                                        <p>Grasas: 31 g</p>
+                                                        <p>Grasas saturadas: 19 g</p>
+                                                        <p>Carbohidratos: 61 g</p>
+                                                        <p>Peso por unidad: 30 g (1 onza)</p>
+                                                        <input type="number" class="weight-input" value="30" min="1" placeholder="Peso en gramos">
+                                                    </div>
+                                                </div>
+                                                <!-- Galletas tipo María -->
+                                                <div class="food-item" data-calories="409" data-protein="6.8" data-fat="8.1" data-saturatedFat="2.5" data-carbs="82.3" data-default-weight="6">
+                                                    <span>Galletas tipo María</span>
+                                                    <div class="food-quantity">
+                                                        <input type="number" class="quantity-input" value="1" min="1">
+                                                        <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                                        <button onclick="addPredefinedFood(this)">Agregar</button>
+                                                    </div>
+                                                    <div class="food-details">
+                                                        <p>Kilocalorías: 409 kcal</p>
+                                                        <p>Proteínas: 6.8 g</p>
+                                                        <p>Grasas: 8.1 g</p>
+                                                        <p>Grasas saturadas: 2.5 g</p>
+                                                        <p>Carbohidratos: 82.3 g</p>
+                                                        <p>Peso por unidad: 6 g (1 galleta)</p>
+                                                        <input type="number" class="weight-input" value="6" min="1" placeholder="Peso en gramos">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Nueva sección "Comida Rápida" -->
+                                <div class="meal-type">
+                                    <div class="meal-header" onclick="toggleMeal('rapida')">
+                                        <span>Comida Rápida</span>
+                                        <span>▼</span>
+                                    </div>
+                                    <div id="rapida" class="meal-content">
+                                        <input type="text" class="search-box" placeholder="Buscar comida rápida..." onkeyup="filterFoods('rapida', this.value)">
+                                        
+                                        <!-- Subcategoría Hamburguesas -->
+                                        <div class="meal-type">
+                                            <div class="meal-header" onclick="toggleMeal('hamburguesas')">
+                                                <span>Hamburguesas</span>
+                                                <span>▼</span>
+                                            </div>
+                                            <div id="hamburguesas" class="meal-content">
+                                                <input type="text" class="search-box" placeholder="Buscar hamburguesas..." onkeyup="filterFoods('hamburguesas', this.value)">
+                                                <!-- Big Mac -->
+                                                <div class="food-item" data-calories="550" data-protein="25" data-fat="30" data-saturatedFat="10" data-carbs="45" data-default-weight="200">
+                                                    <span>Big Mac</span>
+                                                    <div class="food-quantity">
+                                                        <input type="number" class="quantity-input" value="1" min="1">
+                                                        <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                                        <button onclick="addPredefinedFood(this)">Agregar</button>
+                                                    </div>
+                                                    <div class="food-details">
+                                                        <p>Kilocalorías: 550 kcal</p>
+                                                        <p>Proteínas: 25 g</p>
+                                                        <p>Grasas: 30 g</p>
+                                                        <p>Grasas saturadas: 10 g</p>
+                                                        <p>Carbohidratos: 45 g</p>
+                                                        <p>Peso por unidad: 200 g</p>
+                                                        <input type="number" class="weight-input" value="200" min="1" placeholder="Peso en gramos">
+                                                    </div>
+                                                </div>
+                                                <!-- McChicken -->
+                                                <div class="food-item" data-calories="420" data-protein="23" data-fat="20" data-saturatedFat="3" data-carbs="35" data-default-weight="180">
+                                                    <span>McChicken</span>
+                                                    <div class="food-quantity">
+                                                        <input type="number" class="quantity-input" value="1" min="1">
+                                                        <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                                        <button onclick="addPredefinedFood(this)">Agregar</button>
+                                                    </div>
+                                                    <div class="food-details">
+                                                        <p>Kilocalorías: 420 kcal</p>
+                                                        <p>Proteínas: 23 g</p>
+                                                        <p>Grasas: 20 g</p>
+                                                        <p>Grasas saturadas: 3 g</p>
+                                                        <p>Carbohidratos: 35 g</p>
+                                                        <p>Peso por unidad: 180 g</p>
+                                                        <input type="number" class="weight-input" value="180" min="1" placeholder="Peso en gramos">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Subcategoría Acompañamientos -->
+                                        <div class="meal-type">
+                                            <div class="meal-header" onclick="toggleMeal('acompanamientos')">
+                                                <span>Acompañamientos</span>
+                                                <span>▼</span>
+                                            </div>
+                                            <div id="acompanamientos" class="meal-content">
+                                                <input type="text" class="search-box" placeholder="Buscar acompañamientos..." onkeyup="filterFoods('acompanamientos', this.value)">
+                                                <!-- Patatas fritas medianas -->
+                                                <div class="food-item" data-calories="340" data-protein="3" data-fat="17" data-saturatedFat="1" data-carbs="44" data-default-weight="115">
+                                                    <span>Patatas fritas medianas</span>
+                                                    <div class="food-quantity">
+                                                        <input type="number" class="quantity-input" value="1" min="1">
+                                                        <button class="details-btn" onclick="toggleDetails(this)">+</button>
+                                                        <button onclick="addPredefinedFood(this)">Agregar</button>
+                                                    </div>
+                                                    <div class="food-details">
+                                                        <p>Kilocalorías: 340 kcal</p>
+                                                        <p>Proteínas: 3 g</p>
+                                                        <p>Grasas: 17 g</p>
+                                                        <p>Grasas saturadas: 1 g</p>
+                                                        <p>Carbohidratos: 44 g</p>
+                                                        <p>Peso por unidad: 115 g</p>
+                                                        <input type="number" class="weight-input" value="115" min="1" placeholder="Peso en gramos">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                      
+
             </div>
         </div>
         <div class="section form-section">
