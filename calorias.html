@@ -2506,6 +2506,177 @@
 										</div>
 									</div>
 								</div>
+								<div class="meal-type">
+									<div class="meal-header" onclick="toggleMeal('salsas')">
+										<span>Salsas</span> <span>▼</span>
+									</div>
+									<div class="meal-content" id="acompanamientos">
+										<input class="search-box" onkeyup="filterFoods('salsas', this.value)" placeholder="Buscar salsas..." type="text">
+										<!-- Salsa de Tomate -->
+<div class="food-item" data-calories="82" data-carbs="14.2" data-default-weight="100" data-fat="0.4" data-protein="1.8" data-saturatedfat="0.1">
+    <span>Salsa de Tomate</span>
+    <div class="food-quantity">
+        <input class="quantity-input" min="1" type="number" value="1">
+        <button class="details-btn" onclick="toggleDetails(this)">+</button>
+        <button onclick="addPredefinedFood(this)">Agregar</button>
+    </div>
+    <div class="food-details">
+        <p>Kilocalorías: 82 kcal</p>
+        <p>Proteínas: 1.8 g</p>
+        <p>Grasas: 0.4 g</p>
+        <p>Grasas saturadas: 0.1 g</p>
+        <p>Carbohidratos: 14.2 g</p>
+        <p>Peso por unidad: 100 g</p>
+        <input class="weight-input" min="1" placeholder="Peso en gramos" type="number" value="100">
+    </div>
+</div>
+
+<!-- Salsa de Yogur -->
+<div class="food-item" data-calories="120" data-carbs="5.0" data-default-weight="100" data-fat="10.0" data-protein="3.0" data-saturatedfat="2.0">
+    <span>Salsa de Yogur</span>
+    <div class="food-quantity">
+        <input class="quantity-input" min="1" type="number" value="1">
+        <button class="details-btn" onclick="toggleDetails(this)">+</button>
+        <button onclick="addPredefinedFood(this)">Agregar</button>
+    </div>
+    <div class="food-details">
+        <p>Kilocalorías: 120 kcal</p>
+        <p>Proteínas: 3.0 g</p>
+        <p>Grasas: 10.0 g</p>
+        <p>Grasas saturadas: 2.0 g</p>
+        <p>Carbohidratos: 5.0 g</p>
+        <p>Peso por unidad: 100 g</p>
+        <input class="weight-input" min="1" placeholder="Peso en gramos" type="number" value="100">
+    </div>
+</div>
+
+<!-- Salsa de Curry -->
+<div class="food-item" data-calories="150" data-carbs="10.0" data-default-weight="100" data-fat="12.0" data-protein="2.0" data-saturatedfat="3.0">
+    <span>Salsa de Curry</span>
+    <div class="food-quantity">
+        <input class="quantity-input" min="1" type="number" value="1">
+        <button class="details-btn" onclick="toggleDetails(this)">+</button>
+        <button onclick="addPredefinedFood(this)">Agregar</button>
+    </div>
+    <div class="food-details">
+        <p>Kilocalorías: 150 kcal</p>
+        <p>Proteínas: 2.0 g</p>
+        <p>Grasas: 12.0 g</p>
+        <p>Grasas saturadas: 3.0 g</p>
+        <p>Carbohidratos: 10.0 g</p>
+        <p>Peso por unidad: 100 g</p>
+        <input class="weight-input" min="1" placeholder="Peso en gramos" type="number" value="100">
+    </div>
+</div>
+
+<!-- Salsa de Mostaza -->
+<div class="food-item" data-calories="133" data-carbs="5.0" data-default-weight="100" data-fat="9.0" data-protein="7.0" data-saturatedfat="0.5">
+    <span>Salsa de Mostaza</span>
+    <div class="food-quantity">
+        <input class="quantity-input" min="1" type="number" value="1">
+        <button class="details-btn" onclick="toggleDetails(this)">+</button>
+        <button onclick="addPredefinedFood(this)">Agregar</button>
+    </div>
+    <div class="food-details">
+        <p>Kilocalorías: 133 kcal</p>
+        <p>Proteínas: 7.0 g</p>
+        <p>Grasas: 9.0 g</p>
+        <p>Grasas saturadas: 0.5 g</p>
+        <p>Carbohidratos: 5.0 g</p>
+        <p>Peso por unidad: 100 g</p>
+        <input class="weight-input" min="1" placeholder="Peso en gramos" type="number" value="100">
+    </div>
+</div>
+
+<!-- Salsa de Queso -->
+<div class="food-item" data-calories="250" data-carbs="5.0" data-default-weight="100" data-fat="22.0" data-protein="10.0" data-saturatedfat="14.0">
+    <span>Salsa de Queso</span>
+    <div class="food-quantity">
+        <input class="quantity-input" min="1" type="number" value="1">
+        <button class="details-btn" onclick="toggleDetails(this)">+</button>
+        <button onclick="addPredefinedFood(this)">Agregar</button>
+    </div>
+    <div class="food-details">
+        <p>Kilocalorías: 250 kcal</p>
+        <p>Proteínas: 10.0 g</p>
+        <p>Grasas: 22.0 g</p>
+        <p>Grasas saturadas: 14.0 g</p>
+        <p>Carbohidratos: 5.0 g</p>
+        <p>Peso por unidad: 100 g</p>
+        <input class="weight-input" min="1" placeholder="Peso en gramos" type="number" value="100">
+    </div>
+</div>
+
+<!-- Salsa de Ajo -->
+<div class="food-item" data-calories="180" data-carbs="6.0" data-default-weight="100" data-fat="16.0" data-protein="2.0" data-saturatedfat="2.5">
+    <span>Salsa de Ajo</span>
+    <div class="food-quantity">
+        <input class="quantity-input" min="1" type="number" value="1">
+        <button class="details-btn" onclick="toggleDetails(this)">+</button>
+        <button onclick="addPredefinedFood(this)">Agregar</button>
+    </div>
+    <div class="food-details">
+        <p>Kilocalorías: 180 kcal</p>
+        <p>Proteínas: 2.0 g</p>
+        <p>Grasas: 16.0 g</p>
+        <p>Grasas saturadas: 2.5 g</p>
+        <p>Carbohidratos: 6.0 g</p>
+        <p>Peso por unidad: 100 g</p>
+        <input class="weight-input" min="1" placeholder="Peso en gramos" type="number" value="100">
+    </div>
+</div>
+
+<!-- Salsa de Chile -->
+<div class="food-item" data-calories="40" data-carbs="10.0" data-default-weight="100" data-fat="0.5" data-protein="1.0" data-saturatedfat="0.1">
+    <span>Salsa de Chile</span>
+    <div class="food-quantity">
+        <input class="quantity-input" min="1" type="number" value="1">
+        <button class="details-btn" onclick="toggleDetails(this)">+</button>
+        <button onclick="addPredefinedFood(this)">Agregar</button>
+    </div>
+    <div class="food-details">
+        <p>Kilocalorías: 40 kcal</p>
+        <p>Proteínas: 1.0 g</p>
+        <p>Grasas: 0.5 g</p>
+        <p>Grasas saturadas: 0.1 g</p>
+        <p>Carbohidratos: 10.0 g</p>
+        <p>Peso por unidad: 100 g</p>
+        <input class="weight-input" min="1" placeholder="Peso en gramos" type="number" value="100">
+    </div>
+</div>
+
+<!-- Salsa de Miel y Mostaza -->
+<div class="food-item" data-calories="200" data-carbs="20.0" data-default-weight="100" data-fat="12.0" data-protein="2.0" data-saturatedfat="1.5">
+    <span>Salsa de Miel y Mostaza</span>
+    <div class="food-quantity">
+        <input class="quantity-input" min="1" type="number" value="1">
+        <button class="details-btn" onclick="toggleDetails(this)">+</button>
+        <button onclick="addPredefinedFood(this)">Agregar</button>
+    </div>
+    <div class="food-details">
+        <p>Kilocalorías: 200 kcal</p>
+        <p>Proteínas: 2.0 g</p>
+        <p>Grasas: 12.0 g</p>
+        <p>Grasas saturadas: 1.5 g</p>
+        <p>Carbohidratos: 20.0 g</p>
+        <p>Peso por unidad: 100 g</p>
+        <input class="weight-input" min="1" placeholder="Peso en gramos" type="number" value="100">
+    </div>
+</div>
+
+<!-- Salsa de Soja Dulce -->
+<div class="food-item" data-calories="100" data-carbs="20.0" data-default-weight="100" data-fat="0.5" data-protein="5.0" data-saturatedfat="0.1">
+    <span>Salsa de Soja Dulce</span>
+    <div class="food-quantity">
+        <input class="quantity-input" min="1" type="number" value="1">
+        <button class="details-btn" onclick="toggle
+::contentReference[oaicite:0]{index=0}
+ 
+
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
